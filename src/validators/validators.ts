@@ -26,6 +26,11 @@ const studentValidator = [
 		.escape(),
 
 	body("parentPhone").escape(),
+	body("dateOfBirth")
+		.notEmpty()
+		.withMessage("Date of birth is required")
+		.isDate()
+		.withMessage("Invalid date format"),
 ];
 
 export { studentValidator };

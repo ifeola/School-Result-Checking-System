@@ -1,3 +1,4 @@
+import type { Pool, PoolClient } from "pg";
 import db from "../database/db.ts";
 import type { user } from "../types/type.ts";
 
@@ -16,11 +17,11 @@ class User {
 		this.email = email;
 	}
 
-	static async create(user: user) {
+	static async create(user: user, client: PoolClient | Pool) {
 		const queryText =
 			"insert into users(email, password_hash, role) values($1, $2, $3) returning id";
 		const values = [user.email ?? null, user.password, user.role];
-		const result = await db.query(queryText, values);
+		const result = await client.query(queryText, values);
 
 		return result.rows[0];
 	}
