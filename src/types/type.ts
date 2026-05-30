@@ -1,3 +1,5 @@
+import { type Request } from "express";
+
 interface student {
 	userId: string;
 	admissionNumber: string;
@@ -17,4 +19,14 @@ interface user {
 	email?: string | undefined;
 }
 
-export type { student, user };
+type queryValue = (string | number | null | Date | boolean)[];
+
+interface AuthenticatedRequest extends Request {
+	user?: {
+		id: string;
+		identifier: string;
+		role: string;
+	};
+}
+
+export type { student, user, queryValue, AuthenticatedRequest };

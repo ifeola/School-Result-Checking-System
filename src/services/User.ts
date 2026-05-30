@@ -25,6 +25,23 @@ class User {
 
 		return result.rows[0];
 	}
+
+	static async getUserByIdentifier(identifier: string) {
+		const queryText = `
+			SELECT
+				u.id,
+				u.email,
+				u.password_hash,
+				u.role,
+				s.admission_number
+			FROM users u
+			LEFT JOIN students s ON s.user_id = u.id
+			WHERE u.email = $1
+   			OR s.admission_number = $1;
+		`;
+		const result = await db.query(queryText, [identifier]);
+		return result.rows[0];
+	}
 }
 
 export default User;

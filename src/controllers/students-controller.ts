@@ -6,7 +6,7 @@ import Student from "../services/Students.ts";
 import User from "../services/User.ts";
 import type { student, user } from "../types/type.ts";
 import { matchedData, validationResult } from "express-validator";
-import { ValidationError } from "../services/Custom-Errors.ts";
+import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
 import {
 	formartPaginatedResponse,
 	getPaginationParams,
@@ -80,4 +80,64 @@ const getStudents = async (req: Request, res: Response, next: NextFunction) => {
 	res.status(200).json(response);
 };
 
-export { createStudent, getStudents };
+const deleteStudent = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const studentId = req.params.id as string;
+		if (!studentId?.trim()) {
+			return next(new ValidationError("Please provide a valid id"));
+		}
+
+		const result = await Student.deleteStudentById(studentId);
+		if (!result) {
+			return next(new NotFoundError("Student not found."));
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: "Student successfully deleted.",
+			data: { student: result },
+		});
+	} catch (error) {
+		return next(error);
+	}
+};
+
+const updateStudent = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const studentId = req.params.id as string;
+		const updates = req.body;
+
+		if (!studentId?.trim()) {
+			return next(new ValidationError("Please provide a valid id"));
+		}
+
+		if (Object.keys(updates).length === 0) {
+			return next(new ValidationError("No update field provided."));
+		}
+
+		const updatedStudent = await Student.updateStudent(studentId, updates);
+		if (!updatedStudent) {
+			return next(new NotFoundError("Student not found."));
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: "Student updated successfully.",
+			data: {
+				student: updatedStudent,
+			},
+		});
+	} catch (error) {
+		next(error);
+	}
+};
+
+export { createStudent, getStudents, deleteStudent, updateStudent };
