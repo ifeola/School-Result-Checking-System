@@ -1,6 +1,6 @@
 import type { Pool, PoolClient } from "pg";
 import db from "../database/db.ts";
-import type { student } from "../types/type.ts";
+import type { queryValue, student } from "../types/type.ts";
 import type { PaginationParams } from "../utils/pagination.ts";
 
 class Student {
@@ -42,7 +42,7 @@ class Student {
 
 	static async create(user: student, client: PoolClient | Pool) {
 		const queryText = `insert into students(user_id, admission_number, first_name, last_name, gender, date_of_birth, parent_name, parent_phone, current_status, middle_name) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-      returning id, admission_number, first_name, last_name, gender, to_char(date_of_birth, 'YYYY-MM-DD') as date_of_birth, current_status, middle_name`;
+      returning id, admission_number, first_name, last_name, gender, to_char(date_of_birth, 'YYYY-MM-DD') as date_of_birth, current_status, middle_name;`;
 		const values = [
 			user.userId,
 			user.admissionNumber,
@@ -59,28 +59,72 @@ class Student {
 		return data.rows[0];
 	}
 
+	static async getStudentById(id: string) {
+		const queryText = `
+      select admission_number from students
+      where id = $1;
+    `;
+		const result = await db.query(queryText, [id]);
+		return result.rows[0];
+	}
+
 	static async getStudentByAdmissionNumber(admissionNumber: string) {
 		const queryText = `
       select admission_number from students
-      where admission_number = $1
+      where admission_number = $1;
     `;
 		const result = await db.query(queryText, [admissionNumber]);
 		return result.rows[0];
 	}
 
+	static async deleteStudentById(id: string) {
+		const queryText = `
+      update current_students
+			set deleted_at = current_timestamp,
+			current_status = 'withdrawn'
+			where id = $1
+			returning *;
+    `;
+		const result = await db.query(queryText, [id]);
+		return result.rows[0];
+	}
+
+	static async updateStudent(id: string, updates: Partial<student>) {
+		const keys = Object.keys(updates);
+
+		if (keys.length === 0) {
+			return null;
+		}
+
+		const setClause = keys
+			.map((key, index) => `${key} = $${index + 1}`)
+			.join(", ");
+
+		const values = [...Object.values(updates), id] as queryValue;
+		const queryString = `
+			update students
+			set ${setClause}
+			where id = $${values.length}
+			returning *;
+		`;
+
+		const result = await db.query(queryString, values);
+		return result.rows[0];
+	}
+
 	static async getAllStudents({ limit, skip }: PaginationParams) {
 		const queryText = `
-      select id, name, admission_number, created_at
-			from students
-			where is_deleted = NULL
-			order by id desc
+      select *
+			from current_students
+			order by first_name asc
 			limit $1 offset $2;
     `;
-		const countQuery = `SELECT COUNT(*) FROM students where is_deleted = NULL;`;
+		const countQuery = `SELECT COUNT(*) FROM current_students;`;
 		const [dataResult, countResult] = await Promise.all([
 			db.query(queryText, [limit, skip]),
 			db.query(countQuery),
 		]);
+
 		return {
 			students: dataResult.rows,
 			totalCount: parseInt(countResult.rows[0].count, 10),

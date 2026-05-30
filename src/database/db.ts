@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import { config } from "dotenv";
+import type { queryValue } from "../types/type.ts";
 
-type queryValue = string | number | null | Date | boolean;
 config();
 const connectionString = process.env.DATABASE_URL!;
 const sql = new Pool({
@@ -10,6 +10,6 @@ const sql = new Pool({
 });
 
 export default {
-	query: (text: string, params?: queryValue[]) => sql.query(text, params),
+	query: (text: string, params?: queryValue) => sql.query(text, params),
 	sql,
 };
