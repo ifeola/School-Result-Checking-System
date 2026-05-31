@@ -4,7 +4,7 @@ import type {
 	Response,
 	ErrorRequestHandler,
 } from "express";
-import { CustomError } from "../services/Custom-Errors.ts";
+import { CustomError } from "../../services/Custom-Errors.ts";
 
 const errorMiddleware: ErrorRequestHandler = (
 	err,

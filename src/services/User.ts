@@ -33,9 +33,11 @@ class User {
 				u.email,
 				u.password_hash,
 				u.role,
-				s.admission_number
+				s.admission_number,
+        a.permission_level
 			FROM users u
 			LEFT JOIN students s ON s.user_id = u.id
+      LEFT JOIN admins a on a.user_id = u.id
 			WHERE u.email = $1
    			OR s.admission_number = $1;
 		`;

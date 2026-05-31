@@ -1,20 +1,18 @@
 const generateAdmissionNumber = async (db: {
 	query: (
-		arg0: string,
-		arg1: (string | number | null | boolean | Date)[],
+		text: string,
+		values?: (string | number | null | boolean | Date)[],
 	) => any;
-}) => {
+}): Promise<string> => {
 	const date = new Date();
 	const year = date.getFullYear();
 	const schoolName = "DEAC";
 
 	const query = `
     SELECT COUNT(*) AS total
-    FROM students
-    WHERE admission_number LIKE $1
+    FROM students;
   `;
-	const values = [`${schoolName}-${year}-%`];
-	const result = await db.query(query, values);
+	const result = await db.query(query);
 
 	// Convert count to number
 	const count = Number(result.rows[0].total);

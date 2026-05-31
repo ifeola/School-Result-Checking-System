@@ -13,10 +13,24 @@ interface student {
 	middleName?: string | undefined;
 }
 
+interface teacher {
+	userId: string;
+	teacherNumber: string;
+	firstName: string;
+	lastName: string;
+	phone: string;
+}
+
 interface user {
 	password: string;
 	role: "admin" | "teacher" | "student";
 	email?: string | undefined;
+}
+
+interface admin {
+	userId: string;
+	fullName: string;
+	permissionLevel: "super_admin" | "staff_admin" | null;
 }
 
 type queryValue = (string | number | null | Date | boolean)[];
@@ -26,7 +40,8 @@ interface AuthenticatedRequest extends Request {
 		id: string;
 		identifier: string;
 		role: string;
+		permissionLevel: "super_admin" | "staff_admin" | null;
 	};
 }
 
-export type { student, user, queryValue, AuthenticatedRequest };
+export type { student, user, queryValue, AuthenticatedRequest, teacher, admin };

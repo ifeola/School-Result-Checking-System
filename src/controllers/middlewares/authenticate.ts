@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import type { Response, NextFunction } from "express";
-import { UnauthorizedError } from "../services/Custom-Errors.ts";
-import type { AuthenticatedRequest } from "../types/type.ts";
+import { UnauthorizedError } from "../../services/Custom-Errors.ts";
+import type { AuthenticatedRequest } from "../../types/type.ts";
 
 config();
 
@@ -31,6 +31,7 @@ const authenticate = (
 			id: string;
 			identifier: string;
 			role: string;
+			permissionLevel: "super_admin" | "staff_admin" | null;
 		};
 
 		console.log(decoded);

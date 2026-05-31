@@ -5,9 +5,9 @@ import {
 	deleteStudent,
 	updateStudent,
 } from "../controllers/students-controller.ts";
-import { studentValidator } from "../validators/validators.ts";
-import authenticate from "../middlewares/authenticate.ts";
-import authorize from "../middlewares/authorize.ts";
+import { studentValidator } from "../validators/student-validators.ts";
+import authenticate from "../controllers/middlewares/authenticate.ts";
+import authorize from "../controllers/middlewares/authorize.ts";
 
 const router = Router();
 
@@ -17,12 +17,27 @@ router
 		"/students",
 		studentValidator,
 		authenticate,
-		authorize(["admin"]),
+		authorize(["super_admin", "staff_admin"]),
 		createStudent,
 	)
-	.get("/students", authenticate, authorize(["admin", "student"]), getStudents)
-	.delete("/students/:id", authenticate, authorize(["admin"]), deleteStudent)
-	.patch("/students/:id", authenticate, authorize(["admin"]), updateStudent);
+	.get(
+		"/students",
+		authenticate,
+		authorize(["super_admin", "staff_admin"]),
+		getStudents,
+	)
+	.patch(
+		"/students/:id",
+		authenticate,
+		authorize(["super_admin", "staff_admin"]),
+		updateStudent,
+	)
+	.delete(
+		"/students/:id",
+		authenticate,
+		authorize(["super_admin"]),
+		deleteStudent,
+	);
 
 // router.get("/subjects", getSubjects);
 

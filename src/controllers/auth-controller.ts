@@ -15,8 +15,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	const { identifier, password } = matchedData(req);
-	console.log(identifier, password);
-
 	try {
 		const existingUser = await User.getUserByIdentifier(identifier);
 		if (!existingUser) {
@@ -32,12 +30,12 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 		}
 
 		const identity = existingUser.email ?? existingUser.admission_number;
-
 		generateToken(
 			{
 				id: existingUser.id,
 				identifier: identity,
 				role: existingUser.role,
+				permissionLevel: existingUser.permission_level,
 			},
 			res,
 		);
