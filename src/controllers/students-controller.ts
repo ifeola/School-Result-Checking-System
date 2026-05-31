@@ -28,12 +28,12 @@ const createStudent = async (
 
 	const studentPassword = data.lastName.toUpperCase();
 	const hashedPassword = await bcrypt.hash(studentPassword, 10);
-	const studentRole = "student";
+	const ROLE = "student";
 	const client = await db.sql.connect();
 
 	try {
 		await client.query("BEGIN");
-		const userData: user = { role: studentRole, password: hashedPassword };
+		const userData: user = { role: ROLE, password: hashedPassword };
 		const createdUser = await User.create(userData, client);
 
 		// create student account

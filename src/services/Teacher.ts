@@ -1,0 +1,44 @@
+import type { Pool, PoolClient } from "pg";
+import db from "../database/db.ts";
+import type { teacher } from "../types/type.ts";
+
+class Teacher {
+	userId: string;
+	teacherNumber: string;
+	firstName: string;
+	lastName: string;
+	phone: string;
+	constructor(
+		userId: string,
+		teacherNumber: string,
+		firstName: string,
+		lastName: string,
+		phone: string,
+	) {
+		this.userId = userId;
+		this.teacherNumber = teacherNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+	}
+
+	static async create(user: teacher, client: PoolClient | Pool) {
+		const queryText = `
+      insert into teachers(user_id, teacher_number, first_name, last_name, phone)
+      values ($1, $2, $3, $4, $5)
+      returning *
+    `;
+
+		const values = [
+			user.userId,
+			user.teacherNumber,
+			user.firstName,
+			user.lastName,
+			user.phone,
+		];
+		const data = await client.query(queryText, values);
+		return data.rows[0];
+	}
+}
+
+export default Teacher;

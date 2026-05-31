@@ -1,4 +1,4 @@
-const generateAdmissionNumber = async (db: {
+const generateTeacherNumber = async (db: {
 	query: (
 		text: string,
 		values?: (string | number | null | boolean | Date)[],
@@ -10,7 +10,7 @@ const generateAdmissionNumber = async (db: {
 
 	const query = `
     SELECT COUNT(*) AS total
-    FROM students;
+    FROM teachers;
   `;
 	const result = await db.query(query);
 
@@ -23,7 +23,7 @@ const generateAdmissionNumber = async (db: {
 	// Pad with leading zeros
 	const paddedNumber = String(nextNumber).padStart(4, "0");
 
-	return `${schoolName}-${year}-${paddedNumber}`;
+	return `${schoolName}-STF-${year}-${paddedNumber}`;
 };
 
-export { generateAdmissionNumber };
+export default generateTeacherNumber;
