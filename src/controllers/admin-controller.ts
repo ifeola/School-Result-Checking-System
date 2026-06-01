@@ -14,6 +14,12 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 
 	const data = matchedData(req);
 
+	// Check if email already exists
+	const existingAdmin = await User.getUserByIdentifier(data.email);
+	if (existingAdmin) {
+		return next(new ValidationError("Email already exists."));
+	}
+
 	const ROLE = "admin";
 	const lastName = data.fullName.split(" ")[0];
 	const hashedPassword = await bcrypt.hash(lastName.toUpperCase(), 10);

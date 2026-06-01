@@ -1,6 +1,6 @@
 import { Router } from "express";
-import authenticate from "../controllers/middlewares/authenticate.ts";
-import authorize from "../controllers/middlewares/authorize.ts";
+import authenticate from "../middlewares/authenticate.ts";
+import authorize from "../middlewares/authorize.ts";
 import adminValidator from "../validators/admin-validator.ts";
 import { createAdmin } from "../controllers/admin-controller.ts";
 

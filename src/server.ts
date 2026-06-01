@@ -5,7 +5,7 @@ import type { Application } from "express";
 import { urlencoded } from "express";
 import { config } from "dotenv";
 import router from "./routes/students-router.ts";
-import errorMiddleware from "./controllers/middlewares/errorMiddleware.ts";
+import errorMiddleware from "./middlewares/errorMiddleware.ts";
 import authRouter from "./routes/authentication-router.ts";
 import teacherRouter from "./routes/teacher-router.ts";
 import adminRouter from "./routes/admin-router.ts";

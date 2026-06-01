@@ -13,12 +13,20 @@ const createTeacher = async (
 	res: Response,
 	next: NextFunction,
 ) => {
+	// Generate teacher's reg number
 	const teacherNumber = await generateTeacherNumber(db);
 	const error = validationResult(req);
 	if (!error.isEmpty()) {
 		return next(new ValidationError(error.array()));
 	}
 	const result = matchedData(req);
+
+	// Check if email already exists
+	const existingTeacher = await User.getUserByIdentifier(result.email);
+	if (existingTeacher) {
+		return next(new ValidationError("Email already exists."));
+	}
+
 	const hashedPassword = await bcrypt.hash(result.lastName.toUpperCase(), 10);
 	const ROLE = "teacher";
 	const client = await db.sql.connect();
