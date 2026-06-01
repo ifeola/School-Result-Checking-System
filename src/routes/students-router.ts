@@ -6,8 +6,8 @@ import {
 	updateStudent,
 } from "../controllers/students-controller.ts";
 import { studentValidator } from "../validators/student-validators.ts";
-import authenticate from "../controllers/middlewares/authenticate.ts";
-import authorize from "../controllers/middlewares/authorize.ts";
+import authenticate from "../middlewares/authenticate.ts";
+import authorize from "../middlewares/authorize.ts";
 
 const router = Router();
 

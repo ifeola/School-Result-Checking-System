@@ -1,9 +1,9 @@
 import type { NextFunction, Response } from "express";
-import type { AuthenticatedRequest } from "../../types/type.ts";
+import type { AuthenticatedRequest } from "../types/type.ts";
 import {
 	ForbiddenError,
 	UnauthorizedError,
-} from "../../services/Custom-Errors.ts";
+} from "../services/Custom-Errors.ts";
 
 const authorize = (allowedRoles: string[]) => {
 	return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {

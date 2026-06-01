@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { ADMISSION_NUMBER_REGEX } from "../../constants/regex.ts";
+import { ADMISSION_NUMBER_REGEX } from "../constants/regex.ts";
 
 const validateUserData = [
 	body("identifier")
