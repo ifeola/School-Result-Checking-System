@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import type { Request, Response, NextFunction } from "express";
 import { matchedData, validationResult } from "express-validator";
-import { ValidationError } from "../services/Custom-Errors.ts";
+import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
 import generateTeacherNumber from "../utils/generateTeacherNumber.ts";
 import db from "../database/db.ts";
 import type { teacher, user } from "../types/type.ts";
@@ -71,4 +71,30 @@ const createTeacher = async (
 	}
 };
 
-export { createTeacher };
+const deleteTeacher = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const teacherId = req.params.id as string;
+		if (!teacherId?.trim()) {
+			return next(new ValidationError("Please provide a valid id"));
+		}
+
+		const deletedTeacher = await Teacher.deleteById(teacherId);
+		if (!deletedTeacher) {
+			return next(new NotFoundError("Student not found."));
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: "Student successfully deleted.",
+			data: { student: deleteTeacher },
+		});
+	} catch (error) {
+		next(error)
+	}
+};
+
+export { createTeacher, deleteTeacher };
