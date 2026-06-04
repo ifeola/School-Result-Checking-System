@@ -39,6 +39,17 @@ class Teacher {
 		const data = await client.query(queryText, values);
 		return data.rows[0];
 	}
+
+	static async deleteById(id: string) {
+		const queryText = `
+			update current_teachers
+			set deleted_at = current_timestamp
+			where id = $1
+			returning *;
+		`;
+		const result = await db.query(queryText, [id]);
+		return result.rows[0];
+	}
 }
 
 export default Teacher;
