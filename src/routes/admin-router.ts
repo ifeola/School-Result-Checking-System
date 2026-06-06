@@ -6,12 +6,14 @@ import { createAdmin } from "../controllers/admin-controller.ts";
 
 const adminRouter = Router();
 
-adminRouter.post(
-	"/admins",
-	adminValidator,
-	authenticate,
-	authorize(["super_admin"]),
-	createAdmin,
-);
+adminRouter
+	.post(
+		"/admins",
+		adminValidator,
+		authenticate,
+		authorize(["super_admin"]),
+		createAdmin,
+	)
+	.delete("/admins", authenticate, authorize(["super_admin"]));
 
 export default adminRouter;
