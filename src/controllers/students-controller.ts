@@ -85,24 +85,38 @@ const deleteStudent = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	try {
-		const studentId = req.params.id as string;
-		if (!studentId?.trim()) {
-			return next(new ValidationError("Please provide a valid id"));
-		}
+	const studentId = req.params.id as string;
+	if (!studentId?.trim()) {
+		return next(new ValidationError("Please provide a valid id"));
+	}
+	const client = await db.sql.connect();
+	const existingStudent = await Student.getStudentById(studentId);
 
-		const result = await Student.deleteStudentById(studentId);
-		if (!result) {
+	try {
+		await client.query("BEGIN");
+		const deletedStudent = await Student.deleteStudentById(studentId, client);
+		const deletedUser = await User.deleteUserById(
+			existingStudent.user_id,
+			client,
+		);
+
+		console.log(deletedStudent, deletedUser);
+
+		await client.query("COMMIT");
+		if (!deletedStudent && !deletedUser) {
 			return next(new NotFoundError("Student not found."));
 		}
 
 		return res.status(200).json({
 			success: true,
 			message: "Student successfully deleted.",
-			data: { student: result },
+			data: { student: deleteStudent },
 		});
 	} catch (error) {
+		await client.query("ROLLBACK");
 		return next(error);
+	} finally {
+		client.release();
 	}
 };
 
