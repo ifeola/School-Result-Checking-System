@@ -2,18 +2,18 @@ import { Router } from "express";
 import authenticate from "../middlewares/authenticate.ts";
 import authorize from "../middlewares/authorize.ts";
 import adminValidator from "../validators/admin-validator.ts";
-import { createAdmin } from "../controllers/admin-controller.ts";
+import { createAdmin } from "../controllers/admin.controller.ts";
 
-const adminRouter = Router();
+const router = Router();
 
-adminRouter
+router
 	.post(
-		"/admins",
+		"/",
 		adminValidator,
 		authenticate,
 		authorize(["super_admin"]),
 		createAdmin,
 	)
-	.delete("/admins", authenticate, authorize(["super_admin"]));
+	.delete("/", authenticate, authorize(["super_admin"]));
 
-export default adminRouter;
+export default router;

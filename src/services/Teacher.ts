@@ -1,6 +1,7 @@
 import type { Pool, PoolClient } from "pg";
 import db from "../database/db.ts";
 import type { teacher } from "../types/type.ts";
+import type { PaginationParams } from "../utils/pagination.ts";
 
 class Teacher {
 	userId: string;
@@ -49,6 +50,28 @@ class Teacher {
 		`;
 		const result = await db.query(queryText, [id]);
 		return result.rows[0];
+	}
+
+	static async getAllTeachers({ limit, skip }: PaginationParams) {
+		const queryText = `
+				select * from teachers t
+				left join users u
+				on u.id = t.user_id
+				where t.deleted_at is null
+				limit $1 offset $2;
+			`;
+		const countQuery = `
+			select count(*) from teachers
+			where deleted_at is null;
+		`;
+		const [teachers, teachersCount] = await Promise.all([
+			await db.query(queryText, [limit, skip]),
+			await db.query(countQuery),
+		]);
+		return {
+			teachers: teachers.rows,
+			teachersCount: parseInt(teachersCount.rows[0].count, 10),
+		};
 	}
 }
 

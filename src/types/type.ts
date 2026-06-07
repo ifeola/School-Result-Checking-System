@@ -44,4 +44,19 @@ interface AuthenticatedRequest extends Request {
 	};
 }
 
-export type { student, user, queryValue, AuthenticatedRequest, teacher, admin };
+interface enrollment {
+	studentId: string;
+	classId: string;
+	sessionId: string;
+	departmentId: string | null;
+}
+
+export type {
+	student,
+	user,
+	queryValue,
+	AuthenticatedRequest,
+	teacher,
+	admin,
+	enrollment,
+};
