@@ -16,7 +16,11 @@ const studentValidator = [
 		.escape(),
 
 	body("middleName").trim().escape(),
-	body("gender").isIn(["male", "female"]),
+	body("gender")
+		.trim()
+		.toLowerCase()
+		.isIn(["male", "female"])
+		.withMessage("Gender must be male or female"),
 
 	body("parentName")
 		.trim()
@@ -31,6 +35,20 @@ const studentValidator = [
 		.withMessage("Date of birth is required")
 		.isDate()
 		.withMessage("Invalid date format"),
+	body("classId")
+		.notEmpty()
+		.withMessage("Class is required")
+		.isUUID()
+		.withMessage("Invalid class id"),
+	body("sessionId")
+		.notEmpty()
+		.withMessage("Session is required")
+		.isUUID()
+		.withMessage("Invalid session id"),
+	body("departmentId")
+		.optional({ nullable: true })
+		.isUUID()
+		.withMessage("Invalid department id"),
 ];
 
 export { studentValidator };

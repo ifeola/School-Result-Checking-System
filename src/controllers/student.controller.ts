@@ -11,6 +11,8 @@ import {
 	formartPaginatedResponse,
 	getPaginationParams,
 } from "../utils/pagination.ts";
+import Enrollment from "../services/Enrollment.ts";
+import { Class, Department, Session } from "../services/Props.ts";
 
 const createStudent = async (
 	req: Request,
@@ -32,6 +34,25 @@ const createStudent = async (
 	const client = await db.sql.connect();
 
 	try {
+		const classRecord = await Class.getClassById(data.classId);
+		const sessionRecord = await Session.getSessionById(data.sessionId);
+
+		if (classRecord.level === "senior" && !data.departmentId) {
+			return next(
+				new ValidationError("Department is required for senior classes"),
+			);
+		}
+
+		if (classRecord.level === "junior" && data.departmentId) {
+			return next(
+				new ValidationError("Junior classes cannot have a department"),
+			);
+		}
+
+		const departmentRecord = data.departmentId
+			? await Department.getDepartmentById(data.departmentId)
+			: null;
+
 		await client.query("BEGIN");
 		const userData: user = { role: ROLE, password: hashedPassword };
 		const createdUser = await User.create(userData, client);
@@ -50,12 +71,21 @@ const createStudent = async (
 			middleName: data.middleName,
 		};
 		const createdStudent = await Student.create(studentData, client);
+		const enrollment = await Enrollment.create(
+			{
+				studentId: createdStudent.id,
+				classId: classRecord.id,
+				sessionId: sessionRecord.id,
+				departmentId: departmentRecord,
+			},
+			client,
+		);
 		await client.query("COMMIT");
 
 		return res.status(201).json({
 			success: true,
 			message: "Student created successfully",
-			data: createdStudent,
+			data: { ...createdStudent, ...enrollment },
 		});
 	} catch (error) {
 		await client.query("ROLLBACK");

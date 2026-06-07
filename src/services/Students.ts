@@ -115,8 +115,12 @@ class Student {
 	static async getAllStudents({ limit, skip }: PaginationParams) {
 		const queryText = `
       select *
-			from current_students
-			order by first_name asc
+			from current_students cs
+			left join users u
+				on u.id = cs.user_id
+			left join students_enrollments se
+				on se.student_id = cs.id
+			order by cs.first_name asc
 			limit $1 offset $2;
     `;
 		const countQuery = `SELECT COUNT(*) FROM current_students;`;

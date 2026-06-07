@@ -7,6 +7,10 @@ import db from "../database/db.ts";
 import type { teacher, user } from "../types/type.ts";
 import User from "../services/User.ts";
 import Teacher from "../services/Teacher.ts";
+import {
+	formartPaginatedResponse,
+	getPaginationParams,
+} from "../utils/pagination.ts";
 
 const createTeacher = async (
 	req: Request,
@@ -103,20 +107,19 @@ const getAllTeachers = async (
 	next: NextFunction,
 ) => {
 	try {
-		const queryText = `
-		select * from teachers
-		where deleted_at is null;
-	`;
-		const result = await db.query(queryText);
-		const teachers = result.rows;
-		return res.status(200).json({
-			success: true,
-			message: "All teachers successfully fetched.",
-			data: {
-				length: teachers.length,
-				teachers,
-			},
+		const { page, limit, skip } = getPaginationParams(req.query);
+		const { teachers, teachersCount } = await Teacher.getAllTeachers({
+			page,
+			limit,
+			skip,
 		});
+		const response = formartPaginatedResponse(
+			teachers,
+			page,
+			limit,
+			teachersCount,
+		);
+		return res.status(200).json(response);
 	} catch (error) {
 		next(error);
 	}

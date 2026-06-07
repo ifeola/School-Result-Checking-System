@@ -4,11 +4,8 @@ import cookieParser from "cookie-parser";
 import type { Application } from "express";
 import { urlencoded } from "express";
 import { config } from "dotenv";
-import router from "./routes/students-router.ts";
+import router from "./routes/index.ts";
 import errorMiddleware from "./middlewares/errorMiddleware.ts";
-import authRouter from "./routes/authentication-router.ts";
-import teacherRouter from "./routes/teacher-router.ts";
-import adminRouter from "./routes/admin-router.ts";
 
 config();
 const app: Application = express();
@@ -19,9 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 app.use("/api/v1", router);
-app.use("/api/v1", authRouter);
-app.use("/api/v1", teacherRouter);
-app.use("/api/v1", adminRouter);
+
 app.use(errorMiddleware);
 
 app.listen(PORT, () => {
