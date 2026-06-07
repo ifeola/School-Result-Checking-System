@@ -1,15 +1,17 @@
 # School Result Checking System
 
-A backend server for a school result checking system built with Node.js, Express, TypeScript, and PostgreSQL. The server provides authentication, student administration, and protected route handling for admin and student users.
+A backend server for a school result checking system built with Node.js, Express, TypeScript, and PostgreSQL. The API supports authentication, student registration, protected admin operations, and role-based access control.
 
 ## Features
 
-- JWT-based authentication with cookie and bearer token support
-- Admin-protected student management endpoints
-- Student listing with pagination
-- Input validation using `express-validator`
-- Centralized error handling
-- PostgreSQL database support
+- JWT-based authentication with support for Bearer token and HTTP-only cookie
+- Role-based authorization for admin and student routes
+- Student management endpoints (create, list, update, delete)
+- Paginated student listing
+- Request validation using `express-validator`
+- Centralized error handling middleware
+- PostgreSQL database integration
+- Auto-generated admission numbers and secure password hashing
 
 ## Tech Stack
 
@@ -23,6 +25,7 @@ A backend server for a school result checking system built with Node.js, Express
 - `cookie-parser`
 - `cors`
 - `dotenv`
+- `zod`
 
 ## Getting Started
 
@@ -42,9 +45,9 @@ npm install
 
 ### Environment Variables
 
-Create a `.env` file at the project root and define the following variables:
+Create a `.env` file at the project root and define the following values:
 
-```bash
+```env
 PORT=3000
 DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DATABASE
 JWT_SECRET=your_jwt_secret_key
@@ -64,6 +67,12 @@ npm run build
 npm start
 ```
 
+## Available Scripts
+
+- `npm run dev` — start the server with `nodemon` for development
+- `npm run build` — compile TypeScript to JavaScript in `dist/`
+- `npm start` — run the compiled production build
+
 ## API Endpoints
 
 All routes are mounted under `/api/v1`.
@@ -74,7 +83,7 @@ All routes are mounted under `/api/v1`.
 
 Authenticate a user by email or admission number.
 
-Request body:
+Request body example:
 
 ```json
 {
@@ -85,18 +94,20 @@ Request body:
 
 Response:
 
-- Sets a `jwt` cookie
-- Returns login success and user details
+- Sets a `jwt` HTTP-only cookie
+- Returns login success and authenticated user info
 
 ### Student Management
 
 #### `GET /api/v1/students`
 
-Fetch paginated student records.
+Fetch a paginated list of students.
 
 - Requires authentication
 - Roles allowed: `admin`, `student`
-- Query parameters: `page`, `limit`
+- Optional query parameters:
+  - `page` (default: 1)
+  - `limit` (default: 10)
 
 #### `POST /api/v1/students`
 
@@ -104,9 +115,9 @@ Create a new student record.
 
 - Requires authentication
 - Admin-only route
-- Validates student data before creating
+- Validates student data before creation
 
-Request body:
+Request body example:
 
 ```json
 {
@@ -120,10 +131,10 @@ Request body:
 }
 ```
 
-Generated fields:
+The API will generate:
 
-- `admissionNumber` is auto-generated
-- student password is hashed from the uppercased last name
+- `admissionNumber`
+- a hashed password (derived from the last name)
 
 #### `PATCH /api/v1/students/:id`
 
@@ -131,7 +142,7 @@ Update an existing student.
 
 - Requires authentication
 - Admin-only route
-- Request body can include any student fields to update
+- Supports partial updates of student fields
 
 #### `DELETE /api/v1/students/:id`
 
@@ -147,20 +158,20 @@ The backend accepts the JWT from either:
 - `Authorization: Bearer <token>` header
 - `jwt` HTTP-only cookie
 
-Protected routes use `authenticate` and `authorize` middleware to enforce access control.
+Protected routes use `authenticate` and `authorize` middleware for access control.
 
 ## Project Structure
 
 - `src/server.ts` — application entrypoint
 - `src/routes` — route definitions
 - `src/controllers` — request handlers
-- `src/middlewares` — auth, authorization, validation, and error handling
-- `src/services` — business logic and database helpers
-- `src/utils` — token creation, pagination, and helper utilities
-- `src/database/db.ts` — PostgreSQL connection
+- `src/middlewares` — authentication, authorization, validation, and error handling
+- `src/services` — business logic and helper functions
+- `src/utils` — token creation, pagination utilities, and generators
+- `src/database/db.ts` — PostgreSQL connection logic
 
 ## Notes
 
-- Ensure `DATABASE_URL` is correct and points to your Postgres instance.
-- Keep `JWT_SECRET` secure and do not share it publicly.
-- In production, use `NODE_ENV=production` to enable secure cookie settings.
+- Verify that `DATABASE_URL` is pointing to a valid Postgres instance.
+- Keep `JWT_SECRET` safe and never commit it to source control.
+- Use `NODE_ENV=production` in production environments for secure cookie behavior.
