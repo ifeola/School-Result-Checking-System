@@ -93,8 +93,33 @@ const deleteTeacher = async (
 			data: { student: deleteTeacher },
 		});
 	} catch (error) {
-		next(error)
+		next(error);
 	}
 };
 
-export { createTeacher, deleteTeacher };
+const getAllTeachers = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const queryText = `
+		select * from teachers
+		where deleted_at is null;
+	`;
+		const result = await db.query(queryText);
+		const teachers = result.rows;
+		return res.status(200).json({
+			success: true,
+			message: "All teachers successfully fetched.",
+			data: {
+				length: teachers.length,
+				teachers,
+			},
+		});
+	} catch (error) {
+		next(error);
+	}
+};
+
+export { createTeacher, deleteTeacher, getAllTeachers };

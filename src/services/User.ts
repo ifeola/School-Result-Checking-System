@@ -39,9 +39,21 @@ class User {
 			LEFT JOIN students s ON s.user_id = u.id
       LEFT JOIN admins a on a.user_id = u.id
 			WHERE u.email = $1
-   			OR s.admission_number = $1;
+   			OR s.admission_number = $1
+			AND u.deleted_at IS NULL;
 		`;
 		const result = await db.query(queryText, [identifier]);
+		return result.rows[0];
+	}
+
+	static async deleteUserById(id: string, client: Pool | PoolClient) {
+		const queryText = `
+			update users
+			set deleted_at = CURRENT_TIMESTAMP
+			where id = $1
+			returning id;
+		`;
+		const result = await client.query(queryText, [id]);
 		return result.rows[0];
 	}
 }

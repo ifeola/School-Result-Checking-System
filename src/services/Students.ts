@@ -61,7 +61,7 @@ class Student {
 
 	static async getStudentById(id: string) {
 		const queryText = `
-      select admission_number from students
+      select admission_number, user_id from students
       where id = $1;
     `;
 		const result = await db.query(queryText, [id]);
@@ -77,15 +77,15 @@ class Student {
 		return result.rows[0];
 	}
 
-	static async deleteStudentById(id: string) {
+	static async deleteStudentById(id: string, client: Pool | PoolClient) {
 		const queryText = `
-      update current_students
-			set deleted_at = current_timestamp,
+			UPDATE students
+			SET deleted_at = CURRENT_TIMESTAMP,
 			current_status = 'withdrawn'
-			where id = $1
-			returning *;
+			WHERE id = $1
+			returning id;
     `;
-		const result = await db.query(queryText, [id]);
+		const result = await client.query(queryText, [id]);
 		return result.rows[0];
 	}
 
