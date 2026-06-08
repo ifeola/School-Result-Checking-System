@@ -30,10 +30,31 @@ class Enrollment {
 		client: Pool | PoolClient,
 	) {
 		const queryText = `
-      insert into students_enrollments
-        (student_id, class_id, session_id, department_id, promoted_to_next_class, repeated_class)
-      values ($1, $2, $3, $4, $5, $6)
-      returning *
+      WITH inserted AS (
+				INSERT INTO students_enrollments (
+						student_id,
+						class_id,
+						session_id,
+						department_id,
+						promoted_to_next_class,
+						repeated_class
+				)
+				VALUES ($1, $2, $3, $4, $5, $6)
+				RETURNING *
+				)
+			SELECT
+					cl.class_name,
+					ac.session_name,
+					de.department_name,
+					inserted.repeated_class,
+					inserted.promoted_to_next_class
+			FROM inserted
+			LEFT JOIN classes cl
+					ON inserted.class_id = cl.id
+			LEFT JOIN departments de
+					ON inserted.department_id = de.id
+			LEFT JOIN academic_sessions ac
+					ON inserted.session_id = ac.id;
     `;
 		const values = [studentId, classId, sessionId, departmentId, false, false];
 		const result = await client.query(queryText, values);

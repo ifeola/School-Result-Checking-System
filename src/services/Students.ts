@@ -25,7 +25,7 @@ class Student {
 		parentName: string,
 		parentPhone: string,
 		currentStatus: "active" | "graduated" | "withdrawn",
-		middleName?: string,
+		middleName?: string
 	) {
 		// 2. Explicitly assign them
 		this.userId = userId;
@@ -61,7 +61,7 @@ class Student {
 
 	static async getStudentById(id: string) {
 		const queryText = `
-      select admission_number, user_id from students
+      select * from current_students
       where id = $1;
     `;
 		const result = await db.query(queryText, [id]);
@@ -74,7 +74,7 @@ class Student {
       where admission_number = $1;
     `;
 		const result = await db.query(queryText, [admissionNumber]);
-		return result.rows[0];
+		return result.rows;
 	}
 
 	static async deleteStudentById(id: string, client: Pool | PoolClient) {
@@ -114,12 +114,25 @@ class Student {
 
 	static async getAllStudents({ limit, skip }: PaginationParams) {
 		const queryText = `
-      select *
+      select cs.id, cs.user_id,
+			cs.admission_number,
+			cs.first_name,
+			cs.last_name,
+			cs.middle_name,
+			cs.gender,
+			to_char(cs.date_of_birth, 'YYYY-MM-DD'),
+			cs.parent_name,
+			cs.parent_phone,
+			cs.current_status,
+			cl.class_name,
+			de.department_name
 			from current_students cs
-			left join users u
-				on u.id = cs.user_id
 			left join students_enrollments se
 				on se.student_id = cs.id
+			left join classes cl
+				on se.class_id = cl.id
+			left join departments de
+				on se.department_id = de.id
 			order by cs.first_name asc
 			limit $1 offset $2;
     `;
