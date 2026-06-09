@@ -51,7 +51,14 @@ interface enrollment {
 	departmentId: string | null;
 }
 
+type GetStudentsQuery = {
+	page?: string;
+	limit?: string;
+	search?: string;
+};
+
 export type {
+	GetStudentsQuery,
 	student,
 	user,
 	queryValue,

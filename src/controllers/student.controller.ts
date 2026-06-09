@@ -4,13 +4,9 @@ import db from "../database/db.ts";
 import bcrypt from "bcrypt";
 import Student from "../services/Students.ts";
 import User from "../services/User.ts";
-import type { student, user } from "../types/type.ts";
-import { matchedData, validationResult } from "express-validator";
-import {
-	BadRequestError,
-	NotFoundError,
-	ValidationError,
-} from "../services/Custom-Errors.ts";
+import type { GetStudentsQuery, student, user } from "../types/type.ts";
+import { matchedData, query, validationResult } from "express-validator";
+import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
 import {
 	formartPaginatedResponse,
 	getPaginationParams,
@@ -21,7 +17,7 @@ import { Class, Department, Session } from "../services/Props.ts";
 const createStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const admissionNumber = await generateAdmissionNumber(db);
 
@@ -43,13 +39,13 @@ const createStudent = async (
 
 		if (classRecord.level === "senior" && !data.departmentId) {
 			return next(
-				new ValidationError("Department is required for senior classes")
+				new ValidationError("Department is required for senior classes"),
 			);
 		}
 
 		if (classRecord.level === "junior" && data.departmentId) {
 			return next(
-				new ValidationError("Junior classes cannot have a department")
+				new ValidationError("Junior classes cannot have a department"),
 			);
 		}
 
@@ -82,7 +78,7 @@ const createStudent = async (
 				sessionId: sessionRecord.id,
 				departmentId: departmentRecord,
 			},
-			client
+			client,
 		);
 		await client.query("COMMIT");
 
@@ -102,13 +98,20 @@ const createStudent = async (
 	}
 };
 
-const getStudents = async (req: Request, res: Response, next: NextFunction) => {
+const getStudents = async (
+	req: Request<{}, {}, {}, GetStudentsQuery>,
+	res: Response,
+	next: NextFunction,
+) => {
 	const { page, limit, skip } = getPaginationParams(req.query);
-	const { students, totalCount } = await Student.getAllStudents({
-		page,
-		limit,
-		skip,
-	});
+	const { students, totalCount } = await Student.getAllStudents(
+		{
+			page,
+			limit,
+			skip,
+		},
+		req.query,
+	);
 
 	const response = formartPaginatedResponse(students, page, limit, totalCount);
 	res.status(200).json(response);
@@ -140,7 +143,7 @@ const getStudent = async (req: Request, res: Response, next: NextFunction) => {
 const deleteStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const studentId = req.params.id as string;
 	if (!studentId?.trim()) {
@@ -154,7 +157,7 @@ const deleteStudent = async (
 		const deletedStudent = await Student.deleteStudentById(studentId, client);
 		const deletedUser = await User.deleteUserById(
 			existingStudent.user_id,
-			client
+			client,
 		);
 
 		await client.query("COMMIT");
@@ -178,7 +181,7 @@ const deleteStudent = async (
 const updateStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	try {
 		const studentId = req.params.id as string;

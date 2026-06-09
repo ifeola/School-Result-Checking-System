@@ -1,4 +1,4 @@
-export interface PaginationParams {
+export interface QueryParams {
 	page: number;
 	limit: number;
 	skip: number;
@@ -17,7 +17,7 @@ export interface PaginatedResult<T> {
 	data: T[];
 }
 
-export const getPaginationParams = (query: any): PaginationParams => {
+export const getPaginationParams = (query: any): QueryParams => {
 	const page = Math.max(1, parseInt(query.page as string) || 1);
 	const limit = Math.max(1, parseInt(query.limit as string) || 10);
 	const skip = (page - 1) * limit;
