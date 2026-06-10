@@ -1,6 +1,6 @@
 import type { Pool, PoolClient } from "pg";
 import db from "../database/db.ts";
-import type { queryValue, student } from "../types/type.ts";
+import type { queryValue, student, StudentQuery } from "../types/type.ts";
 import type { QueryParams } from "../utils/pagination.ts";
 
 class Student {
@@ -61,8 +61,28 @@ class Student {
 
 	static async getStudentById(id: string) {
 		const queryText = `
-      select * from current_students
-      where id = $1;
+      select s.id, s.user_id,
+			s.admission_number,
+			s.first_name,
+			s.last_name,
+			s.middle_name,
+			s.gender,
+			to_char(s.date_of_birth, 'YYYY-MM-DD') as date_of_birth,
+			s.parent_name,
+			s.parent_phone,
+			s.current_status,
+			cl.class_name,
+			de.department_name,
+			s.deleted_at
+			from students s
+			left join students_enrollments se
+				on se.student_id = s.id
+			left join classes cl
+				on se.class_id = cl.id
+			left join departments de
+				on se.department_id = de.id
+			where s.id = $1
+				or s.user_id = $1
     `;
 		const result = await db.query(queryText, [id]);
 		return result.rows[0];
@@ -112,7 +132,10 @@ class Student {
 		return result.rows[0];
 	}
 
-	static async getAllStudents({ limit, skip }: QueryParams, query: any) {
+	static async getAllStudents(
+		{ limit, skip }: QueryParams,
+		query: StudentQuery,
+	) {
 		let queryText = `
       select s.id, s.user_id,
 			s.admission_number,
@@ -120,7 +143,7 @@ class Student {
 			s.last_name,
 			s.middle_name,
 			s.gender,
-			to_char(s.date_of_birth, 'YYYY-MM-DD'),
+			to_char(s.date_of_birth, 'YYYY-MM-DD') as date_of_birth,
 			s.parent_name,
 			s.parent_phone,
 			s.current_status,
@@ -134,68 +157,78 @@ class Student {
 			left join departments de
 				on se.department_id = de.id
     `;
-		const countQuery = `SELECT COUNT(*) FROM students;`;
-		const params = [];
-		let paramCount = 0;
+		let countQuery = `SELECT COUNT(DISTINCT s.id) FROM students s
+			left join students_enrollments se
+					on se.student_id = s.id
+			left join classes cl
+				on se.class_id = cl.id
+			left join departments de
+				on se.department_id = de.id
+	`;
+		const conditions: string[] = [];
+		const params: (string | number)[] = [];
 
 		if (query.search) {
-			paramCount++;
-			queryText += ` WHERE s.first_name LIKE $${paramCount}
-				OR s.last_name LIKE $${paramCount}
-				OR s.admission_number LIKE $${paramCount}
-			`;
-			params.push(query.search);
+			params.push(`%${query.search}%`);
+			conditions.push(`
+    (
+      s.first_name ILIKE $${params.length}
+      OR s.last_name ILIKE $${params.length}
+      OR s.admission_number ILIKE $${params.length}
+    )
+  `);
 		}
 
 		if (query.current_status) {
-			paramCount++;
-			queryText += `
-				AND s.current_status = $${paramCount}
-			`;
 			params.push(query.current_status);
+			conditions.push(`s.current_status = $${params.length}`);
 		}
 
 		if (query.gender) {
-			paramCount++;
-			queryText += `
-				AND s.gender = $${paramCount}
-			`;
 			params.push(query.gender);
+			conditions.push(`s.gender = $${params.length}`);
 		}
 
 		if (query.class_name) {
-			console.log(query.class_name);
-			paramCount++;
-			queryText += `
-				AND cl.class_name = $${paramCount}
-			`;
 			params.push(query.class_name);
+			conditions.push(`cl.class_name = $${params.length}`);
 		}
 
 		if (query.department_name) {
-			paramCount++;
-			queryText += `
-				AND s.department_name = $${paramCount}
-			`;
 			params.push(query.department_name);
+			conditions.push(`de.department_name = $${params.length}`);
+		}
+
+		if (conditions.length > 0) {
+			const whereClause = ` WHERE ${conditions.join(" AND ")}`;
+			countQuery += whereClause;
+			queryText += whereClause;
 		}
 
 		// Sorting
-		const sortBy = query.sort_by || "created_at";
+		const allowedSortFields = [
+			"created_at",
+			"first_name",
+			"last_name",
+			"admission_number",
+			"current_status",
+		];
+
+		const sortBy = allowedSortFields.includes(query.sort_by as string)
+			? query.sort_by
+			: "created_at";
 		const sortOrder = query.sort_order === "asc" ? "ASC" : "DESC";
 		queryText += ` ORDER BY s.${sortBy} ${sortOrder}`;
 
 		// Pagination
-		paramCount++;
-		queryText += ` LIMIT $${paramCount}`;
 		params.push(limit);
-		paramCount++;
-		queryText += ` OFFSET $${paramCount}`;
+		queryText += ` LIMIT $${params.length}`;
 		params.push(skip);
+		queryText += ` OFFSET $${params.length}`;
 
 		const [dataResult, countResult] = await Promise.all([
 			db.query(queryText, params),
-			db.query(countQuery),
+			db.query(countQuery, params.slice(0, params.length - 2)),
 		]);
 
 		return {

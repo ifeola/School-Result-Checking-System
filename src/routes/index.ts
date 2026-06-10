@@ -6,6 +6,7 @@ import classRouter from "./class.routes.ts";
 import departmentRouter from "./department.routes.ts";
 import sessionRouter from "./session.routes.ts";
 import teacherRouter from "./teacher.routes.ts";
+import userRouter from "./user.routes.ts";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use("/classes", classRouter);
 router.use("/departments", departmentRouter);
 router.use("/academic-sessions", sessionRouter);
 router.use("/teachers", teacherRouter);
+router.use("/user", userRouter);
 
 export default router;
