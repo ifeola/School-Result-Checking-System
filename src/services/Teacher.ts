@@ -1,7 +1,7 @@
 import type { Pool, PoolClient } from "pg";
 import db from "../database/db.ts";
 import type { teacher } from "../types/type.ts";
-import type { PaginationParams } from "../utils/pagination.ts";
+import type { QueryParams } from "../utils/pagination.ts";
 
 class Teacher {
 	userId: string;
@@ -52,7 +52,7 @@ class Teacher {
 		return result.rows[0];
 	}
 
-	static async getAllTeachers({ limit, skip }: PaginationParams) {
+	static async getAllTeachers({ limit, skip }: QueryParams) {
 		const queryText = `
 				select * from teachers t
 				left join users u
@@ -72,6 +72,26 @@ class Teacher {
 			teachers: teachers.rows,
 			teachersCount: parseInt(teachersCount.rows[0].count, 10),
 		};
+	}
+
+	static async getTeacherById(id: string) {
+		const queryText = `
+      select t.id, t.user_id,
+			t.teacher_number,
+			t.first_name,
+			t.last_name,
+			u.email,
+			t.phone,
+			u.role,
+			t.deleted_at
+			from teachers t
+			left join users u
+				on u.id = t.user_id
+			where t.id = $1
+				or t.user_id = $1
+    `;
+		const result = await db.query(queryText, [id]);
+		return result.rows[0];
 	}
 }
 

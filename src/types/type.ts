@@ -57,7 +57,18 @@ type GetStudentsQuery = {
 	search?: string;
 };
 
+interface StudentQuery {
+	search?: string;
+	current_status?: string;
+	gender?: string;
+	class_name?: string;
+	department_name?: string;
+	sort_by?: string;
+	sort_order?: "asc" | "desc";
+}
+
 export type {
+	StudentQuery,
 	GetStudentsQuery,
 	student,
 	user,
