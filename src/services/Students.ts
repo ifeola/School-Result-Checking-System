@@ -25,7 +25,7 @@ class Student {
 		parentName: string,
 		parentPhone: string,
 		currentStatus: "active" | "graduated" | "withdrawn",
-		middleName?: string,
+		middleName?: string
 	) {
 		// 2. Explicitly assign them
 		this.userId = userId;
@@ -73,10 +73,13 @@ class Student {
 			s.current_status,
 			cl.class_name,
 			de.department_name,
+			u.role,
 			s.deleted_at
 			from students s
 			left join students_enrollments se
 				on se.student_id = s.id
+			left join users u
+				on u.id = s.user_id
 			left join classes cl
 				on se.class_id = cl.id
 			left join departments de
@@ -134,7 +137,7 @@ class Student {
 
 	static async getAllStudents(
 		{ limit, skip }: QueryParams,
-		query: StudentQuery,
+		query: StudentQuery
 	) {
 		let queryText = `
       select s.id, s.user_id,
