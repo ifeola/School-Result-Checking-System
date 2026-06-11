@@ -17,6 +17,6 @@ router.use("/classes", classRouter);
 router.use("/departments", departmentRouter);
 router.use("/academic-sessions", sessionRouter);
 router.use("/teachers", teacherRouter);
-router.use("/user", userRouter);
+router.use("/auth/me", userRouter);
 
 export default router;

@@ -10,7 +10,7 @@ const generateToken = (
 		role: string;
 		permissionLevel: "super_admin" | "staff_admin" | null;
 	},
-	res: Response,
+	res: Response
 ) => {
 	const JWT_SECRET = process.env.JWT_SECRET as string;
 
@@ -24,7 +24,7 @@ const generateToken = (
 		JWT_SECRET,
 		{
 			expiresIn: "7d",
-		},
+		}
 	);
 
 	res.cookie("jwt", token, {

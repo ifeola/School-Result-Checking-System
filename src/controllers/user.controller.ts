@@ -7,7 +7,7 @@ import Teacher from "../services/Teacher.ts";
 const getUser = async (
 	req: AuthenticatedRequest,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	const user = req.user;
 
@@ -22,7 +22,7 @@ const getUser = async (
 			if (!student) {
 				return next(new NotFoundError("Student not found"));
 			}
-			return res.status(200).json({ success: true, data: { student } });
+			return res.status(200).json({ success: true, data: { user: student } });
 		}
 
 		if (user.role === "teacher") {
@@ -31,7 +31,7 @@ const getUser = async (
 			if (!teacher) {
 				return next(new NotFoundError("Teacher not found"));
 			}
-			return res.status(200).json({ success: true, data: { teacher } });
+			return res.status(200).json({ success: true, data: { user: teacher } });
 		}
 	} catch (error) {
 		next(error);
