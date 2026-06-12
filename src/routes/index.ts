@@ -7,6 +7,7 @@ import departmentRouter from "./department.routes.ts";
 import sessionRouter from "./session.routes.ts";
 import teacherRouter from "./teacher.routes.ts";
 import userRouter from "./user.routes.ts";
+import assessmentRouter from "./assessment.routes.ts";
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use("/departments", departmentRouter);
 router.use("/academic-sessions", sessionRouter);
 router.use("/teachers", teacherRouter);
 router.use("/auth/me", userRouter);
+router.use("/students", assessmentRouter);
 
 export default router;
