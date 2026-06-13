@@ -1,7 +1,8 @@
 import { Router } from "express";
 import studentRouter from "./student.routes.ts";
 import adminRouter from "./admin.routes.ts";
-import authRouter from "./authentication.routes.ts";
+import loginRouter from "./login.routes.ts";
+import logoutRouter from "./logout.routes.ts";
 import classRouter from "./class.routes.ts";
 import departmentRouter from "./department.routes.ts";
 import sessionRouter from "./session.routes.ts";
@@ -13,7 +14,8 @@ const router = Router();
 
 router.use("/students", studentRouter);
 router.use("/admins", adminRouter);
-router.use("/auth/login", authRouter);
+router.use("/auth/login", loginRouter);
+router.use("/logout", logoutRouter);
 router.use("/classes", classRouter);
 router.use("/departments", departmentRouter);
 router.use("/academic-sessions", sessionRouter);

@@ -20,26 +20,26 @@ router
 		studentValidator,
 		authenticate,
 		authorize(["super_admin", "staff_admin"]),
-		createStudent
+		createStudent,
 	)
 	.get(
 		"/",
-		// authenticate,
-		// authorize(["super_admin", "staff_admin"]),
-		getStudents
+		authenticate,
+		authorize(["super_admin", "staff_admin"]),
+		getStudents,
 	)
 	.get(
 		"/:id",
 		param("id").isUUID().withMessage("Invalid student ID"),
-		// authenticate,
-		// authorize(["super_admin", "staff_admin"]),
-		getStudent
+		authenticate,
+		authorize(["super_admin", "staff_admin", "student", "teacher"]),
+		getStudent,
 	)
 	.patch(
 		"/:id",
 		authenticate,
 		authorize(["super_admin", "staff_admin"]),
-		updateStudent
+		updateStudent,
 	)
 	.delete("/:id", authenticate, authorize(["super_admin"]), deleteStudent);
 

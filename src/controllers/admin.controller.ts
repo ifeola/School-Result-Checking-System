@@ -21,8 +21,7 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	const ROLE = "admin";
-	const lastName = data.fullName.split(" ")[0];
-	const hashedPassword = await bcrypt.hash(lastName.toUpperCase(), 10);
+	const hashedPassword = await bcrypt.hash(data.lastName, 10);
 	const client = await db.sql.connect();
 
 	try {
@@ -39,7 +38,9 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 		const adminData = await Admin.create(
 			{
 				userId: userData.id,
-				fullName: data.fullName,
+				firstName: data.firstName,
+				middleName: data.middleName,
+				lastName: data.lastName,
 				permissionLevel: data.permissionLevel,
 			},
 			client,

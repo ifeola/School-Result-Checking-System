@@ -17,6 +17,7 @@ interface teacher {
 	userId: string;
 	teacherNumber: string;
 	firstName: string;
+	middleName: string;
 	lastName: string;
 	phone: string;
 }
@@ -29,7 +30,9 @@ interface user {
 
 interface admin {
 	userId: string;
-	fullName: string;
+	firstName: string;
+	middleName: string;
+	lastName: string;
 	permissionLevel: "super_admin" | "staff_admin" | null;
 }
 

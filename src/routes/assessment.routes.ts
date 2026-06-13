@@ -6,9 +6,9 @@ import authorize from "../middlewares/authorize.ts";
 const router = Router();
 
 router.get(
-	"/:id/assessment",
+	"/:admission_number/results",
 	authenticate,
-	authorize(["student", "teacher", "admin"]),
+	authorize(["student", "teacher", "super_admin", "staff_admin"]),
 	getAssessment,
 );
 

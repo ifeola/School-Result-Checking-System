@@ -31,6 +31,9 @@ class User {
 			SELECT
 				u.id,
 				u.email,
+				COALESCE(s.first_name, t.first_name, a.first_name) AS first_name,
+    		COALESCE(s.last_name, t.last_name, a.last_name) AS last_name,
+				COALESCE(s.middle_name, t.middle_name, a.middle_name) AS middle_name,
 				u.password_hash,
 				u.role,
 				s.admission_number,

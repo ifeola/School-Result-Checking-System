@@ -6,13 +6,19 @@ const teacherValidator = [
 		.trim()
 		.notEmpty()
 		.withMessage("Please enter teacher's first name")
-		.isLength({ min: 3 })
+		.isLength({ min: 2 })
+		.escape(),
+	body("middleName")
+		.trim()
+		.notEmpty()
+		.withMessage("Please enter teacher's middle name")
+		.isLength({ min: 2 })
 		.escape(),
 	body("lastName")
 		.trim()
 		.notEmpty()
-		.withMessage("Please enter student's last name")
-		.isLength({ min: 3 })
+		.withMessage("Please enter teacher's last name")
+		.isLength({ min: 2 })
 		.escape(),
 	body("phone").escape(),
 ];
