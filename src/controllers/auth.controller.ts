@@ -50,6 +50,17 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 	}
 };
 
-const logout = async (req: Request, res: Response, next: NextFunction) => {};
+const logout = async (req: Request, res: Response, next: NextFunction) => {
+	res.clearCookie("jwt", {
+		secure: process.env.NODE_ENV === "production",
+		httpOnly: true,
+		sameSite: "lax",
+	});
+
+	res.status(200).json({
+		success: true,
+		message: "Logged out successfully",
+	});
+};
 
 export { login, logout };

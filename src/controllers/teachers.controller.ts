@@ -48,6 +48,7 @@ const createTeacher = async (
 			userId: createdUser.id,
 			teacherNumber,
 			firstName: result.firstName,
+			middleName: result.middleName,
 			lastName: result.lastName,
 			phone: result.phone,
 		};
