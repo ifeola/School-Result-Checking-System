@@ -9,7 +9,7 @@ config();
 const authenticate = (
 	req: AuthenticatedRequest,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	let token;
 
@@ -25,8 +25,6 @@ const authenticate = (
 	if (!token) {
 		return next(new UnauthorizedError());
 	}
-
-	console.log(token);
 
 	try {
 		const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
