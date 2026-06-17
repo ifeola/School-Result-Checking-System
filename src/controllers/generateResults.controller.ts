@@ -2,8 +2,6 @@ import puppeteer from "puppeteer-core";
 import type { Request, Response, NextFunction } from "express";
 import type { AuthenticatedRequest } from "../types/type.ts";
 
-const FRONTEND_URL = "http://localhost:5173";
-
 const generateResult = async (
 	req: AuthenticatedRequest,
 	res: Response,
@@ -20,8 +18,6 @@ const generateResult = async (
 		await page.goto(`http://localhost:5173/student/results/print`, {
 			waitUntil: "networkidle0",
 		});
-
-		await page.waitForSelector("#result-section");
 
 		const pdf = await page.pdf({
 			format: "A4",
