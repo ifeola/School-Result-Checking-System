@@ -23,7 +23,7 @@ const generateToken = (
 		},
 		JWT_SECRET,
 		{
-			expiresIn: "7d",
+			expiresIn: "1d",
 		}
 	);
 
@@ -31,7 +31,7 @@ const generateToken = (
 		secure: process.env.NODE_ENV === "production",
 		httpOnly: true,
 		sameSite: "lax",
-		maxAge: 7 * 24 * 60 * 60 * 1000,
+		maxAge: 1 * 24 * 60 * 60 * 1000,
 	});
 
 	return token;

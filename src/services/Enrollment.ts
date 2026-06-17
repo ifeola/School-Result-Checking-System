@@ -15,7 +15,7 @@ class Enrollment {
 		sessionId: string,
 		departmentId: string,
 		promoted: boolean,
-		repeated: boolean,
+		repeated: boolean
 	) {
 		this.studentId = studentId;
 		this.classId = classId;
@@ -27,7 +27,7 @@ class Enrollment {
 
 	static async create(
 		{ studentId, classId, sessionId, departmentId }: enrollment,
-		client: Pool | PoolClient,
+		client: Pool | PoolClient
 	) {
 		const queryText = `
       WITH inserted AS (
@@ -49,11 +49,11 @@ class Enrollment {
 					inserted.repeated_class,
 					inserted.promoted_to_next_class
 			FROM inserted
-			LEFT JOIN classes cl
+			JOIN classes cl
 					ON inserted.class_id = cl.id
-			LEFT JOIN departments de
+			JOIN departments de
 					ON inserted.department_id = de.id
-			LEFT JOIN academic_sessions ac
+			JOIN academic_sessions ac
 					ON inserted.session_id = ac.id;
     `;
 		const values = [studentId, classId, sessionId, departmentId, false, false];

@@ -1,3 +1,5 @@
 {
-	"debug.showInlineBreakpointCandidates": false
+	"debug.showInlineBreakpointCandidates": false,
+	"terminal.integrated.fontLigatures.enabled": true,
+	"terminal.integrated.fontFamily": "Cascadia Code NF, Cursive"
 }
