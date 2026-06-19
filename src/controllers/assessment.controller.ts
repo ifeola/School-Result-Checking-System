@@ -8,9 +8,12 @@ const getAssessment = async (
 	next: NextFunction
 ) => {
 	const studentAdmissionNumber = req.params.admission_number as string;
+	const { term, session } = req.query as { term: string; session: string };
+
 	try {
 		const response = await Assessment.getCurrentByAdmissionNumber(
-			studentAdmissionNumber
+			studentAdmissionNumber,
+			{ term, session }
 		);
 
 		if (response.length === 0) {

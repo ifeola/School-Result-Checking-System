@@ -1,8 +1,11 @@
 import db from "../database/db.ts";
 
 class Assessment {
-	static async getCurrentByAdmissionNumber(admissionNumber: string) {
-		const queryText = `
+	static async getCurrentByAdmissionNumber(
+		admissionNumber: string,
+		queryParams: { term: string; session: string }
+	) {
+		let queryText = `
       select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
         from assessments ass
       join students st
@@ -16,10 +19,28 @@ class Assessment {
       join classes cl
         on cl.id = ass.class_id
       where st.admission_number = $1
-      and ap.is_current = TRUE;
     `;
 
-		const response = await db.query(queryText, [admissionNumber]);
+		const conditions: string[] = [];
+		const params: (string | number)[] = [admissionNumber];
+
+		if (queryParams.term) {
+			params.push(queryParams.term);
+			conditions.push(`tm.term_name = $${params.length}`);
+		}
+
+		if (queryParams.session) {
+			params.push(queryParams.session);
+			conditions.push(`ap.session_name = $${params.length}`);
+		}
+
+		if (conditions.length === 0) {
+			queryText += ` and ap.is_current = TRUE`;
+		} else {
+			queryText += ` and ${conditions.join(" and ")}`;
+		}
+
+		const response = await db.query(queryText, params);
 		return response.rows;
 	}
 
