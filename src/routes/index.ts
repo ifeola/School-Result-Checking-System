@@ -11,7 +11,8 @@ import userRouter from "./user.routes.ts";
 import assessmentRouter from "./assessment.routes.ts";
 import generateResultRouter from "./generateResult.routes.ts";
 import classPositionRouter from "./assessment.routes.ts";
-import previousAssessmentRouter from "./assessment.routes.ts"
+import previousAssessmentRouter from "./assessment.routes.ts";
+import termsRouter from "./term.routes.ts";
 
 const router = Router();
 
@@ -28,5 +29,6 @@ router.use("/students", assessmentRouter);
 router.use("/students", previousAssessmentRouter);
 router.use("/students", classPositionRouter);
 router.use("/generate-result-pdf", generateResultRouter);
+router.use("/terms", termsRouter);
 
 export default router;

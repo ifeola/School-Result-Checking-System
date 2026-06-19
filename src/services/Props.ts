@@ -36,4 +36,24 @@ class Department {
 	}
 }
 
-export { Class, Session, Department };
+class Term {
+	static async getTerms() {
+		const queryText = `
+			select * from terms
+		`;
+		const response = await db.query(queryText);
+		return response.rows;
+	}
+
+	static async getDepartmentById(id: string) {
+		const queryText = `
+        select id
+				from departments
+        where id = $1
+      `;
+		const response = await db.query(queryText, [id]);
+		return response.rows[0].id;
+	}
+}
+
+export { Class, Session, Department, Term };
