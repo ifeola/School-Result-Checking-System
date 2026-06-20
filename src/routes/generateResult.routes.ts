@@ -5,6 +5,6 @@ import authorize from "../middlewares/authorize.ts";
 
 const router = Router();
 
-router.post("/", generateResult);
+router.get("/", generateResult);
 
 export default router;
