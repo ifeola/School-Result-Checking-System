@@ -1,11 +1,14 @@
 import type { ValidationError as ExpressValidationError } from "express-validator";
 
 class CustomError extends Error {
-	status: number;
+	public readonly status: number;
+	public readonly isOperational: boolean;
 	constructor(status: number, message: string) {
 		super(message);
 		this.status = status;
+		this.isOperational = true;
 		this.name = this.constructor.name;
+		Error.captureStackTrace(this, this.constructor);
 	}
 }
 
