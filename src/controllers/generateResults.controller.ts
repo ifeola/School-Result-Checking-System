@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import type { AuthenticatedRequest } from "../types/type.ts";
-import puppeteer from "puppeteer";
+// import puppeteer from "puppeteer";
 
 const html = `
 
@@ -365,36 +365,37 @@ const html = `
 const generateResult = async (
 	req: AuthenticatedRequest,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
-	const browser = await puppeteer.launch({
-		executablePath: "/usr/bin/chromium-browser",
-		headless: true,
-	});
+	let browser;
 
 	try {
-		const page = await browser.newPage();
-
-		await page.setContent(html, {
-			waitUntil: "domcontentloaded",
+		browser = await puppeteer.launch({
+			headless: "new",
+			args: ["--no-sandbox", "--disable-setuid-sandbox"],
 		});
+		const page = await browser.newPage();
+		await page.setContent(html, { waitUntil: "networkidle0" });
 
-		const pdf = await page.pdf({
+		const pdfBuffer = await page.pdf({
 			format: "A4",
 			printBackground: true,
+			margin: { top: "20px", bottom: "20px", left: "20px", right: "20px" },
 		});
 
 		res.set({
 			"Content-Type": "application/pdf",
-			"Content-Disposition": "attachment; filename=result.pdf",
+			"Content-Disposition": `attachment; filename="result-${req.params.studentId}.pdf"`,
+			"Content-Length": pdfBuffer.length,
 		});
-
-		res.send(pdf);
+		res.send(pdfBuffer);
 	} catch (error) {
 		console.log(error);
 	} finally {
-		await browser.close();
+		if (browser) {
+			await browser.close();
+		}
 	}
 };
 
-export default generateResult;
+// export default generateResult;
