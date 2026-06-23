@@ -33,15 +33,6 @@ class ValidationError extends CustomError {
 	}
 }
 
-class BadRequestError extends CustomError {
-	constructor(
-		message = "The server cannot or will not process the request due to an apparent client error.",
-	) {
-		super(400, message);
-		this.name = "BadRequestError";
-	}
-}
-
 class UnauthorizedError extends CustomError {
 	constructor(message = "Authentication falied, please try again.") {
 		super(401, message);
@@ -56,11 +47,18 @@ class ForbiddenError extends CustomError {
 	}
 }
 
+class ConflictError extends CustomError {
+	constructor(message: string) {
+		super(409, message);
+		this.name = "ConflictError";
+	}
+}
+
 export {
 	CustomError,
 	NotFoundError,
 	ValidationError,
-	BadRequestError,
 	UnauthorizedError,
 	ForbiddenError,
+	ConflictError,
 };

@@ -67,9 +67,7 @@ const createTeacher = async (
 		});
 	} catch (error) {
 		await client.query("ROLLBACK");
-		if (error instanceof Error) {
-			return next(error);
-		}
+		throw error;
 		return next(new Error("Something went wrong"));
 	} finally {
 		client.release();
@@ -81,25 +79,21 @@ const deleteTeacher = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	try {
-		const teacherId = req.params.id as string;
-		if (!teacherId?.trim()) {
-			return next(new ValidationError("Please provide a valid id"));
-		}
-
-		const deletedTeacher = await Teacher.deleteById(teacherId);
-		if (!deletedTeacher) {
-			return next(new NotFoundError("Student not found."));
-		}
-
-		return res.status(200).json({
-			success: true,
-			message: "Student successfully deleted.",
-			data: { student: deleteTeacher },
-		});
-	} catch (error) {
-		next(error);
+	const teacherId = req.params.id as string;
+	if (!teacherId?.trim()) {
+		return next(new ValidationError("Please provide a valid id"));
 	}
+
+	const deletedTeacher = await Teacher.deleteById(teacherId);
+	if (!deletedTeacher) {
+		return next(new NotFoundError("Student not found."));
+	}
+
+	return res.status(200).json({
+		success: true,
+		message: "Student successfully deleted.",
+		data: { student: deleteTeacher },
+	});
 };
 
 const getAllTeachers = async (
@@ -107,23 +101,19 @@ const getAllTeachers = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	try {
-		const { page, limit, skip } = getPaginationParams(req.query);
-		const { teachers, teachersCount } = await Teacher.getAllTeachers({
-			page,
-			limit,
-			skip,
-		});
-		const response = formartPaginatedResponse(
-			teachers,
-			page,
-			limit,
-			teachersCount,
-		);
-		return res.status(200).json(response);
-	} catch (error) {
-		next(error);
-	}
+	const { page, limit, skip } = getPaginationParams(req.query);
+	const { teachers, teachersCount } = await Teacher.getAllTeachers({
+		page,
+		limit,
+		skip,
+	});
+	const response = formartPaginatedResponse(
+		teachers,
+		page,
+		limit,
+		teachersCount,
+	);
+	return res.status(200).json(response);
 };
 
 export { createTeacher, deleteTeacher, getAllTeachers };

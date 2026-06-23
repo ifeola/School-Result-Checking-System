@@ -7,23 +7,24 @@ import {
 import teacherValidator from "../validators/teacher-validator.ts";
 import authenticate from "../middlewares/authenticate.ts";
 import authorize from "../middlewares/authorize.ts";
+import catchError from "../utils/catchError.ts";
 
-const router = Router();
+const router: Router = Router();
 
 router
-	.get("/", getAllTeachers)
+	.get("/", catchError(getAllTeachers))
 	.post(
 		"/",
 		teacherValidator,
 		authenticate,
 		authorize(["super_admin", "staff_admin"]),
-		createTeacher,
+		catchError(createTeacher),
 	)
 	.delete(
 		"/:id",
 		authenticate,
 		authorize(["super_admin", "staff_admin"]),
-		deleteTeacher,
+		catchError(deleteTeacher),
 	);
 
 export default router;

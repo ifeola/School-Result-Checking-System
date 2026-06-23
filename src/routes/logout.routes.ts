@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { logout } from "../controllers/auth.controller.ts";
+import catchError from "../utils/catchError.ts";
 
-const router = Router();
+const router: Router = Router();
 
-router.post("/", logout);
+router.post("/", catchError(logout));
 
 export default router;

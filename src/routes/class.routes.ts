@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { getAllClasses } from "../controllers/class.controller.ts";
+import catchError from "../utils/catchError.ts";
 
-const router = Router();
+const router: Router = Router();
 
-router.get("/", getAllClasses);
+router.get("/", catchError(getAllClasses));
 
 export default router;

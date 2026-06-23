@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { matchedData, validationResult } from "express-validator";
-import { ValidationError } from "../services/Custom-Errors.ts";
+import { ConflictError, ValidationError } from "../services/Custom-Errors.ts";
 import db from "../database/db.ts";
 import User from "../services/User.ts";
 import Admin from "../services/Admin.ts";
@@ -17,15 +17,15 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 	// Check if email already exists
 	const existingAdmin = await User.getUserByIdentifier(data.email);
 	if (existingAdmin) {
-		return next(new ValidationError("Email already exists."));
+		return next(new ConflictError("Email already exists."));
 	}
 
 	const ROLE = "admin";
-	const hashedPassword = await bcrypt.hash(data.lastName, 10);
 	const client = await db.sql.connect();
 
 	try {
 		await client.query("BEGIN");
+		const hashedPassword = await bcrypt.hash(data.lastName, 10);
 		const userData = await User.create(
 			{
 				email: data.email,
@@ -56,10 +56,7 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 		});
 	} catch (error) {
 		await client.query("ROLLBACK");
-		if (error instanceof Error) {
-			return next(error);
-		}
-		return next(new Error("Something went wrong"));
+		throw error;
 	} finally {
 		client.release();
 	}
