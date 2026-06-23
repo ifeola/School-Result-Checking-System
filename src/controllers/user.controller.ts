@@ -4,10 +4,14 @@ import { NotFoundError, UnauthorizedError } from "../services/Custom-Errors.ts";
 import Student from "../services/Students.ts";
 import Teacher from "../services/Teacher.ts";
 
+const getUsers = (req: Request, res: Response, next: NextFunction) => {
+	
+};
+
 const getUser = async (
 	req: AuthenticatedRequest,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const user = req.user;
 
@@ -15,26 +19,22 @@ const getUser = async (
 		return next(new UnauthorizedError());
 	}
 
-	try {
-		if (user.role === "student") {
-			const student = await Student.getStudentById(user.id);
+	if (user.role === "student") {
+		const student = await Student.getStudentById(user.id);
 
-			if (!student) {
-				return next(new NotFoundError("Student not found"));
-			}
-			return res.status(200).json({ success: true, data: { user: student } });
+		if (!student) {
+			return next(new NotFoundError("Student not found"));
 		}
+		return res.status(200).json({ success: true, data: { user: student } });
+	}
 
-		if (user.role === "teacher") {
-			const teacher = await Teacher.getTeacherById(user.id);
+	if (user.role === "teacher") {
+		const teacher = await Teacher.getTeacherById(user.id);
 
-			if (!teacher) {
-				return next(new NotFoundError("Teacher not found"));
-			}
-			return res.status(200).json({ success: true, data: { user: teacher } });
+		if (!teacher) {
+			return next(new NotFoundError("Teacher not found"));
 		}
-	} catch (error) {
-		next(error);
+		return res.status(200).json({ success: true, data: { user: teacher } });
 	}
 };
 

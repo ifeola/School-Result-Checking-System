@@ -6,13 +6,9 @@ const getAllClasses = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	try {
-		const result = await db.query(`select * from classes`);
-		const classes = result.rows;
-		return res.status(200).json({ success: true, data: { classes } });
-	} catch (error) {
-		next(error);
-	}
+	const result = await db.query(`select * from classes`);
+	const classes = result.rows;
+	return res.status(200).json({ success: true, data: { classes } });
 };
 
 export { getAllClasses };

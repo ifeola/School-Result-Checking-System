@@ -15,39 +15,35 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	const { identifier, password } = matchedData(req);
-	try {
-		const existingUser = await User.getUserByIdentifier(identifier);
-		if (!existingUser) {
-			return next(new NotFoundError("Invalid username or password"));
-		}
-
-		const isPasswordMatch = await bcrypt.compare(
-			password,
-			existingUser.password_hash,
-		);
-		if (!isPasswordMatch) {
-			return next(new ValidationError("Invalid username or password"));
-		}
-
-		const identity = existingUser.email ?? existingUser.admission_number;
-		generateToken(
-			{
-				id: existingUser.id,
-				identifier: identity,
-				role: existingUser.role,
-				permissionLevel: existingUser.permission_level,
-			},
-			res,
-		);
-
-		return res.status(200).json({
-			success: true,
-			message: "User successfully logged in.",
-			data: { user: { ...existingUser, password_hash: null } },
-		});
-	} catch (error) {
-		next(error);
+	const existingUser = await User.getUserByIdentifier(identifier);
+	if (!existingUser) {
+		return next(new NotFoundError("Invalid username or password"));
 	}
+
+	const isPasswordMatch = await bcrypt.compare(
+		password,
+		existingUser.password_hash,
+	);
+	if (!isPasswordMatch) {
+		return next(new ValidationError("Invalid username or password"));
+	}
+
+	const identity = existingUser.email ?? existingUser.admission_number;
+	generateToken(
+		{
+			id: existingUser.id,
+			identifier: identity,
+			role: existingUser.role,
+			permissionLevel: existingUser.permission_level,
+		},
+		res,
+	);
+
+	return res.status(200).json({
+		success: true,
+		message: "User successfully logged in.",
+		data: { user: { ...existingUser, password_hash: null } },
+	});
 };
 
 const logout = async (req: Request, res: Response, next: NextFunction) => {

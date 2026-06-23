@@ -10,6 +10,7 @@ import {
 import { studentValidator } from "../validators/student-validators.ts";
 import authenticate from "../middlewares/authenticate.ts";
 import authorize from "../middlewares/authorize.ts";
+import catchError from "../utils/catchError.ts";
 
 const router: Router = Router();
 
@@ -20,26 +21,26 @@ router
 		studentValidator,
 		authenticate,
 		authorize(["super_admin", "staff_admin"]),
-		createStudent,
+		createStudent
 	)
 	.get(
 		"/",
-		authenticate,
-		authorize(["super_admin", "staff_admin"]),
-		getStudents,
+		// authenticate,
+		// authorize(["super_admin", "staff_admin", "teacher", "student"]),
+		catchError(getStudents)
 	)
 	.get(
 		"/:id",
 		param("id").isUUID().withMessage("Invalid student ID"),
 		authenticate,
 		authorize(["super_admin", "staff_admin", "student", "teacher"]),
-		getStudent,
+		getStudent
 	)
 	.patch(
 		"/:id",
 		authenticate,
 		authorize(["super_admin", "staff_admin"]),
-		updateStudent,
+		updateStudent
 	)
 	.delete("/:id", authenticate, authorize(["super_admin"]), deleteStudent);
 

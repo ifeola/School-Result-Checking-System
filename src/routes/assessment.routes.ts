@@ -6,28 +6,29 @@ import {
 } from "../controllers/assessment.controller.ts";
 import authenticate from "../middlewares/authenticate.ts";
 import authorize from "../middlewares/authorize.ts";
+import catchError from "../utils/catchError.ts";
 
-const router = Router();
+const router: Router = Router();
 
 router.get(
 	"/:admission_number/results",
 	authenticate,
 	authorize(["student", "teacher", "super_admin", "staff_admin"]),
-	getAssessment
+	catchError(getAssessment),
 );
 
 router.get(
 	"/:admission_number/previous/results",
 	authenticate,
 	authorize(["student", "teacher", "super_admin", "staff_admin"]),
-	getPreviousAssessment
+	catchError(getPreviousAssessment),
 );
 
 router.get(
 	"/:admission_number/position",
 	authenticate,
 	authorize(["student", "teacher", "super_admin", "staff_admin"]),
-	getClassPosition
+	catchError(getClassPosition),
 );
 
 export default router;

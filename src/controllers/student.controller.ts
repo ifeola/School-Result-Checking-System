@@ -17,7 +17,7 @@ import { Class, Department, Session } from "../services/Props.ts";
 const createStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const admissionNumber = await generateAdmissionNumber(db);
 
@@ -39,13 +39,13 @@ const createStudent = async (
 
 		if (classRecord.level === "senior" && !data.departmentId) {
 			return next(
-				new ValidationError("Department is required for senior classes")
+				new ValidationError("Department is required for senior classes"),
 			);
 		}
 
 		if (classRecord.level === "junior" && data.departmentId) {
 			return next(
-				new ValidationError("Junior classes cannot have a department")
+				new ValidationError("Junior classes cannot have a department"),
 			);
 		}
 
@@ -78,7 +78,7 @@ const createStudent = async (
 				sessionId: sessionRecord.id,
 				departmentId: departmentRecord,
 			},
-			client
+			client,
 		);
 		await client.query("COMMIT");
 
@@ -101,7 +101,7 @@ const createStudent = async (
 const getStudents = async (
 	req: Request<{}, {}, {}, GetStudentsQuery>,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const { page, limit, skip } = getPaginationParams(req.query);
 	const { students, totalCount } = await Student.getAllStudents(
@@ -110,7 +110,7 @@ const getStudents = async (
 			limit,
 			skip,
 		},
-		req.query
+		req.query,
 	);
 
 	const response = formartPaginatedResponse(students, page, limit, totalCount);
@@ -125,24 +125,20 @@ const getStudent = async (req: Request, res: Response, next: NextFunction) => {
 
 	const { id } = matchedData(req);
 
-	try {
-		const existingStudent = await Student.getStudentById(id);
-		if (!existingStudent) {
-			return next(new NotFoundError("Student not found"));
-		}
-
-		return res
-			.status(200)
-			.json({ success: true, data: { student: existingStudent } });
-	} catch (error) {
-		next(error);
+	const existingStudent = await Student.getStudentById(id);
+	if (!existingStudent) {
+		return next(new NotFoundError("Student not found"));
 	}
+
+	return res
+		.status(200)
+		.json({ success: true, data: { student: existingStudent } });
 };
 
 const deleteStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const studentId = req.params.id as string;
 	if (!studentId?.trim()) {
@@ -156,7 +152,7 @@ const deleteStudent = async (
 		const deletedStudent = await Student.deleteStudentById(studentId, client);
 		const deletedUser = await User.deleteUserById(
 			existingStudent.user_id,
-			client
+			client,
 		);
 
 		await client.query("COMMIT");
@@ -180,7 +176,7 @@ const deleteStudent = async (
 const updateStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	try {
 		const studentId = req.params.id as string;
