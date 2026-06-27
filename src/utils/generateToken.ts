@@ -28,10 +28,12 @@ const generateToken = (
 	);
 
 	res.cookie("jwt", token, {
+		// secure: true, // process.env.NODE_ENV === "production"
+		// sameSite: "none", // ← required for cross-origin (different ports)
 		secure: process.env.NODE_ENV === "production",
+		sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 		httpOnly: true,
-		sameSite: "lax",
-		maxAge: 1 * 24 * 60 * 60 * 1000,
+		maxAge: 24 * 60 * 60 * 1000, // 1 day
 	});
 
 	return token;

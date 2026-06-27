@@ -219,8 +219,8 @@ class Student {
 
 		const sortBy = allowedSortFields.includes(query.sort_by as string)
 			? query.sort_by
-			: "created_at";
-		const sortOrder = query.sort_order === "asc" ? "ASC" : "DESC";
+			: "admission_number";
+		const sortOrder = query.sort_order === "desc" ? "DESC" : "ASC";
 		queryText += ` ORDER BY s.${sortBy} ${sortOrder}`;
 
 		// Pagination
