@@ -1,6 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
 import Assessment from "../services/Assessment.ts";
 import { NotFoundError } from "../services/Custom-Errors.ts";
+import {
+	formartPaginatedResponse,
+	getPaginationParams,
+} from "../utils/pagination.ts";
+import type { GetStudentsQuery } from "../types/type.ts";
 
 const getAssessment = async (
 	req: Request,
@@ -66,4 +71,31 @@ const getClassPosition = async (
 	});
 };
 
-export { getAssessment, getClassPosition, getPreviousAssessment };
+const getAllResults = async (
+	req: Request<{}, {}, {}, GetStudentsQuery>,
+	res: Response,
+	next: NextFunction,
+) => {
+	console.log(req.query);
+	const { page, limit, skip } = getPaginationParams(req.query);
+	const { results, totalRecords } = await Assessment.getAllResults(
+		{ page, limit, skip },
+		req.query,
+	);
+
+	const assessments = formartPaginatedResponse(
+		results,
+		page,
+		limit,
+		totalRecords,
+	);
+
+	res.status(200).json(assessments);
+};
+
+export {
+	getAssessment,
+	getClassPosition,
+	getPreviousAssessment,
+	getAllResults,
+};
