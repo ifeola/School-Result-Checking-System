@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+	getAllResults,
 	getAssessment,
 	getClassPosition,
 	getPreviousAssessment,
@@ -9,6 +10,13 @@ import authorize from "../middlewares/authorize.ts";
 import catchError from "../utils/catchError.ts";
 
 const router: Router = Router();
+
+router.get(
+	"/",
+	authenticate,
+	authorize(["student", "teacher", "super_admin", "staff_admin"]),
+	catchError(getAllResults),
+);
 
 router.get(
 	"/:admission_number/results",

@@ -67,6 +67,11 @@ interface StudentQuery {
 	class_name?: string;
 	department_name?: string;
 	sort_by?: string;
+	term_name?: string;
+	session_name?: string;
+	total_score?: number;
+	subject?: string;
+	admission_number?: string;
 	sort_order?: "asc" | "desc";
 }
 
