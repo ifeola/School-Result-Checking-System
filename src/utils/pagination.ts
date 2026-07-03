@@ -28,7 +28,7 @@ export const formartPaginatedResponse = <T>(
 	data: T[],
 	page: number,
 	limit: number,
-	totalRecords: number
+	totalRecords: number,
 ): PaginatedResult<T> => {
 	const totalPages = Math.ceil(totalRecords / limit);
 	return {
