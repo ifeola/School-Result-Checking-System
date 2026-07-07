@@ -2,19 +2,19 @@ import { body } from "express-validator";
 
 const teacherValidator = [
 	body("email").trim().isEmail().withMessage("Enter a valid email address."),
-	body("firstName")
+	body("first_name")
 		.trim()
 		.notEmpty()
 		.withMessage("Please enter teacher's first name")
 		.isLength({ min: 2 })
 		.escape(),
-	body("middleName")
+	body("middle_name")
 		.trim()
 		.notEmpty()
 		.withMessage("Please enter teacher's middle name")
 		.isLength({ min: 2 })
 		.escape(),
-	body("lastName")
+	body("last_name")
 		.trim()
 		.notEmpty()
 		.withMessage("Please enter teacher's last name")

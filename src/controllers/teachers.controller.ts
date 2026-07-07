@@ -31,7 +31,7 @@ const createTeacher = async (
 		return next(new ValidationError("Email already exists."));
 	}
 
-	const hashedPassword = await bcrypt.hash(result.lastName.toUpperCase(), 10);
+	const hashedPassword = await bcrypt.hash(result.last_name.toUpperCase(), 10);
 	const ROLE = "teacher";
 	const client = await db.sql.connect();
 
@@ -47,9 +47,9 @@ const createTeacher = async (
 		const teacherData: teacher = {
 			userId: createdUser.id,
 			teacherNumber,
-			firstName: result.firstName,
-			middleName: result.middleName,
-			lastName: result.lastName,
+			firstName: result.first_name,
+			middleName: result.middle_name,
+			lastName: result.last_name,
 			phone: result.phone,
 		};
 
@@ -84,16 +84,37 @@ const deleteTeacher = async (
 		return next(new ValidationError("Please provide a valid id"));
 	}
 
-	const deletedTeacher = await Teacher.deleteById(teacherId);
-	if (!deletedTeacher) {
-		return next(new NotFoundError("Student not found."));
+	const client = await db.sql.connect();
+	const existingTeacher = await Teacher.getTeacherById(teacherId);
+
+	if (!existingTeacher) {
+		return next(new NotFoundError("Teacher not found."));
 	}
 
-	return res.status(200).json({
-		success: true,
-		message: "Student successfully deleted.",
-		data: { student: deleteTeacher },
-	});
+	try {
+		await client.query("BEGIN");
+		const deletedTeacher = await Teacher.deleteById(existingTeacher.id, client);
+		const deletedUser = await User.deleteUserById(
+			existingTeacher.user_id,
+			client,
+		);
+		await client.query("COMMIT");
+
+		if (!deletedTeacher && !deletedUser) {
+			return next(new NotFoundError("Teacher not found."));
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: "Teacher successfully deleted.",
+			data: { teacher: deletedTeacher },
+		});
+	} catch (error) {
+		await client.query("ROLLBACK");
+		return next(error);
+	} finally {
+		client.release();
+	}
 };
 
 const getAllTeachers = async (
