@@ -149,7 +149,10 @@ const deleteStudent = async (
 
 	try {
 		await client.query("BEGIN");
-		const deletedStudent = await Student.deleteStudentById(studentId, client);
+		const deletedStudent = await Student.deleteStudentById(
+			existingStudent.id,
+			client,
+		);
 		const deletedUser = await User.deleteUserById(
 			existingStudent.user_id,
 			client,

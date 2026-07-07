@@ -45,14 +45,14 @@ class Teacher {
 		return data.rows[0];
 	}
 
-	static async deleteById(id: string) {
+	static async deleteById(id: string, client: Pool | PoolClient) {
 		const queryText = `
-			update current_teachers
-			set deleted_at = current_timestamp
-			where id = $1
-			returning *;
+			UPDATE teachers
+			SET deleted_at = CURRENT_TIMESTAMP
+			WHERE id = $1
+			returning id;
 		`;
-		const result = await db.query(queryText, [id]);
+		const result = await client.query(queryText, [id]);
 		return result.rows[0];
 	}
 
