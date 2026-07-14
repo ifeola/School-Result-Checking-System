@@ -13,7 +13,7 @@ class Admin {
 		firstName: string,
 		middleName: string,
 		lastName: string,
-		permissionLevel: "super_admin" | "staff_admin" | null
+		permissionLevel: "super_admin" | "staff_admin" | null,
 	) {
 		this.userId = userId;
 		this.firstName = firstName;
@@ -37,7 +37,7 @@ class Admin {
 			user.permissionLevel,
 		];
 		const data = await client.query(queryText, values);
-		return data.rows[0];
+		return data?.rows[0];
 	}
 
 	static async getAdminById(id: string) {
@@ -56,7 +56,7 @@ class Admin {
 						or ad.user_id = $1
 				`;
 		const result = await db.query(queryText, [id]);
-		return result.rows[0];
+		return result?.rows[0];
 	}
 }
 

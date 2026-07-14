@@ -76,7 +76,6 @@ const getAllResults = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	console.log(req.query);
 	const { page, limit, skip } = getPaginationParams(req.query);
 	const { results, totalRecords } = await Assessment.getAllResults(
 		{ page, limit, skip },
