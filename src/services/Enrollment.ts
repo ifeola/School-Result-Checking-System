@@ -34,7 +34,7 @@ class Enrollment {
 				INSERT INTO students_enrollments (
 						student_id,
 						class_id,
-						session_id,
+						academic_period_id,
 						department_id,
 						promoted_to_next_class,
 						repeated_class
@@ -44,7 +44,7 @@ class Enrollment {
 				)
 			SELECT
 					cl.class_name,
-					ac.session_name,
+					ap.session_name,
 					de.department_name,
 					inserted.repeated_class,
 					inserted.promoted_to_next_class
@@ -53,8 +53,8 @@ class Enrollment {
 					ON inserted.class_id = cl.id
 			JOIN departments de
 					ON inserted.department_id = de.id
-			JOIN academic_sessions ac
-					ON inserted.session_id = ac.id;
+			JOIN academic_periods ap
+					ON inserted.academic_period_id = ap.id;
     `;
 		const values = [studentId, classId, sessionId, departmentId, false, false];
 		const result = await client.query(queryText, values);
