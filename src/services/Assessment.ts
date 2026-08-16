@@ -8,7 +8,7 @@ class Assessment {
 		queryParams: { term: string; session: string },
 	) {
 		let queryText = `
-      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
+      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
         from assessments ass
       join students st
         on st.id = ass.student_id
@@ -48,7 +48,7 @@ class Assessment {
 
 	static async getPreviousByAdmissionNumber(admissionNumber: string) {
 		const queryText = `
-      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
+      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
         from assessments ass
       join students st
         on st.id = ass.student_id

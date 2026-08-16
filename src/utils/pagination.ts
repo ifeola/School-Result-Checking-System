@@ -19,7 +19,7 @@ export interface PaginatedResult<T> {
 
 export const getPaginationParams = (query: any): QueryParams => {
 	const page = Math.max(1, parseInt(query.page as string) || 1);
-	const limit = Math.max(1, parseInt(query.limit as string) || 50);
+	const limit = Math.max(1, parseInt(query.limit as string) || 25);
 	const skip = (page - 1) * limit;
 	return { page, limit, skip };
 };

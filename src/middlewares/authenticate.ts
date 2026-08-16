@@ -9,7 +9,7 @@ config();
 const authenticate = (
 	req: AuthenticatedRequest,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	let token;
 
