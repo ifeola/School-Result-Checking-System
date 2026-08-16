@@ -25,7 +25,7 @@ class Student {
 		parentName: string,
 		parentPhone: string,
 		currentStatus: "active" | "graduated" | "withdrawn",
-		middleName?: string
+		middleName?: string,
 	) {
 		// 2. Explicitly assign them
 		this.userId = userId;
@@ -137,7 +137,7 @@ class Student {
 
 	static async getAllStudents(
 		{ limit, skip }: QueryParams,
-		query: StudentQuery
+		query: StudentQuery,
 	) {
 		let queryText = `
       select s.id, s.user_id,
@@ -202,8 +202,14 @@ class Student {
 			conditions.push(`de.department_name = $${params.length}`);
 		}
 
+		let whereClause;
+
 		if (conditions.length > 0) {
-			const whereClause = ` WHERE ${conditions.join(" AND ")}`;
+			whereClause = ` WHERE s.deleted_at is NULL AND ${conditions.join(" AND ")}`;
+			countQuery += whereClause;
+			queryText += whereClause;
+		} else {
+			whereClause = ` WHERE s.deleted_at is NULL`;
 			countQuery += whereClause;
 			queryText += whereClause;
 		}
@@ -220,7 +226,7 @@ class Student {
 		const sortBy = allowedSortFields.includes(query.sort_by as string)
 			? query.sort_by
 			: "admission_number";
-		const sortOrder = query.sort_order === "desc" ? "DESC" : "ASC";
+		const sortOrder = query.sort_order === "asc" ? "ASC" : "DESC";
 		queryText += ` ORDER BY s.${sortBy} ${sortOrder}`;
 
 		// Pagination
