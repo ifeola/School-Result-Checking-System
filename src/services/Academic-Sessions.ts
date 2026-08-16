@@ -3,10 +3,10 @@ import db from "../database/db.ts";
 class AcademicSession {
 	static async getCurrent() {
 		const queryText = `
-      SELECT session_name, term_name, starts_on, ends_on, is_current, position, updated_at
-      FROM academic_periods
+      SELECT ap.id, ap.session_name, terms.term_name, ap.starts_on, ap.ends_on, ap.is_current, ap.position, ap.updated_at
+      FROM academic_periods ap
       JOIN terms
-      ON terms.id = academic_periods.term_id
+      ON terms.id = ap.term_id
       WHERE is_current = TRUE;
     `;
 

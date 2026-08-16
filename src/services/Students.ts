@@ -208,10 +208,6 @@ class Student {
 			whereClause = ` WHERE s.deleted_at is NULL AND ${conditions.join(" AND ")}`;
 			countQuery += whereClause;
 			queryText += whereClause;
-		} else {
-			whereClause = ` WHERE s.deleted_at is NULL`;
-			countQuery += whereClause;
-			queryText += whereClause;
 		}
 
 		// Sorting
@@ -230,8 +226,10 @@ class Student {
 		queryText += ` ORDER BY s.${sortBy} ${sortOrder}`;
 
 		// Pagination
-		params.push(limit);
-		queryText += ` LIMIT $${params.length}`;
+		if (limit > 0) {
+			params.push(limit);
+			queryText += ` LIMIT $${params.length}`;
+		}
 		params.push(skip);
 		queryText += ` OFFSET $${params.length}`;
 

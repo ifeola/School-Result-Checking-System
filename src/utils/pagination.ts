@@ -19,7 +19,8 @@ export interface PaginatedResult<T> {
 
 export const getPaginationParams = (query: any): QueryParams => {
 	const page = Math.max(1, parseInt(query.page as string) || 1);
-	const limit = Math.max(1, parseInt(query.limit as string) || 25);
+	const parsedLimit = parseInt(query.limit as string) || 25;
+	const limit = isNaN(parsedLimit) ? 0 : Math.max(1, parsedLimit);
 	const skip = (page - 1) * limit;
 	return { page, limit, skip };
 };
@@ -28,9 +29,9 @@ export const formartPaginatedResponse = <T>(
 	data: T[],
 	page: number,
 	limit: number,
-	totalRecords: number,
+	totalRecords: number
 ): PaginatedResult<T> => {
-	const totalPages = Math.ceil(totalRecords / limit);
+	const totalPages = limit === 0 ? 1 : Math.ceil(totalRecords / limit);
 	return {
 		success: true,
 		meta: {
@@ -38,8 +39,8 @@ export const formartPaginatedResponse = <T>(
 			currentPage: page,
 			limit,
 			totalPages,
-			hasNextPage: page < totalPages,
-			hasPrevPage: page > 1,
+			hasNextPage: limit !== 0 && page < totalPages,
+			hasPrevPage: limit !== 0 && page > 1,
 		},
 		data,
 	};

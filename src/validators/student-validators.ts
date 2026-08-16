@@ -1,51 +1,46 @@
 import { body } from "express-validator";
 
 const studentValidator = [
-	body("firstName")
+	body("first_name")
 		.trim()
 		.notEmpty()
 		.withMessage("Please enter student's first name")
 		.isLength({ min: 3 })
 		.escape(),
 
-	body("lastName")
+	body("last_name")
 		.trim()
 		.notEmpty()
 		.withMessage("Please enter student's last name")
 		.isLength({ min: 3 })
 		.escape(),
 
-	body("middleName").trim().escape(),
+	body("middle_name").trim().escape(),
 	body("gender")
 		.trim()
 		.toLowerCase()
 		.isIn(["male", "female"])
 		.withMessage("Gender must be male or female"),
 
-	body("parentName")
+	body("parent_name")
 		.trim()
 		.notEmpty()
 		.withMessage("Please enter student's parent's name")
 		.isLength({ min: 3 })
 		.escape(),
 
-	body("parentPhone").escape(),
-	body("dateOfBirth")
+	body("parent_phone").escape(),
+	body("date_of_birth")
 		.notEmpty()
 		.withMessage("Date of birth is required")
 		.isDate()
 		.withMessage("Invalid date format"),
-	body("classId")
+	body("class_name")
 		.notEmpty()
 		.withMessage("Class is required")
 		.isUUID()
 		.withMessage("Invalid class id"),
-	body("sessionId")
-		.notEmpty()
-		.withMessage("Session is required")
-		.isUUID()
-		.withMessage("Invalid session id"),
-	body("departmentId")
+	body("department_name")
 		.optional({ nullable: true })
 		.isUUID()
 		.withMessage("Invalid department id"),

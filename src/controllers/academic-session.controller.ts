@@ -17,7 +17,7 @@ const getAllSessions = async (
 	next: NextFunction,
 ) => {
 	const result = await db.query(
-		`select distinct session_name from academic_periods`,
+		`select distinct id, session_name from academic_periods`,
 	);
 	const sessions = result.rows;
 	return res.status(200).json({ success: true, data: { sessions } });

@@ -13,11 +13,12 @@ import {
 } from "../utils/pagination.ts";
 import Enrollment from "../services/Enrollment.ts";
 import { Class, Department, Session } from "../services/Props.ts";
+import AcademicSession from "../services/Academic-Sessions.ts";
 
 const createStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	const admissionNumber = await generateAdmissionNumber(db);
 
@@ -28,29 +29,30 @@ const createStudent = async (
 
 	const data = matchedData(req);
 
-	const studentPassword = data.lastName.toUpperCase();
+	const studentPassword = data.last_name.toUpperCase();
 	const hashedPassword = await bcrypt.hash(studentPassword, 10);
 	const ROLE = "student";
 	const client = await db.sql.connect();
 
 	try {
-		const classRecord = await Class.getClassById(data.classId);
-		const sessionRecord = await Session.getSessionById(data.sessionId);
+		const classRecord = await Class.getClassById(data.class_name);
+		// const sessionRecord = await Session.getSessionById(data.sessionId);
+		const currentSession = await AcademicSession.getCurrent();
 
-		if (classRecord.level === "senior" && !data.departmentId) {
+		if (classRecord.level === "senior" && !data.department_name) {
 			return next(
-				new ValidationError("Department is required for senior classes"),
+				new ValidationError("Department is required for senior classes")
 			);
 		}
 
-		if (classRecord.level === "junior" && data.departmentId) {
+		if (classRecord.level === "junior" && data.department_name) {
 			return next(
-				new ValidationError("Junior classes cannot have a department"),
+				new ValidationError("Junior classes cannot have a department")
 			);
 		}
 
-		const departmentRecord = data.departmentId
-			? await Department.getDepartmentById(data.departmentId)
+		const departmentRecord = data.department_name
+			? await Department.getDepartmentById(data.department_name)
 			: null;
 
 		await client.query("BEGIN");
@@ -61,24 +63,24 @@ const createStudent = async (
 		const studentData: student = {
 			userId: createdUser.id,
 			admissionNumber,
-			firstName: data.firstName,
-			lastName: data.lastName,
+			firstName: data.first_name,
+			lastName: data.last_name,
 			gender: data.gender,
-			dateOfBirth: data.dateOfBirth,
-			parentName: data.parentName,
-			parentPhone: data.parentPhone,
+			dateOfBirth: data.date_of_birth,
+			parentName: data.parent_name,
+			parentPhone: data.parent_phone,
 			currentStatus: "active",
-			middleName: data.middleName,
+			middleName: data.middle_name,
 		};
 		const createdStudent = await Student.create(studentData, client);
 		const enrollment = await Enrollment.create(
 			{
 				studentId: createdStudent.id,
 				classId: classRecord.id,
-				sessionId: sessionRecord.id,
+				sessionId: currentSession.id,
 				departmentId: departmentRecord,
 			},
-			client,
+			client
 		);
 		await client.query("COMMIT");
 
@@ -101,7 +103,7 @@ const createStudent = async (
 const getStudents = async (
 	req: Request<{}, {}, {}, GetStudentsQuery>,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	const { page, limit, skip } = getPaginationParams(req.query);
 	const { students, totalCount } = await Student.getAllStudents(
@@ -110,7 +112,7 @@ const getStudents = async (
 			limit,
 			skip,
 		},
-		req.query,
+		req.query
 	);
 
 	const response = formartPaginatedResponse(students, page, limit, totalCount);
@@ -138,7 +140,7 @@ const getStudent = async (req: Request, res: Response, next: NextFunction) => {
 const deleteStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	const studentId = req.params.id as string;
 	if (!studentId?.trim()) {
@@ -151,11 +153,11 @@ const deleteStudent = async (
 		await client.query("BEGIN");
 		const deletedStudent = await Student.deleteStudentById(
 			existingStudent.id,
-			client,
+			client
 		);
 		const deletedUser = await User.deleteUserById(
 			existingStudent.user_id,
-			client,
+			client
 		);
 
 		await client.query("COMMIT");
@@ -179,7 +181,7 @@ const deleteStudent = async (
 const updateStudent = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	try {
 		const studentId = req.params.id as string;
