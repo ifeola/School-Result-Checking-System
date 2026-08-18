@@ -5,7 +5,7 @@ import type { QueryParams } from "../utils/pagination.ts";
 class Assessment {
 	static async getCurrentByAdmissionNumber(
 		admissionNumber: string,
-		queryParams: { term: string; session: string },
+		queryParams: { term: string; session: string }
 	) {
 		let queryText = `
       select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
@@ -80,9 +80,25 @@ class Assessment {
 		const response = await db.query(queryText, [admissionNumber]);
 		return response.rows[0];
 	}
+	static async getResultCounts(sessionName: string) {
+		const queryText = `
+			SELECT cl.class_name, COUNT(st.id) AS count
+			FROM assessments ass
+			JOIN students st ON st.id = ass.student_id
+			JOIN classes cl ON cl.id = ass.class_id
+			JOIN academic_periods ap ON ap.id = ass.academic_period_id
+			WHERE ap.session_name = $1
+			GROUP BY cl.class_name
+			ORDER BY cl.class_name
+		`;
+
+		const response = await db.query(queryText, [sessionName]);
+		return response.rows;
+	}
+
 	static async getAllResults(
 		{ limit, skip }: QueryParams,
-		query: StudentQuery,
+		query: StudentQuery
 	) {
 		let queryText = `
       SELECT 
@@ -146,6 +162,8 @@ class Assessment {
        ( st.first_name ilike $${params.length}
         or st.middle_name ilike $${params.length}
         or st.last_name ilike $${params.length}
+				or sj.subject_name ilike $${params.length}
+				or tm.term_name ilike $${params.length}
         )
         `);
 		}

@@ -4,6 +4,7 @@ import {
 	getAssessment,
 	getClassPosition,
 	getPreviousAssessment,
+	getResultCounts,
 } from "../controllers/assessment.controller.ts";
 import authenticate from "../middlewares/authenticate.ts";
 import authorize from "../middlewares/authorize.ts";
@@ -16,6 +17,13 @@ router.get(
 	authenticate,
 	authorize(["student", "teacher", "super_admin", "staff_admin"]),
 	catchError(getAllResults),
+);
+
+router.get(
+	"/counts",
+	authenticate,
+	authorize(["student", "teacher", "super_admin", "staff_admin"]),
+	catchError(getResultCounts),
 );
 
 router.get(

@@ -13,6 +13,7 @@ import assessmentRouter from "./assessment.routes.ts";
 import classPositionRouter from "./assessment.routes.ts";
 import previousAssessmentRouter from "./assessment.routes.ts";
 import allResultsRouter from "./assessment.routes.ts";
+import resultCountsRouter from "./assessment.routes.ts";
 import termsRouter from "./term.routes.ts";
 import getCurrentSessionRouter from "./academic-session.routes.ts";
 
@@ -37,6 +38,7 @@ router.use("/students", classPositionRouter);
 
 // Results routers
 router.use("/students/results/all", allResultsRouter);
+router.use("/students/results", resultCountsRouter);
 // router.use("/result/:studentId/pdf", generateResultRouter);
 
 // Academic Sessions routers
