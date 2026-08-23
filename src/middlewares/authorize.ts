@@ -11,14 +11,14 @@ const authorize = (allowedRoles: string[]) => {
 			return next(new UnauthorizedError());
 		}
 
-		const effectiveRole =
-			req.user.permissionLevel === "super_admin"
-				? "super_admin"
-				: req.user.permissionLevel === "staff_admin"
-					? "staff_admin"
-					: req.user.role;
+		// const effectiveRole =
+		// 	req.user.permissionLevel === "super_admin"
+		// 		? "super_admin"
+		// 		: req.user.permissionLevel === "staff_admin"
+		// 		? "staff_admin"
+		// 		: req.user.role;
 
-		if (!allowedRoles.includes(effectiveRole)) {
+		if (!allowedRoles.includes(req.user.role)) {
 			return next(new ForbiddenError());
 		}
 

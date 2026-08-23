@@ -5,8 +5,13 @@ import type { queryValue } from "../types/type.ts";
 config();
 const connectionString = process.env.DATABASE_URL!;
 const sql = new Pool({
-	connectionString,
-	ssl: connectionString ? { rejectUnauthorized: false } : false,
+	user: process.env.DB_USER,
+	host: process.env.DB_HOST,
+	database: process.env.DB_NAME,
+	password: process.env.DB_PASSWORD,
+	port: Number(process.env.DB_PORT) as number,
+	// connectionString,
+	// ssl: connectionString ? { rejectUnauthorized: false } : false,
 });
 
 export default {
