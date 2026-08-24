@@ -10,7 +10,7 @@ class User {
 	constructor(
 		role: "admin" | "teacher" | "student",
 		password: string,
-		email?: string,
+		email?: string
 	) {
 		this.role = role;
 		this.password = password;
@@ -29,8 +29,8 @@ class User {
 	static async getAllUsers() {
 		const queryText = `
 			select 
-		`
-	} 
+		`;
+	}
 
 	static async getUserByIdentifier(identifier: string) {
 		const queryText = `
@@ -42,15 +42,14 @@ class User {
 				COALESCE(s.middle_name, t.middle_name, a.middle_name) AS middle_name,
 				u.password_hash,
 				u.role,
-				s.admission_number,
-        a.permission_level
+				s.admission_number
 			FROM users u
 			LEFT JOIN students s ON s.user_id = u.id
       LEFT JOIN admins a on a.user_id = u.id
-			LEFT JOIN teachers t on t.user_id = u.id
+			LEFT JOIN staff t on t.user_id = u.id
 			WHERE u.email = $1
    			OR s.admission_number = $1
-				or t.teacher_number = $1
+				or t.staff_number = $1
 			AND u.deleted_at IS NULL;
 		`;
 		const result = await db.query(queryText, [identifier]);

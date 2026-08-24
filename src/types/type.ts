@@ -24,7 +24,7 @@ interface teacher {
 
 interface user {
 	password: string;
-	role: "admin" | "teacher" | "student";
+	role: "staff_admin" | "super_admin" | "teacher" | "student";
 	email?: string | undefined;
 }
 
@@ -33,7 +33,6 @@ interface admin {
 	firstName: string;
 	middleName: string;
 	lastName: string;
-	permissionLevel: "super_admin" | "staff_admin" | null;
 }
 
 type queryValue = (string | number | null | Date | boolean)[];
@@ -43,7 +42,6 @@ interface AuthenticatedRequest extends Request {
 		id: string;
 		identifier: string;
 		role: string;
-		permissionLevel: "super_admin" | "staff_admin" | null;
 	};
 }
 

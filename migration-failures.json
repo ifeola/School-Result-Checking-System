@@ -1,0 +1,2522 @@
+[
+  {
+    "input": {
+      "first_name": "tobiloba",
+      "last_name": "okoro",
+      "gender": "male",
+      "date_of_birth": "2016-03-24",
+      "parent_name": "yusuf chukwu",
+      "parent_phone": "2349166629388",
+      "middle_name": "grace",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "tobiloba",
+      "last_name": "chukwu",
+      "gender": "male",
+      "date_of_birth": "2016-09-20",
+      "parent_name": "daniel nwachukwu",
+      "parent_phone": "2349039587039",
+      "middle_name": "chidinma",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "adijat",
+      "last_name": "okoro",
+      "gender": "female",
+      "date_of_birth": "2016-03-23",
+      "parent_name": "paul mohammed",
+      "parent_phone": "2348055176955",
+      "middle_name": "musa",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "oluwaseun",
+      "last_name": "danjuma",
+      "gender": "male",
+      "date_of_birth": "2015-06-20",
+      "parent_name": "emmanuel udo",
+      "parent_phone": "2349126753883",
+      "middle_name": "ibrahim",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ngozi",
+      "last_name": "musa",
+      "gender": "female",
+      "date_of_birth": "2015-10-07",
+      "parent_name": "mary obi",
+      "parent_phone": "2347048840994",
+      "middle_name": "emmanuel",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "segun",
+      "last_name": "abubakar",
+      "gender": "male",
+      "date_of_birth": "2015-08-21",
+      "parent_name": "funmilayo onyeka",
+      "parent_phone": "2348138119557",
+      "middle_name": "adebayo",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "rebecca",
+      "last_name": "balogun",
+      "gender": "female",
+      "date_of_birth": "2016-09-24",
+      "parent_name": "abubakar danjuma",
+      "parent_phone": "2348195899313",
+      "middle_name": "funmilayo",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "peter",
+      "last_name": "nnaji",
+      "gender": "male",
+      "date_of_birth": "2016-04-27",
+      "parent_name": "ademola adisa",
+      "parent_phone": "2348118883684",
+      "middle_name": "kemi",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "abiodun",
+      "last_name": "nnaji",
+      "gender": "male",
+      "date_of_birth": "2015-07-21",
+      "parent_name": "paul eze",
+      "parent_phone": "2348085345555",
+      "middle_name": "chidinma",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "faith",
+      "last_name": "emeka",
+      "gender": "female",
+      "date_of_birth": "2015-06-08",
+      "parent_name": "blessing sanusi",
+      "parent_phone": "2349022201654",
+      "middle_name": "fatima",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "daniel",
+      "last_name": "mohammed",
+      "gender": "male",
+      "date_of_birth": "2016-11-14",
+      "parent_name": "hauwa danjuma",
+      "parent_phone": "2349172820592",
+      "middle_name": "temitope",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olamide",
+      "last_name": "elizabeth",
+      "gender": "female",
+      "date_of_birth": "2016-11-18",
+      "parent_name": "joy ogunleye",
+      "parent_phone": "2348168353204",
+      "middle_name": "chinelo",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olumide",
+      "last_name": "elizabeth",
+      "gender": "male",
+      "date_of_birth": "2015-09-25",
+      "parent_name": "ibrahim adeleke",
+      "parent_phone": "2347095758349",
+      "middle_name": "bukola",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "abdullahi",
+      "last_name": "onyeka",
+      "gender": "male",
+      "date_of_birth": "2016-09-25",
+      "parent_name": "ruth ahmed",
+      "parent_phone": "2348175579548",
+      "middle_name": "hassan",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "daniel",
+      "last_name": "onyeka",
+      "gender": "male",
+      "date_of_birth": "2015-04-02",
+      "parent_name": "gbenga chukwu",
+      "parent_phone": "2347075228535",
+      "middle_name": "stephen",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "stephen",
+      "last_name": "nwachukwu",
+      "gender": "male",
+      "date_of_birth": "2016-03-22",
+      "parent_name": "yusuf afolabi",
+      "parent_phone": "2348180823176",
+      "middle_name": "hassan",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "damilola",
+      "last_name": "nwachukwu",
+      "gender": "female",
+      "date_of_birth": "2016-12-10",
+      "parent_name": "hassan olatunji",
+      "parent_phone": "2349170597444",
+      "middle_name": "hassan",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chibuike",
+      "last_name": "obi",
+      "gender": "male",
+      "date_of_birth": "2015-01-19",
+      "parent_name": "deborah obi",
+      "parent_phone": "2347019528530",
+      "middle_name": "chukwuma",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "segun",
+      "last_name": "balogun",
+      "gender": "male",
+      "date_of_birth": "2016-06-03",
+      "parent_name": "aisha okonkwo",
+      "parent_phone": "2348082374753",
+      "middle_name": "stephen",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "samuel",
+      "last_name": "olamide",
+      "gender": "male",
+      "date_of_birth": "2015-04-26",
+      "parent_name": "joseph ibrahim",
+      "parent_phone": "2347023009833",
+      "middle_name": "samuel",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "comfort",
+      "last_name": "lawal",
+      "gender": "female",
+      "date_of_birth": "2015-12-02",
+      "parent_name": "grace yusuf",
+      "parent_phone": "2349055540424",
+      "middle_name": "fatima",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chibuike",
+      "last_name": "ibrahim",
+      "gender": "male",
+      "date_of_birth": "2015-03-14",
+      "parent_name": "abubakar aliyu",
+      "parent_phone": "2347020117988",
+      "middle_name": "chidinma",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olamide",
+      "last_name": "abubakar",
+      "gender": "female",
+      "date_of_birth": "2016-02-25",
+      "parent_name": "funmilayo chukwuemeka",
+      "parent_phone": "2349074606833",
+      "middle_name": "oluwaseun",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "obinna",
+      "last_name": "yusuf",
+      "gender": "male",
+      "date_of_birth": "2015-01-13",
+      "parent_name": "abubakar suleiman",
+      "parent_phone": "2349084593961",
+      "middle_name": "olumide",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "grace",
+      "last_name": "ibrahim",
+      "gender": "female",
+      "date_of_birth": "2016-01-19",
+      "parent_name": "mary nnaji",
+      "parent_phone": "2347016729990",
+      "middle_name": "emmanuel",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "maryam",
+      "last_name": "adebayo",
+      "gender": "female",
+      "date_of_birth": "2016-09-03",
+      "parent_name": "comfort ahmed",
+      "parent_phone": "2347041568532",
+      "middle_name": "olumide",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "temitope",
+      "last_name": "olamide",
+      "gender": "female",
+      "date_of_birth": "2016-10-03",
+      "parent_name": "gbenga olamide",
+      "parent_phone": "2349152462441",
+      "middle_name": "grace",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "damilola",
+      "last_name": "nnaji",
+      "gender": "female",
+      "date_of_birth": "2015-07-05",
+      "parent_name": "temitope udo",
+      "parent_phone": "2348119736572",
+      "middle_name": "grace",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olumide",
+      "last_name": "fagbenle",
+      "gender": "male",
+      "date_of_birth": "2016-02-18",
+      "parent_name": "paul eze",
+      "parent_phone": "2348119233013",
+      "middle_name": "samuel",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ademola",
+      "last_name": "suleiman",
+      "gender": "male",
+      "date_of_birth": "2015-09-23",
+      "parent_name": "peter elizabeth",
+      "parent_phone": "2348084437458",
+      "middle_name": "olumide",
+      "class_name": "e115b40a-6f23-4e00-8850-fcbebf7ef3f9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "deborah",
+      "last_name": "abubakar",
+      "gender": "female",
+      "date_of_birth": "2015-05-04",
+      "parent_name": "esther mohammed",
+      "parent_phone": "2348147816686",
+      "middle_name": "stephen",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "joseph",
+      "last_name": "garba",
+      "gender": "male",
+      "date_of_birth": "2014-09-16",
+      "parent_name": "emmanuel chukwu",
+      "parent_phone": "2348066851377",
+      "middle_name": "chidinma",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "fatima",
+      "last_name": "elizabeth",
+      "gender": "female",
+      "date_of_birth": "2015-11-09",
+      "parent_name": "abubakar musa",
+      "parent_phone": "2348067403166",
+      "middle_name": "victor",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "daniel",
+      "last_name": "balogun",
+      "gender": "male",
+      "date_of_birth": "2015-09-02",
+      "parent_name": "deborah musa",
+      "parent_phone": "2348067684996",
+      "middle_name": "stephen",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chukwuemeka",
+      "last_name": "adeleke",
+      "gender": "male",
+      "date_of_birth": "2015-06-07",
+      "parent_name": "grace akintola",
+      "parent_phone": "2347085146293",
+      "middle_name": "ngozi",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bimpe",
+      "last_name": "mohammed",
+      "gender": "female",
+      "date_of_birth": "2015-03-26",
+      "parent_name": "chinelo adeyemi",
+      "parent_phone": "2348054585178",
+      "middle_name": "mercy",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "deborah",
+      "last_name": "aliyu",
+      "gender": "female",
+      "date_of_birth": "2015-12-04",
+      "parent_name": "emmanuel bello",
+      "parent_phone": "2348036786211",
+      "middle_name": "peace",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "comfort",
+      "last_name": "adeleke",
+      "gender": "female",
+      "date_of_birth": "2015-04-01",
+      "parent_name": "hauwa garba",
+      "parent_phone": "2348119317495",
+      "middle_name": "kemi",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "comfort",
+      "last_name": "sanusi",
+      "gender": "female",
+      "date_of_birth": "2014-01-04",
+      "parent_name": "aisha nwosu",
+      "parent_phone": "2349145630292",
+      "middle_name": "adebayo",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "emmanuel",
+      "last_name": "ahmed",
+      "gender": "male",
+      "date_of_birth": "2014-12-26",
+      "parent_name": "femi sanusi",
+      "parent_phone": "2347061700055",
+      "middle_name": "fatima",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "yusuf",
+      "last_name": "okafor",
+      "gender": "male",
+      "date_of_birth": "2014-01-17",
+      "parent_name": "esther ibrahim",
+      "parent_phone": "2348167887757",
+      "middle_name": "ademola",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chike",
+      "last_name": "garba",
+      "gender": "male",
+      "date_of_birth": "2014-11-28",
+      "parent_name": "victor sanusi",
+      "parent_phone": "2348199508850",
+      "middle_name": "funmilayo",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ifeoma",
+      "last_name": "adisa",
+      "gender": "female",
+      "date_of_birth": "2014-09-05",
+      "parent_name": "stephen nwosu",
+      "parent_phone": "2349186384014",
+      "middle_name": "ademola",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "gift",
+      "last_name": "musa",
+      "gender": "female",
+      "date_of_birth": "2015-05-10",
+      "parent_name": "gbenga ahmed",
+      "parent_phone": "2348053251559",
+      "middle_name": "kemi",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bukola",
+      "last_name": "olatunji",
+      "gender": "female",
+      "date_of_birth": "2015-09-16",
+      "parent_name": "funmilayo chukwu",
+      "parent_phone": "2348179182797",
+      "middle_name": "chinelo",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ngozi",
+      "last_name": "aliyu",
+      "gender": "female",
+      "date_of_birth": "2014-04-26",
+      "parent_name": "james okafor",
+      "parent_phone": "2348073771720",
+      "middle_name": "chinelo",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olumide",
+      "last_name": "chukwuemeka",
+      "gender": "male",
+      "date_of_birth": "2015-12-23",
+      "parent_name": "stephen aliyu",
+      "parent_phone": "2348098054615",
+      "middle_name": "stephen",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "stephen",
+      "last_name": "abubakar",
+      "gender": "male",
+      "date_of_birth": "2014-04-06",
+      "parent_name": "modupe udo",
+      "parent_phone": "2347084813739",
+      "middle_name": "hassan",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "daniel",
+      "last_name": "udo",
+      "gender": "male",
+      "date_of_birth": "2014-11-17",
+      "parent_name": "kemi nnaji",
+      "parent_phone": "2347069401199",
+      "middle_name": "yusuf",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olamide",
+      "last_name": "olatunji",
+      "gender": "female",
+      "date_of_birth": "2015-12-28",
+      "parent_name": "paul aliyu",
+      "parent_phone": "2347095585469",
+      "middle_name": "stephen",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "success",
+      "last_name": "adebayo",
+      "gender": "female",
+      "date_of_birth": "2015-05-15",
+      "parent_name": "victor aliyu",
+      "parent_phone": "2348155076693",
+      "middle_name": "joy",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "nkechi",
+      "last_name": "chukwu",
+      "gender": "female",
+      "date_of_birth": "2015-04-13",
+      "parent_name": "ngozi balogun",
+      "parent_phone": "2349064707061",
+      "middle_name": "yusuf",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "nkechi",
+      "last_name": "udo",
+      "gender": "female",
+      "date_of_birth": "2015-04-27",
+      "parent_name": "gbenga adeyemi",
+      "parent_phone": "2347087267850",
+      "middle_name": "fatima",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "rasheedat",
+      "last_name": "elizabeth",
+      "gender": "female",
+      "date_of_birth": "2014-07-28",
+      "parent_name": "chinelo nwachukwu",
+      "parent_phone": "2348083300637",
+      "middle_name": "ngozi",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chinedu",
+      "last_name": "obi",
+      "gender": "male",
+      "date_of_birth": "2014-08-01",
+      "parent_name": "stephen afolabi",
+      "parent_phone": "2347072732043",
+      "middle_name": "peace",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "friday",
+      "last_name": "nwachukwu",
+      "gender": "male",
+      "date_of_birth": "2014-10-19",
+      "parent_name": "comfort lawal",
+      "parent_phone": "2348071968116",
+      "middle_name": "james",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ayodele",
+      "last_name": "fashola",
+      "gender": "male",
+      "date_of_birth": "2014-04-15",
+      "parent_name": "stephen okoro",
+      "parent_phone": "2347066581473",
+      "middle_name": "adebayo",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ngozi",
+      "last_name": "bello",
+      "gender": "female",
+      "date_of_birth": "2015-06-08",
+      "parent_name": "mary adeyemi",
+      "parent_phone": "2348036757737",
+      "middle_name": "james",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "friday",
+      "last_name": "mohammed",
+      "gender": "male",
+      "date_of_birth": "2015-08-22",
+      "parent_name": "daniel udo",
+      "parent_phone": "2348044392446",
+      "middle_name": "grace",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "joy",
+      "last_name": "ahmed",
+      "gender": "female",
+      "date_of_birth": "2015-03-10",
+      "parent_name": "james adeleke",
+      "parent_phone": "2349160372847",
+      "middle_name": "funmilayo",
+      "class_name": "19630a72-2e84-4478-9395-788504f4cbf9",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "victoria",
+      "last_name": "ibrahim",
+      "gender": "female",
+      "date_of_birth": "2014-02-23",
+      "parent_name": "kemi ogunleye",
+      "parent_phone": "2347085958181",
+      "middle_name": "chukwuma",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olamide",
+      "last_name": "nwachukwu",
+      "gender": "male",
+      "date_of_birth": "2013-02-17",
+      "parent_name": "ruth chukwuemeka",
+      "parent_phone": "2347075793759",
+      "middle_name": "fatima",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "hassan",
+      "last_name": "onyeka",
+      "gender": "male",
+      "date_of_birth": "2013-12-05",
+      "parent_name": "peter okoro",
+      "parent_phone": "2349182232344",
+      "middle_name": "temitope",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ronke",
+      "last_name": "lawal",
+      "gender": "female",
+      "date_of_birth": "2013-06-28",
+      "parent_name": "chukwuma okoro",
+      "parent_phone": "2349042730796",
+      "middle_name": "kemi",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "titilayo",
+      "last_name": "fagbenle",
+      "gender": "female",
+      "date_of_birth": "2013-06-01",
+      "parent_name": "ademola nwosu",
+      "parent_phone": "2349038470244",
+      "middle_name": "chinelo",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "kemi",
+      "last_name": "garba",
+      "gender": "female",
+      "date_of_birth": "2013-09-01",
+      "parent_name": "ngozi chukwu",
+      "parent_phone": "2348064549859",
+      "middle_name": "peace",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olamide",
+      "last_name": "aliyu",
+      "gender": "female",
+      "date_of_birth": "2013-11-23",
+      "parent_name": "james chukwu",
+      "parent_phone": "2348139742165",
+      "middle_name": "ademola",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "rebecca",
+      "last_name": "aliyu",
+      "gender": "female",
+      "date_of_birth": "2013-08-18",
+      "parent_name": "chinelo musa",
+      "parent_phone": "2348157219209",
+      "middle_name": "emmanuel",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "funmilayo",
+      "last_name": "adeleke",
+      "gender": "female",
+      "date_of_birth": "2014-02-24",
+      "parent_name": "ibrahim nwachukwu",
+      "parent_phone": "2347034850391",
+      "middle_name": "peace",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "kayode",
+      "last_name": "bello",
+      "gender": "male",
+      "date_of_birth": "2013-02-27",
+      "parent_name": "samuel onyeka",
+      "parent_phone": "2348050569669",
+      "middle_name": "peace",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "joseph",
+      "last_name": "nwachukwu",
+      "gender": "male",
+      "date_of_birth": "2013-01-02",
+      "parent_name": "blessing okonkwo",
+      "parent_phone": "2347011646234",
+      "middle_name": "yusuf",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "rasheedat",
+      "last_name": "bello",
+      "gender": "female",
+      "date_of_birth": "2013-03-02",
+      "parent_name": "adebayo ogunleye",
+      "parent_phone": "2347018770247",
+      "middle_name": "joseph",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "hauwa",
+      "last_name": "balogun",
+      "gender": "female",
+      "date_of_birth": "2014-03-05",
+      "parent_name": "temitope chukwu",
+      "parent_phone": "2348025898299",
+      "middle_name": "samuel",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "modupe",
+      "last_name": "ahmed",
+      "gender": "female",
+      "date_of_birth": "2014-09-13",
+      "parent_name": "abubakar adeleke",
+      "parent_phone": "2347088990506",
+      "middle_name": "musa",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "zainab",
+      "last_name": "olamide",
+      "gender": "female",
+      "date_of_birth": "2014-10-24",
+      "parent_name": "daniel olawale",
+      "parent_phone": "2348198641164",
+      "middle_name": "funmilayo",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chidera",
+      "last_name": "aliyu",
+      "gender": "male",
+      "date_of_birth": "2014-03-01",
+      "parent_name": "femi bello",
+      "parent_phone": "2348114380847",
+      "middle_name": "olumide",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "tunde",
+      "last_name": "suleiman",
+      "gender": "male",
+      "date_of_birth": "2013-02-22",
+      "parent_name": "paul emeka",
+      "parent_phone": "2348036550845",
+      "middle_name": "ademola",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "temitope",
+      "last_name": "nwachukwu",
+      "gender": "female",
+      "date_of_birth": "2014-05-27",
+      "parent_name": "emmanuel afolabi",
+      "parent_phone": "2347051286958",
+      "middle_name": "grace",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bukola",
+      "last_name": "ogunleye",
+      "gender": "female",
+      "date_of_birth": "2013-12-13",
+      "parent_name": "modupe nwachukwu",
+      "parent_phone": "2349068755000",
+      "middle_name": "joseph",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "sunday",
+      "last_name": "okafor",
+      "gender": "male",
+      "date_of_birth": "2013-12-11",
+      "parent_name": "ruth chukwu",
+      "parent_phone": "2348087201917",
+      "middle_name": "stephen",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "stephen",
+      "last_name": "okoro",
+      "gender": "male",
+      "date_of_birth": "2014-03-16",
+      "parent_name": "folake okoro",
+      "parent_phone": "2348088561612",
+      "middle_name": "samuel",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "esther",
+      "last_name": "okonkwo",
+      "gender": "female",
+      "date_of_birth": "2013-06-14",
+      "parent_name": "ibrahim afolabi",
+      "parent_phone": "2348165250068",
+      "middle_name": "chukwuma",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "abisola",
+      "last_name": "adisa",
+      "gender": "female",
+      "date_of_birth": "2014-08-03",
+      "parent_name": "ademola ogunleye",
+      "parent_phone": "2347064247457",
+      "middle_name": "kemi",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chike",
+      "last_name": "nwachukwu",
+      "gender": "male",
+      "date_of_birth": "2013-01-07",
+      "parent_name": "kemi okonkwo",
+      "parent_phone": "2348069329732",
+      "middle_name": "joseph",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "kayode",
+      "last_name": "okoro",
+      "gender": "male",
+      "date_of_birth": "2014-05-15",
+      "parent_name": "bimpe ogunleye",
+      "parent_phone": "2347094560158",
+      "middle_name": "daniel",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "joseph",
+      "last_name": "afolabi",
+      "gender": "male",
+      "date_of_birth": "2014-09-14",
+      "parent_name": "ibrahim udo",
+      "parent_phone": "2347096934122",
+      "middle_name": "emmanuel",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chinedu",
+      "last_name": "suleiman",
+      "gender": "male",
+      "date_of_birth": "2013-07-27",
+      "parent_name": "adebayo aliyu",
+      "parent_phone": "2349083989546",
+      "middle_name": "comfort",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "suleiman",
+      "last_name": "ibrahim",
+      "gender": "male",
+      "date_of_birth": "2014-02-09",
+      "parent_name": "chinelo garba",
+      "parent_phone": "2347078147397",
+      "middle_name": "mercy",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "oluwatobi",
+      "last_name": "suleiman",
+      "gender": "female",
+      "date_of_birth": "2013-10-19",
+      "parent_name": "bimpe mohammed",
+      "parent_phone": "2349082287061",
+      "middle_name": "bukola",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "comfort",
+      "last_name": "garba",
+      "gender": "female",
+      "date_of_birth": "2013-08-11",
+      "parent_name": "fatima olamide",
+      "parent_phone": "2349041348220",
+      "middle_name": "daniel",
+      "class_name": "caf90b7a-31e8-46f6-b2a0-f6dfe09f816c",
+      "department_name": null
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "fatima",
+      "last_name": "nnaji",
+      "gender": "female",
+      "date_of_birth": "2011-12-26",
+      "parent_name": "musa okonkwo",
+      "parent_phone": "2347026944487",
+      "middle_name": "bukola",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "adaeze",
+      "last_name": "olatunji",
+      "gender": "female",
+      "date_of_birth": "2011-01-24",
+      "parent_name": "musa balogun",
+      "parent_phone": "2349045570755",
+      "middle_name": "ibrahim",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bimpe",
+      "last_name": "adisa",
+      "gender": "female",
+      "date_of_birth": "2012-06-28",
+      "parent_name": "esther danjuma",
+      "parent_phone": "2348194127561",
+      "middle_name": "temitope",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "nkechi",
+      "last_name": "okafor",
+      "gender": "female",
+      "date_of_birth": "2012-04-21",
+      "parent_name": "temitope obi",
+      "parent_phone": "2348022130508",
+      "middle_name": "funmilayo",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "adaeze",
+      "last_name": "abubakar",
+      "gender": "female",
+      "date_of_birth": "2012-12-10",
+      "parent_name": "mary nnaji",
+      "parent_phone": "2347017532195",
+      "middle_name": "joseph",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "comfort",
+      "last_name": "onyeka",
+      "gender": "female",
+      "date_of_birth": "2012-04-17",
+      "parent_name": "olumide afolabi",
+      "parent_phone": "2348020598952",
+      "middle_name": "fatima",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bimpe",
+      "last_name": "aliyu",
+      "gender": "female",
+      "date_of_birth": "2012-04-15",
+      "parent_name": "folake fashola",
+      "parent_phone": "2348011261301",
+      "middle_name": "joy",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "abisola",
+      "last_name": "nwachukwu",
+      "gender": "female",
+      "date_of_birth": "2012-08-12",
+      "parent_name": "temitope lawal",
+      "parent_phone": "2348043567615",
+      "middle_name": "olumide",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "zainab",
+      "last_name": "ibrahim",
+      "gender": "female",
+      "date_of_birth": "2011-02-08",
+      "parent_name": "hassan olamide",
+      "parent_phone": "2348149625201",
+      "middle_name": "adebayo",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chike",
+      "last_name": "adisa",
+      "gender": "male",
+      "date_of_birth": "2012-10-28",
+      "parent_name": "mary ahmed",
+      "parent_phone": "2348076669607",
+      "middle_name": "peace",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "success",
+      "last_name": "obi",
+      "gender": "female",
+      "date_of_birth": "2011-04-21",
+      "parent_name": "paul eze",
+      "parent_phone": "2348023041121",
+      "middle_name": "funmilayo",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "gbenga",
+      "last_name": "olatunji",
+      "gender": "male",
+      "date_of_birth": "2011-12-05",
+      "parent_name": "victor nnaji",
+      "parent_phone": "2348065767881",
+      "middle_name": "oluwaseun",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "femi",
+      "last_name": "eze",
+      "gender": "male",
+      "date_of_birth": "2011-09-17",
+      "parent_name": "funmilayo fashola",
+      "parent_phone": "2347074672520",
+      "middle_name": "musa",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "faith",
+      "last_name": "garba",
+      "gender": "female",
+      "date_of_birth": "2012-08-03",
+      "parent_name": "samuel adisa",
+      "parent_phone": "2347084801233",
+      "middle_name": "musa",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ngozi",
+      "last_name": "adisa",
+      "gender": "female",
+      "date_of_birth": "2011-09-04",
+      "parent_name": "paul emeka",
+      "parent_phone": "2349095704631",
+      "middle_name": "james",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "adaeze",
+      "last_name": "obi",
+      "gender": "female",
+      "date_of_birth": "2012-10-18",
+      "parent_name": "femi obi",
+      "parent_phone": "2348018484847",
+      "middle_name": "joy",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "rebecca",
+      "last_name": "adeleke",
+      "gender": "female",
+      "date_of_birth": "2011-02-05",
+      "parent_name": "emmanuel adeleke",
+      "parent_phone": "2349025585427",
+      "middle_name": "temitope",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chibuike",
+      "last_name": "nwachukwu",
+      "gender": "male",
+      "date_of_birth": "2011-08-12",
+      "parent_name": "esther chukwuemeka",
+      "parent_phone": "2349130739712",
+      "middle_name": "yusuf",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ruth",
+      "last_name": "abubakar",
+      "gender": "female",
+      "date_of_birth": "2011-10-14",
+      "parent_name": "aisha okafor",
+      "parent_phone": "2348059731689",
+      "middle_name": "kemi",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ikenna",
+      "last_name": "olatunji",
+      "gender": "male",
+      "date_of_birth": "2011-02-22",
+      "parent_name": "hassan yusuf",
+      "parent_phone": "2349047028180",
+      "middle_name": "grace",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "daniel",
+      "last_name": "udo",
+      "gender": "male",
+      "date_of_birth": "2012-11-21",
+      "parent_name": "ruth yusuf",
+      "parent_phone": "2347054762841",
+      "middle_name": "chukwuma",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "victor",
+      "last_name": "olamide",
+      "gender": "male",
+      "date_of_birth": "2012-09-07",
+      "parent_name": "fatima garba",
+      "parent_phone": "2347029804386",
+      "middle_name": "chidinma",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "musa",
+      "last_name": "mohammed",
+      "gender": "male",
+      "date_of_birth": "2011-03-04",
+      "parent_name": "ruth eze",
+      "parent_phone": "2347058082464",
+      "middle_name": "yusuf",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "yakubu",
+      "last_name": "nnaji",
+      "gender": "male",
+      "date_of_birth": "2012-05-02",
+      "parent_name": "joseph adebayo",
+      "parent_phone": "2347018530615",
+      "middle_name": "james",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bukola",
+      "last_name": "onyeka",
+      "gender": "female",
+      "date_of_birth": "2012-08-17",
+      "parent_name": "femi okafor",
+      "parent_phone": "2348098436473",
+      "middle_name": "comfort",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ronke",
+      "last_name": "adeyemi",
+      "gender": "female",
+      "date_of_birth": "2011-07-14",
+      "parent_name": "bimpe olatunji",
+      "parent_phone": "2347020843514",
+      "middle_name": "oluwaseun",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "modupe",
+      "last_name": "mohammed",
+      "gender": "female",
+      "date_of_birth": "2012-05-20",
+      "parent_name": "esther nnaji",
+      "parent_phone": "2349090180577",
+      "middle_name": "chukwuma",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ronke",
+      "last_name": "sanusi",
+      "gender": "female",
+      "date_of_birth": "2011-02-26",
+      "parent_name": "esther olawale",
+      "parent_phone": "2349070606674",
+      "middle_name": "funmilayo",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "damilare",
+      "last_name": "garba",
+      "gender": "male",
+      "date_of_birth": "2011-07-14",
+      "parent_name": "joy lawal",
+      "parent_phone": "2348199269266",
+      "middle_name": "kemi",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "mercy",
+      "last_name": "mohammed",
+      "gender": "female",
+      "date_of_birth": "2011-02-03",
+      "parent_name": "comfort lawal",
+      "parent_phone": "2347060015814",
+      "middle_name": "chinelo",
+      "class_name": "621a0db0-9fc5-45f0-9638-c8b8735d0e95",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "nnamdi",
+      "last_name": "yusuf",
+      "gender": "male",
+      "date_of_birth": "2010-11-04",
+      "parent_name": "joseph yusuf",
+      "parent_phone": "2348190585678",
+      "middle_name": "samuel",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "comfort",
+      "last_name": "abubakar",
+      "gender": "female",
+      "date_of_birth": "2011-03-22",
+      "parent_name": "ibrahim akintola",
+      "parent_phone": "2347084660688",
+      "middle_name": "samuel",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "temitope",
+      "last_name": "okoro",
+      "gender": "female",
+      "date_of_birth": "2011-07-28",
+      "parent_name": "kemi fagbenle",
+      "parent_phone": "2348096261621",
+      "middle_name": "samuel",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "sunday",
+      "last_name": "okoro",
+      "gender": "male",
+      "date_of_birth": "2011-05-23",
+      "parent_name": "joy akintola",
+      "parent_phone": "2347034347841",
+      "middle_name": "james",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "abiodun",
+      "last_name": "adisa",
+      "gender": "male",
+      "date_of_birth": "2011-12-21",
+      "parent_name": "comfort adebayo",
+      "parent_phone": "2348060491958",
+      "middle_name": "chukwuma",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ronke",
+      "last_name": "garba",
+      "gender": "female",
+      "date_of_birth": "2010-05-24",
+      "parent_name": "gbenga ahmed",
+      "parent_phone": "2347017061037",
+      "middle_name": "olumide",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chidera",
+      "last_name": "fagbenle",
+      "gender": "male",
+      "date_of_birth": "2011-05-15",
+      "parent_name": "bimpe ahmed",
+      "parent_phone": "2349065590800",
+      "middle_name": "oluwaseun",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "damilola",
+      "last_name": "sanusi",
+      "gender": "female",
+      "date_of_birth": "2010-07-04",
+      "parent_name": "gbenga okonkwo",
+      "parent_phone": "2349199541016",
+      "middle_name": "ibrahim",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "fatima",
+      "last_name": "obi",
+      "gender": "female",
+      "date_of_birth": "2011-01-07",
+      "parent_name": "daniel eze",
+      "parent_phone": "2347044295247",
+      "middle_name": "adebayo",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ifeoma",
+      "last_name": "ogunleye",
+      "gender": "female",
+      "date_of_birth": "2010-12-14",
+      "parent_name": "stephen nwachukwu",
+      "parent_phone": "2348040884937",
+      "middle_name": "james",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "folake",
+      "last_name": "adisa",
+      "gender": "female",
+      "date_of_birth": "2011-07-01",
+      "parent_name": "chukwuma nnaji",
+      "parent_phone": "2349167617561",
+      "middle_name": "paul",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "victoria",
+      "last_name": "chukwuemeka",
+      "gender": "female",
+      "date_of_birth": "2011-07-01",
+      "parent_name": "funmilayo fagbenle",
+      "parent_phone": "2349058567046",
+      "middle_name": "emmanuel",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "hassan",
+      "last_name": "abubakar",
+      "gender": "male",
+      "date_of_birth": "2010-10-13",
+      "parent_name": "hauwa adeleke",
+      "parent_phone": "2348055568701",
+      "middle_name": "grace",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chukwudi",
+      "last_name": "afolabi",
+      "gender": "male",
+      "date_of_birth": "2011-09-17",
+      "parent_name": "hassan akintola",
+      "parent_phone": "2348096629889",
+      "middle_name": "chukwuma",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chibuike",
+      "last_name": "abubakar",
+      "gender": "male",
+      "date_of_birth": "2010-04-06",
+      "parent_name": "comfort nwosu",
+      "parent_phone": "2347094281857",
+      "middle_name": "yusuf",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ronke",
+      "last_name": "olamide",
+      "gender": "female",
+      "date_of_birth": "2010-11-19",
+      "parent_name": "kemi nnaji",
+      "parent_phone": "2347094183695",
+      "middle_name": "hassan",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "grace",
+      "last_name": "olatunji",
+      "gender": "female",
+      "date_of_birth": "2010-08-21",
+      "parent_name": "paul emeka",
+      "parent_phone": "2347057236885",
+      "middle_name": "chukwuma",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "gbenga",
+      "last_name": "udo",
+      "gender": "male",
+      "date_of_birth": "2011-01-12",
+      "parent_name": "comfort chukwu",
+      "parent_phone": "2349189736043",
+      "middle_name": "joseph",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ronke",
+      "last_name": "emeka",
+      "gender": "female",
+      "date_of_birth": "2011-08-26",
+      "parent_name": "ngozi nnaji",
+      "parent_phone": "2349173837847",
+      "middle_name": "daniel",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ayodele",
+      "last_name": "olatunji",
+      "gender": "male",
+      "date_of_birth": "2010-12-03",
+      "parent_name": "funmilayo okafor",
+      "parent_phone": "2348068754920",
+      "middle_name": "ibrahim",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chidinma",
+      "last_name": "adebayo",
+      "gender": "female",
+      "date_of_birth": "2011-06-12",
+      "parent_name": "hauwa chukwuemeka",
+      "parent_phone": "2347055414869",
+      "middle_name": "funmilayo",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "michael",
+      "last_name": "garba",
+      "gender": "male",
+      "date_of_birth": "2010-02-18",
+      "parent_name": "temitope fashola",
+      "parent_phone": "2348098122539",
+      "middle_name": "chukwuma",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chukwudi",
+      "last_name": "chukwu",
+      "gender": "male",
+      "date_of_birth": "2011-06-10",
+      "parent_name": "hauwa eze",
+      "parent_phone": "2349121370793",
+      "middle_name": "samuel",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "olamide",
+      "last_name": "danjuma",
+      "gender": "female",
+      "date_of_birth": "2010-03-22",
+      "parent_name": "modupe chukwu",
+      "parent_phone": "2348099987086",
+      "middle_name": "temitope",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "maryam",
+      "last_name": "onyeka",
+      "gender": "female",
+      "date_of_birth": "2010-05-06",
+      "parent_name": "joy okonkwo",
+      "parent_phone": "2348040406092",
+      "middle_name": "james",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "abdullahi",
+      "last_name": "balogun",
+      "gender": "male",
+      "date_of_birth": "2011-09-25",
+      "parent_name": "modupe okafor",
+      "parent_phone": "2348055199748",
+      "middle_name": "emmanuel",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "sunday",
+      "last_name": "danjuma",
+      "gender": "male",
+      "date_of_birth": "2011-03-27",
+      "parent_name": "kemi afolabi",
+      "parent_phone": "2348068743530",
+      "middle_name": "yusuf",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "damilare",
+      "last_name": "onyeka",
+      "gender": "male",
+      "date_of_birth": "2011-08-20",
+      "parent_name": "abubakar obi",
+      "parent_phone": "2349142100652",
+      "middle_name": "chinelo",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "rasheedat",
+      "last_name": "ibrahim",
+      "gender": "female",
+      "date_of_birth": "2010-08-25",
+      "parent_name": "stephen sanusi",
+      "parent_phone": "2349166191704",
+      "middle_name": "ngozi",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "femi",
+      "last_name": "ahmed",
+      "gender": "male",
+      "date_of_birth": "2010-01-21",
+      "parent_name": "hassan musa",
+      "parent_phone": "2347079244185",
+      "middle_name": "yusuf",
+      "class_name": "408a9e4e-27b4-4b7f-9e8f-6253405d0129",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "tunde",
+      "last_name": "chukwu",
+      "gender": "male",
+      "date_of_birth": "2010-05-15",
+      "parent_name": "blessing lawal",
+      "parent_phone": "2347039801436",
+      "middle_name": "hassan",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "comfort",
+      "last_name": "adeyemi",
+      "gender": "female",
+      "date_of_birth": "2010-07-17",
+      "parent_name": "stephen chukwu",
+      "parent_phone": "2348140137082",
+      "middle_name": "fatima",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "adewale",
+      "last_name": "abubakar",
+      "gender": "male",
+      "date_of_birth": "2009-03-05",
+      "parent_name": "adebayo eze",
+      "parent_phone": "2347072962895",
+      "middle_name": "kemi",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bimpe",
+      "last_name": "elizabeth",
+      "gender": "female",
+      "date_of_birth": "2010-01-09",
+      "parent_name": "musa musa",
+      "parent_phone": "2348091722503",
+      "middle_name": "stephen",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "temitope",
+      "last_name": "suleiman",
+      "gender": "female",
+      "date_of_birth": "2009-02-02",
+      "parent_name": "femi udo",
+      "parent_phone": "2347024879094",
+      "middle_name": "grace",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "modupe",
+      "last_name": "nwachukwu",
+      "gender": "female",
+      "date_of_birth": "2010-12-05",
+      "parent_name": "james fagbenle",
+      "parent_phone": "2348142287985",
+      "middle_name": "james",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "amina",
+      "last_name": "chukwu",
+      "gender": "female",
+      "date_of_birth": "2009-02-17",
+      "parent_name": "modupe musa",
+      "parent_phone": "2347062405812",
+      "middle_name": "comfort",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "fatima",
+      "last_name": "danjuma",
+      "gender": "female",
+      "date_of_birth": "2009-12-01",
+      "parent_name": "chukwuma akintola",
+      "parent_phone": "2348098195059",
+      "middle_name": "ngozi",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "paul",
+      "last_name": "emeka",
+      "gender": "male",
+      "date_of_birth": "2009-03-02",
+      "parent_name": "ademola nwosu",
+      "parent_phone": "2347072360629",
+      "middle_name": "bukola",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "esther",
+      "last_name": "nwosu",
+      "gender": "female",
+      "date_of_birth": "2010-02-23",
+      "parent_name": "folake okafor",
+      "parent_phone": "2348137057085",
+      "middle_name": "musa",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "d81f51d1-7fa4-4858-9fb4-7c5834a09b9d"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "michael",
+      "last_name": "ibrahim",
+      "gender": "male",
+      "date_of_birth": "2010-06-10",
+      "parent_name": "esther bello",
+      "parent_phone": "2348114915156",
+      "middle_name": "stephen",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "tunde",
+      "last_name": "akintola",
+      "gender": "male",
+      "date_of_birth": "2010-11-11",
+      "parent_name": "hassan lawal",
+      "parent_phone": "2349069020451",
+      "middle_name": "paul",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "precious",
+      "last_name": "nwosu",
+      "gender": "female",
+      "date_of_birth": "2009-06-26",
+      "parent_name": "comfort lawal",
+      "parent_phone": "2347067795113",
+      "middle_name": "joy",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bayo",
+      "last_name": "suleiman",
+      "gender": "male",
+      "date_of_birth": "2010-02-11",
+      "parent_name": "temitope olatunji",
+      "parent_phone": "2349167192331",
+      "middle_name": "victor",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "john",
+      "last_name": "olatunji",
+      "gender": "male",
+      "date_of_birth": "2009-01-24",
+      "parent_name": "victoria fagbenle",
+      "parent_phone": "2349046850196",
+      "middle_name": "ngozi",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "ibrahim",
+      "last_name": "adisa",
+      "gender": "male",
+      "date_of_birth": "2010-01-05",
+      "parent_name": "folake okafor",
+      "parent_phone": "2348019023909",
+      "middle_name": "ngozi",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "paul",
+      "last_name": "onyeka",
+      "gender": "male",
+      "date_of_birth": "2009-10-02",
+      "parent_name": "folake onyeka",
+      "parent_phone": "2348169584522",
+      "middle_name": "ngozi",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "abiodun",
+      "last_name": "eze",
+      "gender": "male",
+      "date_of_birth": "2009-07-11",
+      "parent_name": "fatima ogunleye",
+      "parent_phone": "2347034970946",
+      "middle_name": "comfort",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chidinma",
+      "last_name": "danjuma",
+      "gender": "female",
+      "date_of_birth": "2010-05-25",
+      "parent_name": "abubakar olawale",
+      "parent_phone": "2349148329479",
+      "middle_name": "mercy",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "halima",
+      "last_name": "ogunleye",
+      "gender": "female",
+      "date_of_birth": "2010-08-06",
+      "parent_name": "folake chukwu",
+      "parent_phone": "2347052894344",
+      "middle_name": "yusuf",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "7d33959b-6b27-4474-ba95-198dd1716891"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "victoria",
+      "last_name": "balogun",
+      "gender": "female",
+      "date_of_birth": "2009-05-28",
+      "parent_name": "olumide onyeka",
+      "parent_phone": "2349140097200",
+      "middle_name": "daniel",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "femi",
+      "last_name": "eze",
+      "gender": "male",
+      "date_of_birth": "2009-01-12",
+      "parent_name": "victoria udo",
+      "parent_phone": "2347084040798",
+      "middle_name": "grace",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "friday",
+      "last_name": "chukwu",
+      "gender": "male",
+      "date_of_birth": "2009-07-23",
+      "parent_name": "modupe chukwuemeka",
+      "parent_phone": "2347064953237",
+      "middle_name": "chukwuma",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "victor",
+      "last_name": "nnaji",
+      "gender": "male",
+      "date_of_birth": "2010-08-15",
+      "parent_name": "victoria eze",
+      "parent_phone": "2347083994695",
+      "middle_name": "temitope",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "paul",
+      "last_name": "eze",
+      "gender": "male",
+      "date_of_birth": "2010-02-17",
+      "parent_name": "olumide afolabi",
+      "parent_phone": "2348140262109",
+      "middle_name": "fatima",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chidinma",
+      "last_name": "suleiman",
+      "gender": "female",
+      "date_of_birth": "2010-05-07",
+      "parent_name": "esther okoro",
+      "parent_phone": "2348093889081",
+      "middle_name": "paul",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "bimpe",
+      "last_name": "nwachukwu",
+      "gender": "female",
+      "date_of_birth": "2010-10-19",
+      "parent_name": "femi ahmed",
+      "parent_phone": "2348185647532",
+      "middle_name": "chukwuma",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "tobiloba",
+      "last_name": "chukwu",
+      "gender": "male",
+      "date_of_birth": "2009-11-07",
+      "parent_name": "chinelo fagbenle",
+      "parent_phone": "2348014064904",
+      "middle_name": "oluwaseun",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "esther",
+      "last_name": "nwachukwu",
+      "gender": "female",
+      "date_of_birth": "2009-08-08",
+      "parent_name": "hauwa adeleke",
+      "parent_phone": "2349019794273",
+      "middle_name": "emmanuel",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  },
+  {
+    "input": {
+      "first_name": "chidera",
+      "last_name": "olatunji",
+      "gender": "male",
+      "date_of_birth": "2009-08-07",
+      "parent_name": "musa nnaji",
+      "parent_phone": "2347052857920",
+      "middle_name": "fatima",
+      "class_name": "3345fa79-961a-4dab-b753-046f78f54902",
+      "department_name": "e31a58d8-bd7c-4f80-9bb6-ad97e0c4b597"
+    },
+    "error": "HTTP 500 — Cannot read properties of undefined (reading 'level')"
+  }
+]

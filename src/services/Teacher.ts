@@ -16,7 +16,7 @@ class Teacher {
 		firstName: string,
 		middleName: string,
 		lastName: string,
-		phone: string,
+		phone: string
 	) {
 		this.userId = userId;
 		this.teacherNumber = teacherNumber;
@@ -28,7 +28,7 @@ class Teacher {
 
 	static async create(user: teacher, client: PoolClient | Pool) {
 		const queryText = `
-      insert into teachers(user_id, teacher_number, middle_name, first_name, last_name, phone)
+      insert into staff(user_id, teacher_number, middle_name, first_name, last_name, phone)
       values ($1, $2, $3, $4, $5, $6)
       returning *
     `;
@@ -47,7 +47,7 @@ class Teacher {
 
 	static async deleteById(id: string, client: Pool | PoolClient) {
 		const queryText = `
-			UPDATE teachers
+			UPDATE staff
 			SET deleted_at = CURRENT_TIMESTAMP
 			WHERE id = $1
 			returning id;
@@ -58,14 +58,14 @@ class Teacher {
 
 	static async getAllTeachers({ limit, skip }: QueryParams) {
 		const queryText = `
-				select * from teachers t
+				select * from staff t
 				left join users u
 				on u.id = t.user_id
 				where t.deleted_at is null
 				limit $1 offset $2;
 			`;
 		const countQuery = `
-			select count(*) from teachers
+			select count(*) from staff
 			where deleted_at is null;
 		`;
 		const [teachers, teachersCount] = await Promise.all([
@@ -89,7 +89,7 @@ class Teacher {
 			t.phone,
 			u.role,
 			t.deleted_at
-			from teachers t
+			from staff t
 			left join users u
 				on u.id = t.user_id
 			where t.id = $1
