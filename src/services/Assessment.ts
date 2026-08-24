@@ -8,8 +8,8 @@ class Assessment {
 		queryParams: { term: string; session: string }
 	) {
 		let queryText = `
-      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
-        from assessments ass
+      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
+        from students_assessments ass
       join students st
         on st.id = ass.student_id
       join subjects sj
@@ -18,8 +18,10 @@ class Assessment {
         on ap.id = ass.academic_period_id
       join terms tm
         on tm.id = ap.term_id
+			JOIN students_enrollments se
+				ON se.student_id = st.id
       join classes cl
-        on cl.id = ass.class_id
+        on cl.id = se.class_id
       where st.admission_number = $1
     `;
 
@@ -48,8 +50,8 @@ class Assessment {
 
 	static async getPreviousByAdmissionNumber(admissionNumber: string) {
 		const queryText = `
-      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.assignment_score, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
-        from assessments ass
+      select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
+        from students_assessments ass
       join students st
         on st.id = ass.student_id
       join subjects sj
@@ -58,11 +60,13 @@ class Assessment {
         on ap.id = ass.academic_period_id
       join terms tm
         on tm.id = ap.term_id
+			JOIN students_enrollments se
+				ON se.student_id = st.id
       join classes cl
-        on cl.id = ass.class_id
+        on cl.id = se.class_id
       where st.admission_number = $1
-        and ap.position = (
-          select aps.position from
+        and ap.sequence_no = (
+          select aps.sequence_no from
           academic_periods aps
           where aps.is_current = TRUE
         ) - 1
@@ -83,10 +87,10 @@ class Assessment {
 	static async getResultCounts(sessionName: string) {
 		const queryText = `
 			SELECT cl.class_name, COUNT(st.id) AS count
-			FROM assessments ass
+			FROM students_assessments ass
 			JOIN students st ON st.id = ass.student_id
-			JOIN classes cl ON cl.id = ass.class_id
 			JOIN academic_periods ap ON ap.id = ass.academic_period_id
+			JOIN classes cl ON cl.id = ap.class_id
 			WHERE ap.session_name = $1
 			GROUP BY cl.class_name
 			ORDER BY cl.class_name
@@ -112,13 +116,12 @@ class Assessment {
         dp.department_name,
         cl.class_name,
         sj.subject_name,
-        ass.assignment_score,
         ass.test_score,
         ass.exam_score,
         ass.total_score,
         ass.grade,
         ass.remark
-      FROM assessments ass
+      FROM students_assessments ass
       JOIN students st
         ON st.id = ass.student_id
       JOIN subjects sj
@@ -127,16 +130,16 @@ class Assessment {
         ON ap.id = ass.academic_period_id
       JOIN terms tm
         ON tm.id = ap.term_id
+			JOIN students_enrollments se
+				ON se.student_id = st.id
       JOIN classes cl
-        ON cl.id = ass.class_id
-      JOIN students_enrollments se
-        ON se.student_id = st.id
+        ON cl.id = se.class_id
       LEFT JOIN departments dp        
         ON dp.id = se.department_id
     `;
 
 		let countQuery = `select count(st.id) 
-      from assessments ass
+      from students_assessments ass
       join students st
         on st.id = ass.student_id
       join subjects sj
@@ -145,10 +148,10 @@ class Assessment {
         on ap.id = ass.academic_period_id
       join terms tm
         on tm.id = ap.term_id
+			join students_enrollments se
+				on se.student_id = st.id
       join classes cl
-        on cl.id = ass.class_id
-      join students_enrollments se
-        on se.student_id = st.id
+        on cl.id = se.class_id
       left join departments dp
         on dp.id = se.department_id
 	`;

@@ -9,7 +9,7 @@ config();
 const authenticate = (
 	req: AuthenticatedRequest,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	let token;
 
@@ -31,7 +31,6 @@ const authenticate = (
 			id: string;
 			identifier: string;
 			role: string;
-			permissionLevel: "super_admin" | "staff_admin" | null;
 		};
 
 		req.user = decoded;
