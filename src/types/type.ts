@@ -20,6 +20,7 @@ interface teacher {
 	middleName: string;
 	lastName: string;
 	phone: string;
+	status: string;
 }
 
 interface user {
@@ -33,6 +34,7 @@ interface admin {
 	firstName: string;
 	middleName: string;
 	lastName: string;
+	adminNumber: string;
 }
 
 type queryValue = (string | number | null | Date | boolean)[];

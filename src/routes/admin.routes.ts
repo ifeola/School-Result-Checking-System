@@ -11,8 +11,8 @@ router
 	.post(
 		"/",
 		adminValidator,
-		// authenticate,
-		// authorize(["super_admin, staff_admin"]),
+		authenticate,
+		authorize(["super_admin, staff_admin"]),
 		catchError(createAdmin)
 	)
 	.delete("/", authenticate, authorize(["super_admin"]));

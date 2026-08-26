@@ -22,21 +22,23 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 	const isPasswordMatch = await bcrypt.compare(
 		password,
-		existingUser.password_hash,
+		existingUser.password_hash
 	);
+
+	console.log(isPasswordMatch);
+
 	if (!isPasswordMatch) {
 		return next(new ValidationError("Invalid username or password"));
 	}
 
-	const identity = existingUser.email ?? existingUser.admission_number;
+	const identity = existingUser.email ?? existingUser.id_number;
 	generateToken(
 		{
 			id: existingUser.id,
 			identifier: identity,
 			role: existingUser.role,
-			permissionLevel: existingUser.permission_level,
 		},
-		res,
+		res
 	);
 
 	return res.status(200).json({

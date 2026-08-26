@@ -7,8 +7,7 @@ const generateToken = (
 	user: {
 		id: string;
 		identifier: string;
-		role: string;
-		permissionLevel: "super_admin" | "staff_admin" | null;
+		role: "student" | "teacher" | "staff_admin" | "super_admin";
 	},
 	res: Response
 ) => {
@@ -19,7 +18,6 @@ const generateToken = (
 			id: user.id,
 			identifier: user.identifier,
 			role: user.role,
-			permissionLevel: user.permissionLevel,
 		},
 		JWT_SECRET,
 		{

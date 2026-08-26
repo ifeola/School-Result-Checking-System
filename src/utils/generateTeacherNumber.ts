@@ -1,7 +1,7 @@
 const generateTeacherNumber = async (db: {
 	query: (
 		text: string,
-		values?: (string | number | null | boolean | Date)[],
+		values?: (string | number | null | boolean | Date)[]
 	) => any;
 }): Promise<string> => {
 	const date = new Date();
@@ -10,7 +10,7 @@ const generateTeacherNumber = async (db: {
 
 	const query = `
     SELECT COUNT(*) AS total
-    FROM teachers;
+    FROM staff;
   `;
 	const result = await db.query(query);
 
