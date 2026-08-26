@@ -7,7 +7,7 @@ class AcademicSession {
       FROM academic_periods ap
       JOIN terms
       ON terms.id = ap.term_id
-      WHERE ap.sequence_no = 1;
+      WHERE ap.is_current = TRUE;
     `;
 
 		const response = await db.query(queryText);

@@ -36,7 +36,7 @@ const getUser = async (
 		return res.status(200).json({ success: true, data: { user: teacher } });
 	}
 
-	if (user.role === "admin") {
+	if (user.role === "staff_admin") {
 		const admin = await Admin.getAdminById(user.id);
 
 		if (!admin) {

@@ -15,7 +15,7 @@ import {
 const createTeacher = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	// Generate teacher's reg number
 	const teacherNumber = await generateTeacherNumber(db);
@@ -51,6 +51,7 @@ const createTeacher = async (
 			middleName: result.middle_name,
 			lastName: result.last_name,
 			phone: result.phone,
+			status: "active",
 		};
 
 		const createdTeacher = await Teacher.create(teacherData, client);
@@ -67,7 +68,7 @@ const createTeacher = async (
 		});
 	} catch (error) {
 		await client.query("ROLLBACK");
-		throw error;
+		// throw error;
 		return next(new Error("Something went wrong"));
 	} finally {
 		client.release();
@@ -77,7 +78,7 @@ const createTeacher = async (
 const deleteTeacher = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	const teacherId = req.params.id as string;
 	if (!teacherId?.trim()) {
@@ -96,7 +97,7 @@ const deleteTeacher = async (
 		const deletedTeacher = await Teacher.deleteById(existingTeacher.id, client);
 		const deletedUser = await User.deleteUserById(
 			existingTeacher.user_id,
-			client,
+			client
 		);
 		await client.query("COMMIT");
 
@@ -120,7 +121,7 @@ const deleteTeacher = async (
 const getAllTeachers = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	const { page, limit, skip } = getPaginationParams(req.query);
 	const { teachers, teachersCount } = await Teacher.getAllTeachers({
@@ -132,7 +133,7 @@ const getAllTeachers = async (
 		teachers,
 		page,
 		limit,
-		teachersCount,
+		teachersCount
 	);
 	return res.status(200).json(response);
 };

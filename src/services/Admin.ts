@@ -7,34 +7,34 @@ class Admin {
 	firstName: string;
 	middleName: string;
 	lastName: string;
-	permissionLevel: "super_admin" | "staff_admin" | null;
+	adminNumber: string;
 	constructor(
 		userId: string,
 		firstName: string,
 		middleName: string,
 		lastName: string,
-		permissionLevel: "super_admin" | "staff_admin" | null,
+		adminNumber: string
 	) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.middleName = firstName;
 		this.lastName = firstName;
-		this.permissionLevel = permissionLevel;
+		this.adminNumber = adminNumber;
 	}
 
 	static async create(user: admin, client: PoolClient | Pool) {
 		const queryText = `
-      insert into admins(user_id, first_name, middle_name, last_name, permission_level)
+      insert into admins(user_id, admin_number, first_name, middle_name, last_name)
       values ($1, $2, $3, $4, $5)
       returning *
     `;
 
 		const values = [
 			user.userId,
+			user.adminNumber,
 			user.firstName,
 			user.middleName,
 			user.lastName,
-			user.permissionLevel,
 		];
 		const data = await client.query(queryText, values);
 		return data?.rows[0];
@@ -46,6 +46,7 @@ class Admin {
 					ad.first_name,
 					ad.middle_name,
 					ad.last_name,
+					ad.admin_number AS id_number,
 					u.email,
 					u.role,
 					u.deleted_at

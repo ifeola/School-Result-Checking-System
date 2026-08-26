@@ -5,6 +5,7 @@ import { ConflictError, ValidationError } from "../services/Custom-Errors.ts";
 import db from "../database/db.ts";
 import User from "../services/User.ts";
 import Admin from "../services/Admin.ts";
+import generateAdminNumber from "../utils/generateAdminNumber.ts";
 
 const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 	const error = validationResult(req);
@@ -20,7 +21,8 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 		return next(new ConflictError("Email already exists."));
 	}
 
-	const ROLE = "admin";
+	const ROLE = "staff_admin";
+	const adminNumber = await generateAdminNumber(db);
 	const client = await db.sql.connect();
 
 	try {
@@ -32,7 +34,7 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 				password: hashedPassword,
 				role: ROLE,
 			},
-			client,
+			client
 		);
 
 		const adminData = await Admin.create(
@@ -41,9 +43,9 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 				firstName: data.firstName,
 				middleName: data.middleName,
 				lastName: data.lastName,
-				permissionLevel: data.permissionLevel,
+				adminNumber,
 			},
-			client,
+			client
 		);
 
 		await client.query("COMMIT");

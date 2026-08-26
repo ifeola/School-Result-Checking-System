@@ -3,11 +3,11 @@ import type { StudentQuery } from "../types/type.ts";
 import type { QueryParams } from "../utils/pagination.ts";
 
 class Assessment {
-	static async getCurrentByAdmissionNumber(
-		admissionNumber: string,
-		queryParams: { term: string; session: string }
-	) {
-		let queryText = `
+  static async getCurrentByAdmissionNumber(
+    admissionNumber: string,
+    queryParams: { term: string; session: string },
+  ) {
+    let queryText = `
       select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
         from students_assessments ass
       join students st
@@ -25,31 +25,31 @@ class Assessment {
       where st.admission_number = $1
     `;
 
-		const conditions: string[] = [];
-		const params: (string | number)[] = [admissionNumber];
+    const conditions: string[] = [];
+    const params: (string | number)[] = [admissionNumber];
 
-		if (queryParams.term) {
-			params.push(queryParams.term);
-			conditions.push(`tm.term_name = $${params.length}`);
-		}
+    if (queryParams.term) {
+      params.push(queryParams.term);
+      conditions.push(`tm.term_name = $${params.length}`);
+    }
 
-		if (queryParams.session) {
-			params.push(queryParams.session);
-			conditions.push(`ap.session_name = $${params.length}`);
-		}
+    if (queryParams.session) {
+      params.push(queryParams.session);
+      conditions.push(`ap.session_name = $${params.length}`);
+    }
 
-		if (conditions.length === 0) {
-			queryText += ` and ap.is_current = TRUE`;
-		} else {
-			queryText += ` and ${conditions.join(" and ")}`;
-		}
+    if (conditions.length === 0) {
+      queryText += ` and ap.is_current = TRUE`;
+    } else {
+      queryText += ` and ${conditions.join(" and ")}`;
+    }
 
-		const response = await db.query(queryText, params);
-		return response.rows;
-	}
+    const response = await db.query(queryText, params);
+    return response.rows;
+  }
 
-	static async getPreviousByAdmissionNumber(admissionNumber: string) {
-		const queryText = `
+  static async getPreviousByAdmissionNumber(admissionNumber: string) {
+    const queryText = `
       select st.first_name, ap.session_name, tm.term_name, st.last_name, st.middle_name, st.admission_number,  cl.class_name, ass.subject_id, sj.subject_name, ass.test_score, ass.exam_score, ass.total_score, ass.grade, ass.remark
         from students_assessments ass
       join students st
@@ -73,19 +73,19 @@ class Assessment {
         ORDER BY tm.term_name DESC;
     `;
 
-		const response = await db.query(queryText, [admissionNumber]);
-		return response.rows;
-	}
+    const response = await db.query(queryText, [admissionNumber]);
+    return response.rows;
+  }
 
-	static async getCurrentPosition(admissionNumber: string) {
-		const queryText = `select * from class_positions cp
-      where cp.admission_number = $1;`;
+  static async getCurrentPosition(admissionNumber: string) {
+    const queryText = `select * from students_positions sp
+      where sp.admission_number = $1;`;
 
-		const response = await db.query(queryText, [admissionNumber]);
-		return response.rows[0];
-	}
-	static async getResultCounts(sessionName: string) {
-		const queryText = `
+    const response = await db.query(queryText, [admissionNumber]);
+    return response.rows[0];
+  }
+  static async getResultCounts(sessionName: string) {
+    const queryText = `
 			SELECT cl.class_name, COUNT(st.id) AS count
 			FROM students_assessments ass
 			JOIN students st ON st.id = ass.student_id
@@ -93,19 +93,19 @@ class Assessment {
 			JOIN classes cl ON cl.id = ap.class_id
 			WHERE ap.session_name = $1
 			GROUP BY cl.class_name
-			ORDER BY cl.class_name
+			ORDER BY cl.class_name;
 		`;
 
-		const response = await db.query(queryText, [sessionName]);
-		return response.rows;
-	}
+    const response = await db.query(queryText, [sessionName]);
+    return response.rows;
+  }
 
-	static async getAllResults(
-		{ limit, skip }: QueryParams,
-		query: StudentQuery
-	) {
-		let queryText = `
-      SELECT 
+  static async getAllResults(
+    { limit, skip }: QueryParams,
+    query: StudentQuery,
+  ) {
+    let queryText = `
+      SELECT
         st.first_name,
         st.middle_name,
         st.last_name,
@@ -134,11 +134,11 @@ class Assessment {
 				ON se.student_id = st.id
       JOIN classes cl
         ON cl.id = se.class_id
-      LEFT JOIN departments dp        
+      LEFT JOIN departments dp
         ON dp.id = se.department_id
     `;
 
-		let countQuery = `select count(st.id) 
+    let countQuery = `select count(st.id)
       from students_assessments ass
       join students st
         on st.id = ass.student_id
@@ -156,12 +156,12 @@ class Assessment {
         on dp.id = se.department_id
 	`;
 
-		const conditions: string[] = [];
-		const params: (string | number)[] = [];
+    const conditions: string[] = [];
+    const params: (string | number)[] = [];
 
-		if (query.search) {
-			params.push(`%${query.search}%`);
-			conditions.push(`
+    if (query.search) {
+      params.push(`%${query.search}%`);
+      conditions.push(`
        ( st.first_name ilike $${params.length}
         or st.middle_name ilike $${params.length}
         or st.last_name ilike $${params.length}
@@ -169,68 +169,74 @@ class Assessment {
 				or tm.term_name ilike $${params.length}
         )
         `);
-		}
+    }
 
-		if (query.term_name) {
-			params.push(query.term_name);
-			conditions.push(`tm.term_name = $${params.length}`);
-		}
+    if (query.term_name) {
+      params.push(query.term_name);
+      conditions.push(`tm.term_name = $${params.length}`);
+    }
 
-		if (query.session_name) {
-			params.push(query.session_name);
-			conditions.push(`ap.session_name = $${params.length}`);
-		}
+    if (query.session_name) {
+      params.push(query.session_name);
+      conditions.push(`ap.session_name = $${params.length}`);
+    }
 
-		if (query.admission_number) {
-			params.push(query.admission_number);
-			conditions.push(`st.admission_number = $${params.length}`);
-		}
+    if (query.admission_number) {
+      params.push(query.admission_number);
+      conditions.push(`st.admission_number = $${params.length}`);
+    }
 
-		if (query.class_name) {
-			params.push(query.class_name);
-			conditions.push(`cl.class_name = $${params.length}`);
-		}
+    if (query.class_name) {
+      params.push(query.class_name);
+      conditions.push(`cl.class_name = $${params.length}`);
+    }
 
-		if (query.department_name) {
-			params.push(query.department_name);
-			conditions.push(`dp.department_name = $${params.length}`);
-		}
+    if (query.department_name) {
+      params.push(query.department_name);
+      conditions.push(`dp.department_name = $${params.length}`);
+    }
 
-		if (conditions.length > 0) {
-			const whereClause = `where ${conditions.join(" and ")}`;
-			queryText += whereClause;
-			countQuery += whereClause;
-		}
+    let whereClause;
 
-		// Sorting
-		const allowedSortFields = [
-			"created_at",
-			"first_name",
-			"last_name",
-			"admission_number",
-			"current_status",
-		];
-		const sortBy = allowedSortFields.includes(query.sort_by as string)
-			? query.sort_by
-			: "admission_number";
-		const sortOrder = query.sort_order === "asc" ? "ASC" : "DESC";
-		queryText += ` ORDER BY st.${sortBy} ${sortOrder}`;
+    if (conditions.length > 0) {
+      whereClause = `where ap.is_current = TRUE AND ${conditions.join(" and ")}`;
+      queryText += whereClause;
+      countQuery += whereClause;
+    } else {
+      whereClause = `where ap.is_current = TRUE`;
+      queryText += whereClause;
+      countQuery += whereClause;
+    }
 
-		// Pagination
-		params.push(limit);
-		queryText += ` LIMIT $${params.length}`;
-		params.push(skip);
-		queryText += ` OFFSET $${params.length}`;
+    // Sorting
+    const allowedSortFields = [
+      "created_at",
+      "first_name",
+      "last_name",
+      "admission_number",
+      "current_status",
+    ];
+    const sortBy = allowedSortFields.includes(query.sort_by as string)
+      ? query.sort_by
+      : "admission_number";
+    const sortOrder = query.sort_order === "asc" ? "ASC" : "DESC";
+    queryText += ` ORDER BY st.${sortBy} ${sortOrder}`;
 
-		const [response, totalRecords] = await Promise.all([
-			db.query(queryText, params),
-			db.query(countQuery, params.slice(0, params.length - 2)),
-		]);
-		return {
-			results: response.rows,
-			totalRecords: parseInt(totalRecords.rows[0].count, 10),
-		};
-	}
+    // Pagination
+    params.push(limit);
+    queryText += ` LIMIT $${params.length}`;
+    params.push(skip);
+    queryText += ` OFFSET $${params.length}`;
+
+    const [response, totalRecords] = await Promise.all([
+      db.query(queryText, params),
+      db.query(countQuery, params.slice(0, params.length - 2)),
+    ]);
+    return {
+      results: response.rows,
+      totalRecords: parseInt(totalRecords.rows[0].count, 10),
+    };
+  }
 }
 
 export default Assessment;

@@ -10,13 +10,15 @@ class Teacher {
 	middleName: string;
 	lastName: string;
 	phone: string;
+	current_status: string;
 	constructor(
 		userId: string,
 		teacherNumber: string,
 		firstName: string,
 		middleName: string,
 		lastName: string,
-		phone: string
+		phone: string,
+		current_status: string
 	) {
 		this.userId = userId;
 		this.teacherNumber = teacherNumber;
@@ -24,12 +26,13 @@ class Teacher {
 		this.middleName = middleName;
 		this.lastName = lastName;
 		this.phone = phone;
+		this.current_status = current_status;
 	}
 
 	static async create(user: teacher, client: PoolClient | Pool) {
 		const queryText = `
-      insert into staff(user_id, teacher_number, middle_name, first_name, last_name, phone)
-      values ($1, $2, $3, $4, $5, $6)
+      insert into staff(user_id, staff_number, middle_name, first_name, last_name, phone, current_status)
+      values ($1, $2, $3, $4, $5, $6, $7)
       returning *
     `;
 
@@ -40,6 +43,7 @@ class Teacher {
 			user.middleName,
 			user.lastName,
 			user.phone,
+			user.status,
 		];
 		const data = await client.query(queryText, values);
 		return data.rows[0];
