@@ -169,7 +169,7 @@ class Student {
 				on se.department_id = de.id
 	`;
     const conditions: string[] = [];
-    const params: (string | number)[] = [];
+    const params: (string | number | boolean)[] = [];
 
     if (query.search) {
       params.push(`%${query.search}%`);
@@ -182,8 +182,8 @@ class Student {
   `);
     }
 
-    if (query.current_status) {
-      params.push(query.current_status);
+    if (query.status) {
+      params.push(query.status);
       conditions.push(`s.current_status = $${params.length}`);
     }
 
@@ -219,10 +219,10 @@ class Student {
       "current_status",
     ];
 
-    const sortBy = allowedSortFields.includes(query.sort_by as string)
-      ? query.sort_by
+    const sortBy = allowedSortFields.includes(query.sort as string)
+      ? query.sort
       : "admission_number";
-    const sortOrder = query.sort_order === "asc" ? "ASC" : "DESC";
+    const sortOrder = query.order === "asc" ? "ASC" : "DESC";
     queryText += ` ORDER BY s.${sortBy} ${sortOrder}`;
 
     // Pagination

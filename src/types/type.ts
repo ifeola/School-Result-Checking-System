@@ -1,88 +1,98 @@
 import { type Request } from "express";
 
 interface student {
-	userId: string;
-	admissionNumber: string;
-	firstName: string;
-	lastName: string;
-	gender: "male" | "female";
-	dateOfBirth: Date;
-	parentName: string;
-	parentPhone: string;
-	currentStatus: "active" | "graduated" | "withdrawn";
-	middleName?: string | undefined;
+  userId: string;
+  admissionNumber: string;
+  firstName: string;
+  lastName: string;
+  gender: "male" | "female";
+  dateOfBirth: Date;
+  parentName: string;
+  parentPhone: string;
+  currentStatus: "active" | "graduated" | "withdrawn";
+  middleName?: string | undefined;
 }
 
 interface teacher {
-	userId: string;
-	teacherNumber: string;
-	firstName: string;
-	middleName: string;
-	lastName: string;
-	phone: string;
-	status: string;
+  userId: string;
+  teacherNumber: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  phone: string;
+  status: string;
 }
 
 interface user {
-	password: string;
-	role: "staff_admin" | "super_admin" | "teacher" | "student";
-	email?: string | undefined;
+  password: string;
+  role: "staff_admin" | "super_admin" | "teacher" | "student";
+  email?: string | undefined;
 }
 
 interface admin {
-	userId: string;
-	firstName: string;
-	middleName: string;
-	lastName: string;
-	adminNumber: string;
+  userId: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  adminNumber: string;
 }
 
 type queryValue = (string | number | null | Date | boolean)[];
 
 interface AuthenticatedRequest extends Request {
-	user?: {
-		id: string;
-		identifier: string;
-		role: string;
-	};
+  user?: {
+    id: string;
+    identifier: string;
+    role: string;
+  };
 }
 
 interface enrollment {
-	studentId: string;
-	classId: string;
-	sessionId: string;
-	departmentId: string | null;
+  studentId: string;
+  classId: string;
+  sessionId: string;
+  departmentId: string | null;
 }
 
 type GetStudentsQuery = {
-	page?: string;
-	limit?: string;
-	search?: string;
+  page?: string;
+  limit?: string;
+  search?: string;
 };
 
 interface StudentQuery {
-	search?: string;
-	current_status?: string;
-	gender?: string;
-	class_name?: string;
-	department_name?: string;
-	sort_by?: string;
-	term_name?: string;
-	session_name?: string;
-	total_score?: number;
-	subject?: string;
-	admission_number?: string;
-	sort_order?: "asc" | "desc";
+  search?: string;
+  status?: string;
+  gender?: string;
+  class_name?: string;
+  department_name?: string;
+  sort?: string;
+  term_name?: string;
+  session_name?: string;
+  total_score?: number;
+  subject?: string;
+  admission_number?: string;
+  order?: "asc" | "desc";
+}
+
+interface TeacherQuery {
+  search?: string;
+  status?: string;
+  gender?: string;
+  staff_number?: string;
+  sort?: string;
+  order?: "asc" | "desc";
 }
 
 export type {
-	StudentQuery,
-	GetStudentsQuery,
-	student,
-	user,
-	queryValue,
-	AuthenticatedRequest,
-	teacher,
-	admin,
-	enrollment,
+  StudentQuery,
+  GetStudentsQuery,
+  student,
+  user,
+  queryValue,
+  AuthenticatedRequest,
+  teacher,
+  admin,
+  enrollment,
+  TeacherQuery,
 };

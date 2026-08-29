@@ -7,6 +7,7 @@ import { config } from "dotenv";
 import router from "./routes/index.ts";
 import errorMiddleware from "./middlewares/errorMiddleware.ts";
 import notFound from "./middlewares/notFound.ts";
+import helmet from "helmet";
 
 config();
 const app: Application = express();
@@ -16,8 +17,9 @@ app.use(
 	cors({
 		origin: ["http://localhost:5173", "http://localhost:5174"],
 		credentials: true,
-	}),
+	})
 );
+app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));

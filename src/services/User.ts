@@ -3,12 +3,12 @@ import db from "../database/db.ts";
 import type { user } from "../types/type.ts";
 
 class User {
-	public role: "admin" | "teacher" | "student";
+	public role: "staff_admin" | "teacher" | "student";
 	public password: string;
 	public email?: string | undefined;
 
 	constructor(
-		role: "admin" | "teacher" | "student",
+		role: "staff_admin" | "teacher" | "student",
 		password: string,
 		email?: string
 	) {
