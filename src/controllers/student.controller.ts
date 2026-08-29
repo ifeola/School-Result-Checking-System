@@ -4,7 +4,12 @@ import db from "../database/db.ts";
 import bcrypt from "bcrypt";
 import Student from "../services/Students.ts";
 import User from "../services/User.ts";
-import type { GetStudentsQuery, student, user } from "../types/type.ts";
+import type {
+	GetStudentsQuery,
+	student,
+	StudentQuery,
+	user,
+} from "../types/type.ts";
 import { matchedData, validationResult } from "express-validator";
 import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
 import {
@@ -101,7 +106,7 @@ const createStudent = async (
 };
 
 const getStudents = async (
-	req: Request<{}, {}, {}, GetStudentsQuery>,
+	req: Request<{}, {}, {}, StudentQuery>,
 	res: Response,
 	next: NextFunction
 ) => {

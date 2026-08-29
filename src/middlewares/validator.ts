@@ -1,5 +1,6 @@
 import { body } from "express-validator";
 import {
+	ADMIN_NUMBER_REGEX,
 	ADMISSION_NUMBER_REGEX,
 	TEACHER_NUMBER_REGEX,
 } from "../constants/regex.ts";
@@ -13,8 +14,9 @@ const validateUserData = [
 			const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 			const isAdmissionNumber = ADMISSION_NUMBER_REGEX.test(value);
 			const isTeacherNumber = TEACHER_NUMBER_REGEX.test(value);
+			const isAdminNumber = ADMIN_NUMBER_REGEX.test(value);
 
-			if (!isEmail && !isAdmissionNumber && !isTeacherNumber) {
+			if (!isEmail && !isAdmissionNumber && !isTeacherNumber && !isAdminNumber) {
 				throw new Error("Enter a valid email or admission number.");
 			}
 

@@ -25,8 +25,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 		existingUser.password_hash
 	);
 
-	console.log(isPasswordMatch);
-
 	if (!isPasswordMatch) {
 		return next(new ValidationError("Invalid username or password"));
 	}
