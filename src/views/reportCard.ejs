@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>
+			<%= student.first_name %> <%= student.last_name %> — Report Card
+		</title>
+
+		<% /* FONT LOADING NOTE (read before shipping to production): This template
+		uses @import for Google Fonts for local preview convenience. For production
+		PDF generation via Puppeteer, self-host these three font files (woff2) under
+		/public/fonts and swap the @import block below for @font-face rules pointing
+		at file:// or absolute local paths. Puppeteer's page.setContent() +
+		networkidle0 CAN resolve @import, but a network dependency mid-render is
+		exactly the fragility we avoided with Tailwind's CDN script — don't
+		reintroduce it here for a document that has to be reliable in production. */
+		%>
+
+		<style>
+			@font-face {
+				font-family: "Bricolage Grotesque";
+				font-style: normal; /* See note below */
+				font-weight: 100, 900;
+				src: url("./fonts/BricolageGrotesque-VariableFont_opsz\,wdth\,wght.woff2")
+					format("woff2");
+			}
+
+			@font-face {
+				font-family: "Space Grotesk";
+				font-style: normal; /* See note below */
+				font-weight: 100, 900;
+				src: url("./fonts/SpaceGrotesk-VariableFont_wght.woff2") format("woff2");
+			}
+
+			:root {
+				/* Institutional palette — swap these for your exact 10-color OKLCH tokens */
+				--brand-primary: oklch(52% 0.13 162); /* emerald */
+				--brand-primary-dark: oklch(38% 0.11 162);
+				--brand-primary-tint: oklch(
+					96% 0.02 162
+				); /* pale emerald wash for header bg */
+				--brand-gold: oklch(78% 0.15 85); /* reserved: position badge only */
+				--brand-gold-dark: oklch(58% 0.14 70);
+
+				--ink: oklch(
+					22% 0.01 260
+				); /* primary text, near-black not pure black */
+				--ink-muted: oklch(45% 0.01 260); /* secondary text */
+				--line: oklch(88% 0.005 260); /* hairline borders */
+				--line-strong: oklch(78% 0.005 260);
+				--surface: oklch(100% 0 0); /* page background — light, print-first */
+				--surface-alt: oklch(98% 0.003 260); /* zebra striping */
+
+				--font-heading: "Bricolage Grotesque", sans-serif;
+				--font-body: "Space Grotesk", sans-serif;
+				--font-editorial: "Newsreader", serif;
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font-family: var(--font-body);
+				color: var(--ink);
+				background: var(--surface);
+				font-size: 11px;
+				line-height: 1.5;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			/*
+			    No page-level padding here — Puppeteer's page.pdf({ margin }) already
+			    reserves 20mm top/bottom, 15mm left/right. Adding padding here too
+			    would double up the whitespace and push content off balance.
+			  */
+
+			/* ---------- Letterhead ---------- */
+			.letterhead {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				padding-bottom: 14px;
+				border-bottom: 3px solid var(--brand-primary);
+				margin-bottom: 18px;
+			}
+
+			.letterhead__crest {
+				width: 56px;
+				height: 56px;
+				border-radius: 8px;
+				background: var(--brand-primary-tint);
+				border: 1px solid var(--line-strong);
+				flex-shrink: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-family: var(--font-heading);
+				font-weight: 800;
+				color: var(--brand-primary-dark);
+				font-size: 20px;
+			}
+
+			.letterhead__text {
+				flex: 1;
+			}
+
+			.letterhead__school {
+				font-family: var(--font-heading);
+				font-weight: 800;
+				font-size: 19px;
+				color: var(--brand-primary-dark);
+				letter-spacing: -0.01em;
+			}
+
+			.letterhead__address {
+				font-size: 9.5px;
+				color: var(--ink-muted);
+				margin-top: 2px;
+			}
+
+			.letterhead__doctitle {
+				text-align: right;
+				flex-shrink: 0;
+			}
+
+			.letterhead__doctitle .label {
+				font-family: var(--font-heading);
+				font-weight: 700;
+				font-size: 12px;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: var(--ink);
+			}
+
+			.letterhead__doctitle .term {
+				font-size: 9.5px;
+				color: var(--ink-muted);
+				margin-top: 3px;
+				text-transform: capitalize;
+			}
+
+			/* ---------- Student info grid ---------- */
+			.info-grid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 0;
+				border: 1px solid var(--line);
+				border-radius: 6px;
+				overflow: hidden;
+				margin-bottom: 18px;
+			}
+
+			.info-cell {
+				padding: 8px 12px;
+				border-right: 1px solid var(--line);
+				border-bottom: 1px solid var(--line);
+			}
+
+			.info-cell:nth-child(4n) {
+				border-right: none;
+			}
+
+			.info-cell .k {
+				font-size: 8.5px;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: var(--ink-muted);
+				margin-bottom: 2px;
+			}
+
+			.info-cell .v {
+				font-weight: 600;
+				font-size: 11.5px;
+				color: var(--ink);
+				text-transform: capitalize;
+			}
+
+			/* ---------- Section labels ---------- */
+			.section-label {
+				font-family: var(--font-heading);
+				font-weight: 700;
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: var(--brand-primary-dark);
+				margin-bottom: 8px;
+				margin-top: 20px;
+				padding-bottom: 6px;
+				border-bottom: 1px solid var(--line-strong);
+			}
+
+			.section-label:first-of-type {
+				margin-top: 0;
+			}
+
+			/* ---------- Results table ---------- */
+			table.results {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 10.5px;
+			}
+
+			table.results thead th {
+				background: var(--brand-primary);
+				color: var(--surface);
+				font-family: var(--font-heading);
+				font-weight: 600;
+				text-align: left;
+				padding: 7px 10px;
+				font-size: 9.5px;
+				text-transform: uppercase;
+				letter-spacing: 0.03em;
+			}
+
+			table.results thead th.num,
+			table.results td.num {
+				text-align: center;
+			}
+
+			table.results tbody td {
+				padding: 6px 10px;
+				border-bottom: 1px solid var(--line);
+			}
+
+			table.results tbody tr:nth-child(even) {
+				background: var(--surface-alt);
+			}
+
+			table.results tbody td.subject {
+				font-weight: 600;
+			}
+
+			table.results tbody td.grade {
+				font-weight: 700;
+				color: var(--brand-primary-dark);
+			}
+
+			/* ---------- Summary strip ---------- */
+			.summary-strip {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 10px;
+				margin-top: 14px;
+			}
+
+			.summary-card {
+				border: 1px solid var(--line);
+				border-radius: 6px;
+				padding: 8px 10px;
+				text-align: center;
+			}
+
+			.summary-card .k {
+				font-size: 8.5px;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: var(--ink-muted);
+			}
+
+			.summary-card .v {
+				font-family: var(--font-heading);
+				font-weight: 800;
+				font-size: 18px;
+				color: var(--ink);
+				margin-top: 2px;
+			}
+
+			/* Position card is the ONE gold accent on the page — a distinction earned, not decoration */
+			.summary-card--position {
+				background: linear-gradient(
+					180deg,
+					oklch(99% 0.01 85) 0%,
+					var(--surface) 100%
+				);
+				border-color: var(--brand-gold);
+			}
+
+			.summary-card--position .v {
+				color: var(--brand-gold-dark);
+			}
+
+			/* ---------- Attendance ---------- */
+			.attendance-row {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 10px;
+			}
+
+			.attendance-cell {
+				border: 1px solid var(--line);
+				border-radius: 6px;
+				padding: 8px 10px;
+			}
+
+			.attendance-cell .k {
+				font-size: 8.5px;
+				text-transform: uppercase;
+				color: var(--ink-muted);
+				letter-spacing: 0.04em;
+			}
+
+			.attendance-cell .v {
+				font-weight: 700;
+				font-size: 13px;
+				margin-top: 2px;
+			}
+
+			/* ---------- Remark (editorial accent — Newsreader, used sparingly per design system) ---------- */
+			.remark-box {
+				border-left: 3px solid var(--brand-primary);
+				background: var(--brand-primary-tint);
+				padding: 8px 12px;
+				border-radius: 0 6px 6px 0;
+			}
+
+			.remark-box .label {
+				font-size: 8.5px;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: var(--brand-primary-dark);
+				font-weight: 700;
+				margin-bottom: 4px;
+			}
+
+			.remark-box .text {
+				font-family: var(--font-editorial);
+				font-style: italic;
+				font-size: 12.5px;
+				color: var(--ink);
+				line-height: 1.55;
+			}
+
+			/* ---------- Grading legend ---------- */
+			.legend {
+				display: flex;
+				gap: 16px;
+				flex-wrap: wrap;
+				font-size: 9px;
+				color: var(--ink-muted);
+				margin-top: 10px;
+				padding-top: 8px;
+				border-top: 1px dashed var(--line);
+			}
+
+			.legend span b {
+				color: var(--ink);
+			}
+
+			/* ---------- Signatures ---------- */
+			.signatures {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 40px;
+				margin-top: 34px;
+			}
+
+			.signature-line {
+				border-top: 1px solid var(--ink);
+				padding-top: 4px;
+				font-size: 9.5px;
+				color: var(--ink-muted);
+			}
+
+			/* ---------- Footer ---------- */
+			.doc-footer {
+				margin-top: 24px;
+				padding-top: 10px;
+				border-top: 1px solid var(--line);
+				text-align: center;
+			}
+
+			.doc-footer .motto {
+				font-family: var(--font-editorial);
+				font-style: italic;
+				font-size: 10.5px;
+				color: var(--brand-primary-dark);
+			}
+
+			.doc-footer .contact {
+				font-size: 8px;
+				color: var(--ink-muted);
+				margin-top: 3px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Letterhead -->
+		<div class="letterhead">
+			<div class="letterhead__crest">DA</div>
+			<div class="letterhead__text">
+				<div class="letterhead__school"><%= school.name%></div>
+				<div class="letterhead__address"><%= school.address %></div>
+			</div>
+			<div class="letterhead__doctitle">
+				<div class="label">Student Report Card</div>
+				<div class="term">
+					<%= results[0].term_name %> &middot; <%= results[0].session_name %>
+				</div>
+			</div>
+		</div>
+
+		<!-- Student info -->
+		<div class="info-grid">
+			<div class="info-cell">
+				<div class="k">Full Name</div>
+				<div class="v"><%= student.first_name %> <%= student.last_name %></div>
+			</div>
+			<div class="info-cell">
+				<div class="k">Admission No.</div>
+				<div class="v"><%= student.admission_number %></div>
+			</div>
+			<div class="info-cell">
+				<div class="k">Class</div>
+				<div class="v"><%= results[0].class_name %></div>
+			</div>
+			<div class="info-cell">
+				<div class="k">Gender</div>
+				<div class="v"><%= student.gender %></div>
+			</div>
+		</div>
+
+		<!-- Academic performance -->
+		<div class="section-label">Academic Performance</div>
+		<table class="results">
+			<thead>
+				<tr>
+					<th>Subject</th>
+					<th class="num">Test</th>
+					<th class="num">Exam</th>
+					<th class="num">Total</th>
+					<th class="num">Grade</th>
+					<th>Remark</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% results.forEach(function(r) { %>
+				<tr>
+					<td class="subject"><%= r.subject_name %></td>
+					<td class="num"><%= r.test_score %></td>
+					<td class="num"><%= r.exam_score %></td>
+					<td class="num"><b><%= r.total_score %></b></td>
+					<td class="num grade"><%= r.grade %></td>
+					<td><%= r.remark %></td>
+				</tr>
+				<% }); %>
+			</tbody>
+		</table>
+
+		<!-- Summary -->
+		<div class="summary-strip">
+			<div class="summary-card">
+				<div class="k">Total Score</div>
+				<div><%= totalScore %></div>
+			</div>
+			<div class="summary-card">
+				<div class="k">Average</div>
+				<div><%= averageScore %></div>
+			</div>
+			<div class="summary-card summary-card--position">
+				<div class="k">Class Position</div>
+				<div class="v">1</div>
+			</div>
+		</div>
+
+		<!-- Remark -->
+		<div class="section-label">Class Teacher's Remark</div>
+		<div class="remark-box">
+			<div class="label">Remark</div>
+		</div>
+
+		<!-- Grading legend -->
+		<div class="legend">
+			<span><b>A</b> = 70&ndash;100 (Excellent)</span>
+			<span><b>B</b> = 60&ndash;69 (Very Good)</span>
+			<span><b>C</b> = 50&ndash;59 (Good)</span>
+			<span><b>D</b> = 40&ndash;49 (Fair)</span>
+			<span><b>F</b> = 0&ndash;39 (Fail)</span>
+		</div>
+
+		<!-- Signatures -->
+		<div class="signatures">
+			<div class="signature-line">Class Teacher's Signature</div>
+			<div class="signature-line">Principal's Signature</div>
+		</div>
+
+		<!-- Footer -->
+		<div class="doc-footer">
+			<div class="motto"><%= school.motto %></div>
+			<div class="contact">
+				<%= school.phone %> &middot; <%= school.email %> &middot; <%=
+				school.website %>
+			</div>
+		</div>
+	</body>
+</html>
