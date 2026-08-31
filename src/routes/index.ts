@@ -9,7 +9,7 @@ import allSessionsRouter from "./academic-session.routes.ts";
 import teacherRouter from "./teacher.routes.ts";
 import userRouter from "./user.routes.ts";
 import assessmentRouter from "./assessment.routes.ts";
-// import generateResultRouter from "./generateResult.routes.ts";
+import generateResultRouter from "./generateResult.routes.ts";
 import classPositionRouter from "./assessment.routes.ts";
 import previousAssessmentRouter from "./assessment.routes.ts";
 import allResultsRouter from "./assessment.routes.ts";
@@ -39,7 +39,7 @@ router.use("/students", classPositionRouter);
 // Results routers
 router.use("/students/results/all", allResultsRouter);
 router.use("/students/results", resultCountsRouter);
-// router.use("/result/:studentId/pdf", generateResultRouter);
+router.use("/result", generateResultRouter);
 
 // Academic Sessions routers
 router.use("/terms", termsRouter);
