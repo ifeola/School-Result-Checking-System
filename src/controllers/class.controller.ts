@@ -4,7 +4,7 @@ import db from "../database/db.ts";
 const getAllClasses = async (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ) => {
 	const result = await db.query(`select id, class_name from classes`);
 	const classes = result.rows;
