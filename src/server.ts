@@ -8,13 +8,11 @@ import router from "./routes/index.ts";
 import errorMiddleware from "./middlewares/errorMiddleware.ts";
 import notFound from "./middlewares/notFound.ts";
 import helmet from "helmet";
-import logMessage from "./logs/logger.ts";
 
 config();
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
 
-logMessage();
 app.use(
 	cors({
 		origin: ["http://localhost:5173", "http://localhost:5174"],
