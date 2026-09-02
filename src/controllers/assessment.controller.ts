@@ -15,7 +15,7 @@ const getAssessment = async (
 	const studentAdmissionNumber = req.params.admission_number as string;
 	const { term, session } = req.query as { term: string; session: string };
 
-	const response = await Assessment.getCurrentByAdmissionNumber(
+	const response = await Assessment.getByAdmissionNumber(
 		studentAdmissionNumber,
 		{ term, session }
 	);

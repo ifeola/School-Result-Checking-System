@@ -2,10 +2,8 @@ import type { Response, NextFunction } from "express";
 import type { AuthenticatedRequest } from "../types/type.ts";
 import puppeteer, { Browser } from "puppeteer";
 import ejs from "ejs";
-import fs from "fs";
 import path from "path";
 import Student from "../services/Students.ts";
-import { Session } from "../services/Props.ts";
 import Assessment from "../services/Assessment.ts";
 import { school } from "../constants/school.ts";
 
@@ -35,15 +33,17 @@ const generateResult = async (
 ) => {
 	let browser;
 	const params = req.params;
+	const term = req.query.term_name as string;
+	const session = req.query.session_name as string;
 
 	try {
 		browser = await getBrowser();
 		const page = await browser.newPage();
 
 		const student = await Student.getStudentById(params.id as string);
-		const results = await Assessment.getCurrentByAdmissionNumber(
+		const results = await Assessment.getByAdmissionNumber(
 			student.admission_number,
-			{ term: "third", session: "2025/2026" }
+			{ term, session }
 		);
 		const position = await Assessment.getCurrentPosition(
 			student.admission_number

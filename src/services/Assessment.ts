@@ -3,7 +3,7 @@ import type { StudentQuery } from "../types/type.ts";
 import type { QueryParams } from "../utils/pagination.ts";
 
 class Assessment {
-	static async getCurrentByAdmissionNumber(
+	static async getByAdmissionNumber(
 		admissionNumber: string,
 		queryParams: { term: string; session: string }
 	) {
