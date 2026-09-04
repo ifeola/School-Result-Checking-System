@@ -14,10 +14,14 @@ const app: Application = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(
-	cors({
-		origin: ["http://localhost:5173", "http://localhost:5174"],
-		credentials: true,
-	})
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "http://myschool-1pb9.onrender.com",
+    ],
+    credentials: true,
+  }),
 );
 app.use(express.json());
 app.use(cookieParser());
@@ -28,5 +32,5 @@ app.use(notFound);
 app.use(errorMiddleware);
 
 app.listen(PORT, () => {
-	console.log(`Server running on localhost:${PORT}`);
+  console.log(`Server running on localhost:${PORT}`);
 });
