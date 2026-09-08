@@ -18,8 +18,8 @@ router
   .post(
     "/",
     studentValidator,
-    authenticate,
-    authorize(["super_admin", "staff_admin"]),
+    // authenticate,
+    // authorize(["super_admin", "staff_admin"]),
     createStudent,
   )
   .get(
