@@ -1,5 +1,6 @@
 {
 	"debug.showInlineBreakpointCandidates": false,
 	"terminal.integrated.fontLigatures.enabled": true,
-	"terminal.integrated.fontFamily": "Cascadia Code NF, Cursive"
+	"terminal.integrated.fontFamily": "Cascadia Code NF, Cursive",
+	"editor.lineHeight": 2
 }

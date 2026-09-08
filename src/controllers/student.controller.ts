@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 import Student from "../services/Students.ts";
 import User from "../services/User.ts";
 import type {
-	GetStudentsQuery,
 	student,
 	StudentQuery,
 	user,
