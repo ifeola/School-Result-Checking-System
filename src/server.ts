@@ -7,7 +7,6 @@ import { config } from "dotenv";
 import router from "./routes/index.ts";
 import errorMiddleware from "./middlewares/errorMiddleware.ts";
 import notFound from "./middlewares/notFound.ts";
-import helmet from "helmet";
 
 config();
 const app: Application = express();
@@ -17,7 +16,6 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "http://localhost:5174",
       "https://myschool-1pb9.onrender.com",
     ],
     credentials: true,
