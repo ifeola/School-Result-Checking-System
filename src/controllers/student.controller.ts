@@ -4,216 +4,212 @@ import db from "../database/db.ts";
 import bcrypt from "bcrypt";
 import Student from "../services/Students.ts";
 import User from "../services/User.ts";
-import type {
-	student,
-	StudentQuery,
-	user,
-} from "../types/type.ts";
+import type { student, StudentQuery, user } from "../types/type.ts";
 import { matchedData, validationResult } from "express-validator";
 import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
 import {
-	formartPaginatedResponse,
-	getPaginationParams,
+  formartPaginatedResponse,
+  getPaginationParams,
 } from "../utils/pagination.ts";
 import Enrollment from "../services/Enrollment.ts";
 import { Class, Department, Session } from "../services/Props.ts";
 import AcademicSession from "../services/Academic-Sessions.ts";
 
 const createStudent = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction,
 ) => {
-	const admissionNumber = await generateAdmissionNumber(db);
+  const admissionNumber = await generateAdmissionNumber(db);
 
-	const result = validationResult(req);
-	if (!result.isEmpty()) {
-		return next(new ValidationError(result.array()));
-	}
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    return next(new ValidationError(result.array()));
+  }
 
-	const data = matchedData(req);
+  const data = matchedData(req);
 
-	const studentPassword = data.last_name.toUpperCase();
-	const hashedPassword = await bcrypt.hash(studentPassword, 10);
-	const ROLE = "student";
-	const client = await db.sql.connect();
+  const studentPassword = data.last_name.toUpperCase();
+  const hashedPassword = await bcrypt.hash(studentPassword, 10);
+  const ROLE = "student";
+  const client = await db.sql.connect();
 
-	try {
-		const classRecord = await Class.getClassById(data.class_name);
-		// const sessionRecord = await Session.getSessionById(data.sessionId);
-		const currentSession = await AcademicSession.getCurrent();
+  try {
+    const classRecord = await Class.getClassById(data.class_name);
+    // const sessionRecord = await Session.getSessionById(data.sessionId);
+    const currentSession = await AcademicSession.getCurrent();
 
-		if (classRecord.level === "senior" && !data.department_name) {
-			return next(
-				new ValidationError("Department is required for senior classes")
-			);
-		}
+    if (classRecord.level === "senior" && !data.department_name) {
+      return next(
+        new ValidationError("Department is required for senior classes"),
+      );
+    }
 
-		if (classRecord.level === "junior" && data.department_name) {
-			return next(
-				new ValidationError("Junior classes cannot have a department")
-			);
-		}
+    if (classRecord.level === "junior" && data.department_name) {
+      return next(
+        new ValidationError("Junior classes cannot have a department"),
+      );
+    }
 
-		const departmentRecord = data.department_name
-			? await Department.getDepartmentById(data.department_name)
-			: null;
+    const departmentRecord = data.department_name
+      ? await Department.getDepartmentById(data.department_name)
+      : null;
 
-		await client.query("BEGIN");
-		const userData: user = { role: ROLE, password: hashedPassword };
-		const createdUser = await User.create(userData, client);
+    await client.query("BEGIN");
+    const userData: user = { role: ROLE, password: hashedPassword };
+    const createdUser = await User.create(userData, client);
 
-		// create student account
-		const studentData: student = {
-			userId: createdUser.id,
-			admissionNumber,
-			firstName: data.first_name,
-			lastName: data.last_name,
-			gender: data.gender,
-			dateOfBirth: data.date_of_birth,
-			parentName: data.parent_name,
-			parentPhone: data.parent_phone,
-			currentStatus: "active",
-			middleName: data.middle_name,
-		};
-		const createdStudent = await Student.create(studentData, client);
-		const enrollment = await Enrollment.create(
-			{
-				studentId: createdStudent.id,
-				classId: classRecord.id,
-				sessionId: currentSession.id,
-				departmentId: departmentRecord,
-			},
-			client
-		);
-		await client.query("COMMIT");
+    // create student account
+    const studentData: student = {
+      userId: createdUser.id,
+      admissionNumber,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      gender: data.gender,
+      dateOfBirth: data.date_of_birth,
+      parentName: data.parent_name,
+      parentPhone: data.parent_phone,
+      currentStatus: "active",
+      middleName: data.middle_name,
+    };
+    const createdStudent = await Student.create(studentData, client);
+    const enrollment = await Enrollment.create(
+      {
+        studentId: createdStudent.id,
+        classId: classRecord.id,
+        sessionId: currentSession.id,
+        departmentId: departmentRecord,
+      },
+      client,
+    );
+    await client.query("COMMIT");
 
-		return res.status(201).json({
-			success: true,
-			message: "Student created successfully",
-			data: { ...createdStudent, ...enrollment },
-		});
-	} catch (error) {
-		await client.query("ROLLBACK");
-		if (error instanceof Error) {
-			return next(error);
-		}
-		return next(new Error("Something went wrong"));
-	} finally {
-		client.release();
-	}
+    return res.status(201).json({
+      success: true,
+      message: "Student created successfully",
+      data: { ...createdStudent, ...enrollment },
+    });
+  } catch (error) {
+    await client.query("ROLLBACK");
+    if (error instanceof Error) {
+      return next(error);
+    }
+    return next(new Error("Something went wrong"));
+  } finally {
+    client.release();
+  }
 };
 
 const getStudents = async (
-	req: Request<{}, {}, {}, StudentQuery>,
-	res: Response,
-	next: NextFunction
+  req: Request<{}, {}, {}, StudentQuery>,
+  res: Response,
+  next: NextFunction,
 ) => {
-	const { page, limit, skip } = getPaginationParams(req.query);
-	const { students, totalCount } = await Student.getAllStudents(
-		{
-			page,
-			limit,
-			skip,
-		},
-		req.query
-	);
+  const { page, limit, skip } = getPaginationParams(req.query);
+  const { students, totalCount } = await Student.getAllStudents(
+    {
+      page,
+      limit,
+      skip,
+    },
+    req.query,
+  );
 
-	const response = formartPaginatedResponse(students, page, limit, totalCount);
-	res.status(200).json(response);
+  const response = formartPaginatedResponse(students, page, limit, totalCount);
+  res.status(200).json(response);
 };
 
 const getStudent = async (req: Request, res: Response, next: NextFunction) => {
-	const error = validationResult(req);
-	if (!error.isEmpty()) {
-		return next(new ValidationError(error.array()));
-	}
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return next(new ValidationError(error.array()));
+  }
 
-	const { id } = matchedData(req);
+  const { id } = matchedData(req);
 
-	const existingStudent = await Student.getStudentById(id);
-	if (!existingStudent) {
-		return next(new NotFoundError("Student not found"));
-	}
+  const existingStudent = await Student.getStudentById(id);
+  if (!existingStudent) {
+    return next(new NotFoundError("Student not found"));
+  }
 
-	return res
-		.status(200)
-		.json({ success: true, data: { student: existingStudent } });
+  return res
+    .status(200)
+    .json({ success: true, data: { student: existingStudent } });
 };
 
 const deleteStudent = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction,
 ) => {
-	const studentId = req.params.id as string;
-	if (!studentId?.trim()) {
-		return next(new ValidationError("Please provide a valid id"));
-	}
-	const client = await db.sql.connect();
-	const existingStudent = await Student.getStudentById(studentId);
+  const studentId = req.params.id as string;
+  if (!studentId?.trim()) {
+    return next(new ValidationError("Please provide a valid id"));
+  }
+  const client = await db.sql.connect();
+  const existingStudent = await Student.getStudentById(studentId);
 
-	try {
-		await client.query("BEGIN");
-		const deletedStudent = await Student.deleteStudentById(
-			existingStudent.id,
-			client
-		);
-		const deletedUser = await User.deleteUserById(
-			existingStudent.user_id,
-			client
-		);
+  try {
+    await client.query("BEGIN");
+    const deletedStudent = await Student.deleteStudentById(
+      existingStudent.id,
+      client,
+    );
+    const deletedUser = await User.deleteUserById(
+      existingStudent.user_id,
+      client,
+    );
 
-		await client.query("COMMIT");
-		if (!deletedStudent && !deletedUser) {
-			return next(new NotFoundError("Student not found."));
-		}
+    await client.query("COMMIT");
+    if (!deletedStudent && !deletedUser) {
+      return next(new NotFoundError("Student not found."));
+    }
 
-		return res.status(200).json({
-			success: true,
-			message: "Student successfully deleted.",
-			data: { student: deleteStudent },
-		});
-	} catch (error) {
-		await client.query("ROLLBACK");
-		return next(error);
-	} finally {
-		client.release();
-	}
+    return res.status(200).json({
+      success: true,
+      message: "Student successfully deleted.",
+      data: { student: deleteStudent },
+    });
+  } catch (error) {
+    await client.query("ROLLBACK");
+    return next(error);
+  } finally {
+    client.release();
+  }
 };
 
 const updateStudent = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction,
 ) => {
-	try {
-		const studentId = req.params.id as string;
-		const updates = req.body;
+  try {
+    const studentId = req.params.id as string;
+    const updates = req.body;
 
-		if (!studentId?.trim()) {
-			return next(new ValidationError("Please provide a valid id"));
-		}
+    if (!studentId?.trim()) {
+      return next(new ValidationError("Please provide a valid id"));
+    }
 
-		if (Object.keys(updates).length === 0) {
-			return next(new ValidationError("No update field provided."));
-		}
+    if (Object.keys(updates).length === 0) {
+      return next(new ValidationError("No update field provided."));
+    }
 
-		const updatedStudent = await Student.updateStudent(studentId, updates);
-		if (!updatedStudent) {
-			return next(new NotFoundError("Student not found."));
-		}
+    const updatedStudent = await Student.updateStudent(studentId, updates);
+    if (!updatedStudent) {
+      return next(new NotFoundError("Student not found."));
+    }
 
-		return res.status(200).json({
-			success: true,
-			message: "Student updated successfully.",
-			data: {
-				student: updatedStudent,
-			},
-		});
-	} catch (error) {
-		next(error);
-	}
+    return res.status(200).json({
+      success: true,
+      message: "Student updated successfully.",
+      data: {
+        student: updatedStudent,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export { createStudent, getStudents, deleteStudent, updateStudent, getStudent };
