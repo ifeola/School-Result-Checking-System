@@ -32,7 +32,6 @@ router
     "/:id",
     param("id").isUUID().withMessage("Invalid student ID"),
     authenticate,
-    authorize(["super_admin", "staff_admin", "student"]),
     getStudent,
   )
   .patch(
