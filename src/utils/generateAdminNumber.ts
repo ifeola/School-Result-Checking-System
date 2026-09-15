@@ -1,3 +1,5 @@
+import { generateAdmissionNumber } from "./generateAdmissionNumber.ts";
+
 const generateAdminNumber = async (db: {
 	query: (
 		text: string,
