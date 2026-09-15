@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	email text unique,
@@ -101,17 +100,12 @@ CREATE TABLE IF NOT EXISTS classes (
 
 CREATE TABLE IF NOT EXISTS student_class_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-
     student_id UUID REFERENCES students(id),
-
     class_id UUID REFERENCES classes(id),
-
     session_id UUID REFERENCES academic_sessions(id),
     department_id UUID REFERENCES departments(id),
-
     promoted_to_next_class BOOLEAN DEFAULT FALSE,
     repeated_class BOOLEAN DEFAULT FALSE,
-
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
