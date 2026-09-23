@@ -8,13 +8,13 @@ import catchError from "../utils/catchError.ts";
 const router: Router = Router();
 
 router
-	.post(
-		"/",
-		adminValidator,
-		authenticate,
-		authorize(["super_admin, staff_admin"]),
-		catchError(createAdmin)
-	)
-	.delete("/", authenticate, authorize(["super_admin"]));
+  .post(
+    "/",
+    adminValidator,
+    authenticate,
+    authorize(["super_admin", "staff_admin"]),
+    catchError(createAdmin),
+  )
+  .delete("/", authenticate, authorize(["super_admin"]));
 
 export default router;
