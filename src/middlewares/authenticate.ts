@@ -24,7 +24,7 @@ const authenticate = (
 
 	if (!token) {
 		return next(new UnauthorizedError());
-	}
+	} 
 
 	try {
 		const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
