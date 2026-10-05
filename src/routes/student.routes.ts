@@ -24,8 +24,8 @@ router
   )
   .get(
     "/",
-    authenticate,
-    authorize(["super_admin", "staff_admin"]),
+    // authenticate,
+    // authorize(["super_admin", "staff_admin", "student"]),
     catchError(getStudents),
   )
   .get(
