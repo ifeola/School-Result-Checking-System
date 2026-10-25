@@ -1,34 +1,22 @@
-import express from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import type { Application } from "express";
-import { urlencoded } from "express";
-import { config } from "dotenv";
-import router from "./routes/index.ts";
-import errorMiddleware from "./middlewares/errorMiddleware.ts";
-import notFound from "./middlewares/notFound.ts";
+import { loadEnv } from "./config/env.ts";
+import createApp from "./app.ts";
 
-config();
-const app: Application = express();
-const PORT = process.env.PORT || 3000;
+const env = loadEnv();
+const app = createApp({ env });
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://myschool-1pb9.onrender.com",
-    ],
-    credentials: true,
-  }),
-);
-app.use(express.json());
-app.use(cookieParser());
-app.use(urlencoded({ extended: true }));
-app.use("/api/v1", router);
-
-app.use(notFound);
-app.use(errorMiddleware);
-
-app.listen(PORT, () => {
-  console.log(`Server running on localhost:${PORT}`);
+const server = app.listen(env.port, () => {
+	console.log(`Server running on localhost:${env.port}`);
 });
+
+const shutdown = (signal: string) => {
+	console.log(`${signal} received, closing HTTP server.`);
+	server.close((error) => {
+		if (error) {
+			console.error("Error while closing the HTTP server:", error);
+			process.exitCode = 1;
+		}
+	});
+};
+
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));

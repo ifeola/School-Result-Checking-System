@@ -1,10 +1,9 @@
 import { Router } from "express";
 import generateResult from "../controllers/generateResults.controller.ts";
-import authenticate from "../middlewares/authenticate.ts";
-import authorize from "../middlewares/authorize.ts";
+import { expensiveLimiter } from "../middlewares/rateLimit.ts";
 
 const router: Router = Router();
 
-router.get("/:id/pdf", generateResult);
+router.get("/:id/pdf", expensiveLimiter, generateResult);
 
 export default router;

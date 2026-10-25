@@ -1,0 +1,35 @@
+import express, { type Application } from "express";
+import { loadEnv, type AppEnv } from "./config/env.ts";
+import errorMiddleware from "./middlewares/errorMiddleware.ts";
+import notFound from "./middlewares/notFound.ts";
+import { createRateLimiters, globalLimiter } from "./middlewares/rateLimit.ts";
+import {
+	applyBodyParsers,
+	applySecurityHeaders,
+} from "./middlewares/security.ts";
+import router from "./routes/index.ts";
+
+export type CreateAppOptions = {
+	env?: AppEnv;
+};
+
+export const createApp = (options: CreateAppOptions = {}): Application => {
+	const env = options.env ?? loadEnv();
+	const app = express();
+
+	// Route-level limiters read their concrete instances from app.locals. This
+	// keeps limits configurable per app instance (useful in tests).
+	app.locals.rateLimiters = createRateLimiters(env);
+
+	applySecurityHeaders(app, env);
+	app.use("/api/v1", globalLimiter);
+	applyBodyParsers(app, env);
+	app.use("/api/v1", router);
+
+	app.use(notFound);
+	app.use(errorMiddleware);
+
+	return app;
+};
+
+export default createApp;
