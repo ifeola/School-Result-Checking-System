@@ -1,3 +1,10 @@
 allowBuilds:
   bcrypt: true
   puppeteer: true
+
+overrides:
+  # Patched transitive versions for GHSA-27r3-jxmh-p828 / GHSA-x5fp-wj9c-mxmx / GHSA-4mjr-xmp4-gh2g.
+  body-parser: ^2.4.0
+  qs: ^6.16.1
+  # Dev-only (nodemon > minimatch); keeps the full audit clean.
+  brace-expansion: ^5.0.12

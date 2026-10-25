@@ -16,7 +16,9 @@ let browserInstance: Browser | null = null;
 const getBrowser = async (): Promise<Browser> => {
 	if (!browserInstance || !browserInstance.connected) {
 		browserInstance = await puppeteer.launch({
-			headless: true,
+			// The headless shell is sufficient for static PDF rendering and is
+			// considerably lighter than a full Chrome installation.
+			headless: "shell",
 			args: env.puppeteer.noSandbox
 				? ["--no-sandbox", "--disable-setuid-sandbox"]
 				: [],
