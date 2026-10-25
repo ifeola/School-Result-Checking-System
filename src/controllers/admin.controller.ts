@@ -1,19 +1,21 @@
 import type { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import { matchedData, validationResult } from "express-validator";
-import { ConflictError, ValidationError } from "../services/Custom-Errors.ts";
+import { ConflictError } from "../services/Custom-Errors.ts";
 import db from "../database/db.ts";
 import User from "../services/User.ts";
 import Admin from "../services/Admin.ts";
 import generateAdminNumber from "../utils/generateAdminNumber.ts";
+import { loadEnv } from "../config/env.ts";
+
+const env = loadEnv();
 
 const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
-	const error = validationResult(req);
-	if (!error.isEmpty()) {
-		return next(new ValidationError(error.array()));
-	}
-
-	const data = matchedData(req);
+	const data = req.body as {
+		email: string;
+		firstName: string;
+		middleName: string;
+		lastName: string;
+	};
 
 	// Check if email already exists
 	const existingAdmin = await User.getUserByIdentifier(data.email);
@@ -27,14 +29,14 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 
 	try {
 		await client.query("BEGIN");
-		const hashedPassword = await bcrypt.hash(data.lastName, 10);
+		const hashedPassword = await bcrypt.hash(data.lastName, env.bcryptRounds);
 		const userData = await User.create(
 			{
 				email: data.email,
 				password: hashedPassword,
 				role: ROLE,
 			},
-			client
+			client,
 		);
 
 		const adminData = await Admin.create(
@@ -45,7 +47,7 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 				lastName: data.lastName,
 				adminNumber,
 			},
-			client
+			client,
 		);
 
 		await client.query("COMMIT");

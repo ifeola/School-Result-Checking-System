@@ -1,37 +1,50 @@
-import { config } from "dotenv";
-import jwt from "jsonwebtoken";
-import { type Response } from "express";
+import jwt, { type SignOptions } from "jsonwebtoken";
+import type { CookieOptions, Response } from "express";
+import { loadEnv } from "../config/env.ts";
 
-config();
+const env = loadEnv();
+
+export type AuthCookieOptions = CookieOptions;
+
+export const getAuthCookieOptions = (): AuthCookieOptions => ({
+	httpOnly: true,
+	secure: env.cookie.secure,
+	sameSite: env.cookie.sameSite,
+	path: "/",
+	...(env.cookie.domain ? { domain: env.cookie.domain } : {}),
+});
+
 const generateToken = (
 	user: {
 		id: string;
 		identifier: string;
 		role: "student" | "teacher" | "staff_admin" | "super_admin";
 	},
-	res: Response
+	res: Response,
 ) => {
-	const JWT_SECRET = process.env.JWT_SECRET as string;
-
 	const token = jwt.sign(
 		{
 			id: user.id,
 			identifier: user.identifier,
 			role: user.role,
 		},
-		JWT_SECRET,
+		env.jwt.secret,
 		{
-			expiresIn: "1d",
-		}
+			algorithm: "HS256",
+			expiresIn: env.jwt.expiresIn as NonNullable<SignOptions["expiresIn"]>,
+			issuer: env.jwt.issuer,
+			audience: env.jwt.audience,
+		},
 	);
 
+	const decoded = jwt.decode(token) as { exp?: number } | null;
+	const maxAge = decoded?.exp
+		? Math.max(0, decoded.exp * 1000 - Date.now())
+		: undefined;
+
 	res.cookie("jwt", token, {
-		// secure: true, // process.env.NODE_ENV === "production"
-		// sameSite: "none", // ← required for cross-origin (different ports)
-		secure: process.env.NODE_ENV === "production",
-		sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-		httpOnly: true,
-		maxAge: 24 * 60 * 60 * 1000, // 1 day
+		...getAuthCookieOptions(),
+		...(maxAge !== undefined ? { maxAge } : {}),
 	});
 
 	return token;

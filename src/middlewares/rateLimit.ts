@@ -84,6 +84,12 @@ const buildLimiter = (
 };
 
 export const createRateLimiters = (env: AppEnv): RateLimiters => {
+	if (env.rateLimit.store === "redis" && !storeFactory) {
+		throw new Error(
+			"RATE_LIMIT_STORE=redis requires setRateLimitStoreFactory() to be called at startup.",
+		);
+	}
+
 	const global = buildLimiter("global", env.rateLimit.global);
 
 	const auth = buildLimiter("auth", env.rateLimit.auth, {

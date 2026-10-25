@@ -2,6 +2,22 @@ import type { Pool, PoolClient } from "pg";
 import db from "../database/db.ts";
 import type { queryValue, student, StudentQuery } from "../types/type.ts";
 import type { QueryParams } from "../utils/pagination.ts";
+import { ValidationError } from "./Custom-Errors.ts";
+
+// Only these columns may appear in an UPDATE ... SET clause. This is the
+// second line of defence behind Zod's strict update schema.
+const STUDENT_UPDATE_FIELDS = [
+  "first_name",
+  "last_name",
+  "middle_name",
+  "gender",
+  "date_of_birth",
+  "parent_name",
+  "parent_phone",
+  "current_status",
+] as const;
+
+type StudentUpdateField = (typeof STUDENT_UPDATE_FIELDS)[number];
 
 class Student {
   public userId: string;
@@ -112,18 +128,36 @@ class Student {
     return result.rows[0];
   }
 
-  static async updateStudent(id: string, updates: Partial<student>) {
-    const keys = Object.keys(updates);
+  static async updateStudent(
+    id: string,
+    updates: Partial<Record<StudentUpdateField, queryValue[number]>>,
+  ) {
+    const entries = Object.entries(updates).filter(
+      ([, value]) => value !== undefined,
+    ) as [string, queryValue[number]][];
 
-    if (keys.length === 0) {
+    if (entries.length === 0) {
       return null;
     }
 
-    const setClause = keys
-      .map((key, index) => `${key} = $${index + 1}`)
+    const invalidFields = entries
+      .map(([key]) => key)
+      .filter(
+        (key) =>
+          !(STUDENT_UPDATE_FIELDS as readonly string[]).includes(key),
+      );
+
+    if (invalidFields.length > 0) {
+      throw new ValidationError(
+        `Invalid update field(s): ${invalidFields.join(", ")}.`,
+      );
+    }
+
+    const setClause = entries
+      .map(([key], index) => `${key} = $${index + 1}`)
       .join(", ");
 
-    const values = [...Object.values(updates), id] as queryValue;
+    const values = [...entries.map(([, value]) => value), id] as queryValue;
     const queryString = `
 			update students
 			set ${setClause}

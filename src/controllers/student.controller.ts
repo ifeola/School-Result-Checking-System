@@ -4,16 +4,24 @@ import db from "../database/db.ts";
 import bcrypt from "bcrypt";
 import Student from "../services/Students.ts";
 import User from "../services/User.ts";
-import type { student, StudentQuery, user } from "../types/type.ts";
-import { matchedData, validationResult } from "express-validator";
+import type {
+  AuthenticatedRequest,
+  student,
+  StudentQuery,
+  user,
+} from "../types/type.ts";
 import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
 import {
   formartPaginatedResponse,
   getPaginationParams,
 } from "../utils/pagination.ts";
 import Enrollment from "../services/Enrollment.ts";
-import { Class, Department, Session } from "../services/Props.ts";
+import { Class, Department } from "../services/Props.ts";
 import AcademicSession from "../services/Academic-Sessions.ts";
+import { loadEnv } from "../config/env.ts";
+import { assertStudentRecordAccess } from "../middlewares/studentAccess.ts";
+
+const env = loadEnv();
 
 const createStudent = async (
   req: Request,
@@ -22,15 +30,23 @@ const createStudent = async (
 ) => {
   const admissionNumber = await generateAdmissionNumber(db);
 
-  const result = validationResult(req);
-  if (!result.isEmpty()) {
-    return next(new ValidationError(result.array()));
-  }
-
-  const data = matchedData(req);
+  const data = req.body as {
+    first_name: string;
+    last_name: string;
+    middle_name?: string;
+    gender: "male" | "female";
+    parent_name: string;
+    parent_phone?: string;
+    date_of_birth: string;
+    class_name: string;
+    department_name?: string | null;
+  };
 
   const studentPassword = data.last_name.toUpperCase();
-  const hashedPassword = await bcrypt.hash(studentPassword, 10);
+  const hashedPassword = await bcrypt.hash(
+    studentPassword,
+    env.bcryptRounds,
+  );
   const ROLE = "student";
   const client = await db.sql.connect();
 
@@ -66,9 +82,9 @@ const createStudent = async (
       firstName: data.first_name,
       lastName: data.last_name,
       gender: data.gender,
-      dateOfBirth: data.date_of_birth,
+      dateOfBirth: new Date(`${data.date_of_birth}T00:00:00.000Z`),
       parentName: data.parent_name,
-      parentPhone: data.parent_phone,
+      parentPhone: data.parent_phone ?? "",
       currentStatus: "active",
       middleName: data.middle_name,
     };
@@ -120,17 +136,17 @@ const getStudents = async (
 };
 
 const getStudent = async (req: Request, res: Response, next: NextFunction) => {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return next(new ValidationError(error.array()));
-  }
-
-  const { id } = matchedData(req);
+  const { id } = req.params as { id: string };
 
   const existingStudent = await Student.getStudentById(id);
   if (!existingStudent) {
     return next(new NotFoundError("Student not found"));
   }
+
+  assertStudentRecordAccess(
+    (req as AuthenticatedRequest).user,
+    existingStudent,
+  );
 
   return res
     .status(200)
@@ -148,6 +164,11 @@ const deleteStudent = async (
   }
   const client = await db.sql.connect();
   const existingStudent = await Student.getStudentById(studentId);
+
+  if (!existingStudent) {
+    client.release();
+    return next(new NotFoundError("Student not found."));
+  }
 
   try {
     await client.query("BEGIN");

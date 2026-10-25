@@ -5,7 +5,11 @@ import {
 	formartPaginatedResponse,
 	getPaginationParams,
 } from "../utils/pagination.ts";
-import type { GetStudentsQuery } from "../types/type.ts";
+import type {
+	AuthenticatedRequest,
+	GetStudentsQuery,
+} from "../types/type.ts";
+import { assertStudentAdmissionAccess } from "../middlewares/studentAccess.ts";
 
 const getAssessment = async (
 	req: Request,
@@ -13,11 +17,23 @@ const getAssessment = async (
 	next: NextFunction
 ) => {
 	const studentAdmissionNumber = req.params.admission_number as string;
-	const { term, session } = req.query as { term: string; session: string };
+	const query = req.query as {
+		term?: string;
+		session?: string;
+		term_name?: string;
+		session_name?: string;
+	};
+	const term = query.term ?? query.term_name;
+	const session = query.session ?? query.session_name;
+
+	await assertStudentAdmissionAccess(
+		(req as AuthenticatedRequest).user,
+		studentAdmissionNumber,
+	);
 
 	const response = await Assessment.getByAdmissionNumber(
 		studentAdmissionNumber,
-		{ term, session }
+		{ term: term ?? "", session: session ?? "" }
 	);
 
 	if (response.length === 0) {
@@ -37,6 +53,12 @@ const getPreviousAssessment = async (
 	next: NextFunction
 ) => {
 	const studentAdmissionNumber = req.params.admission_number as string;
+
+	await assertStudentAdmissionAccess(
+		(req as AuthenticatedRequest).user,
+		studentAdmissionNumber,
+	);
+
 	const response = await Assessment.getPreviousByAdmissionNumber(
 		studentAdmissionNumber
 	);
@@ -58,6 +80,12 @@ const getClassPosition = async (
 	next: NextFunction
 ) => {
 	const studentAdmissionNumber = req.params.admission_number as string;
+
+	await assertStudentAdmissionAccess(
+		(req as AuthenticatedRequest).user,
+		studentAdmissionNumber,
+	);
+
 	const response = await Assessment.getCurrentPosition(studentAdmissionNumber);
 
 	if (response.length === 0) {

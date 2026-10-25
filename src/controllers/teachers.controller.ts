@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import type { Request, Response, NextFunction } from "express";
-import { matchedData, validationResult } from "express-validator";
 import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
 import generateTeacherNumber from "../utils/generateTeacherNumber.ts";
 import db from "../database/db.ts";
@@ -11,6 +10,9 @@ import {
   formartPaginatedResponse,
   getPaginationParams,
 } from "../utils/pagination.ts";
+import { loadEnv } from "../config/env.ts";
+
+const env = loadEnv();
 
 const createTeacher = async (
   req: Request,
@@ -19,11 +21,13 @@ const createTeacher = async (
 ) => {
   // Generate teacher's reg number
   const teacherNumber = await generateTeacherNumber(db);
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return next(new ValidationError(error.array()));
-  }
-  const result = matchedData(req);
+  const result = req.body as {
+    email: string;
+    first_name: string;
+    middle_name: string;
+    last_name: string;
+    phone?: string;
+  };
 
   // Check if email already exists
   const existingTeacher = await User.getUserByIdentifier(result.email);
@@ -31,7 +35,10 @@ const createTeacher = async (
     return next(new ValidationError("Email already exists."));
   }
 
-  const hashedPassword = await bcrypt.hash(result.last_name.toUpperCase(), 10);
+  const hashedPassword = await bcrypt.hash(
+    result.last_name.toUpperCase(),
+    env.bcryptRounds,
+  );
   const ROLE = "teacher";
   const client = await db.sql.connect();
 
@@ -50,7 +57,7 @@ const createTeacher = async (
       firstName: result.first_name,
       middleName: result.middle_name,
       lastName: result.last_name,
-      phone: result.phone,
+      phone: result.phone ?? "",
       status: "active",
     };
 

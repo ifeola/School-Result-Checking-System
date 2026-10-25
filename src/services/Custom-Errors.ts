@@ -34,7 +34,7 @@ class ValidationError extends CustomError {
 }
 
 class UnauthorizedError extends CustomError {
-  constructor(message = "Authentication falied, please try again.") {
+  constructor(message = "Authentication failed, please try again.") {
     super(401, message);
     this.name = "UnauthorizedError";
   }

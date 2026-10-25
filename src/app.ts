@@ -1,6 +1,6 @@
 import express, { type Application } from "express";
 import { loadEnv, type AppEnv } from "./config/env.ts";
-import errorMiddleware from "./middlewares/errorMiddleware.ts";
+import { createErrorMiddleware } from "./middlewares/errorMiddleware.ts";
 import notFound from "./middlewares/notFound.ts";
 import { createRateLimiters, globalLimiter } from "./middlewares/rateLimit.ts";
 import {
@@ -27,7 +27,7 @@ export const createApp = (options: CreateAppOptions = {}): Application => {
 	app.use("/api/v1", router);
 
 	app.use(notFound);
-	app.use(errorMiddleware);
+	app.use(createErrorMiddleware(env));
 
 	return app;
 };

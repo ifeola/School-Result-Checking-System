@@ -1,32 +1,37 @@
 import bcrypt from "bcrypt";
 import type { Response, Request, NextFunction } from "express";
-import { matchedData, validationResult } from "express-validator";
-import { NotFoundError, ValidationError } from "../services/Custom-Errors.ts";
+import { UnauthorizedError } from "../services/Custom-Errors.ts";
 import User from "../services/User.ts";
-import generateToken from "../utils/generateToken.ts";
+import generateToken, {
+	getAuthCookieOptions,
+} from "../utils/generateToken.ts";
+
+// A valid bcrypt hash used only to keep the unknown-user and wrong-password
+// paths roughly the same duration (mitigates user enumeration by timing).
+const DUMMY_PASSWORD_HASH =
+	"$2b$12$DRNJ9/75m6tmdNP4s6VzBuYTLtzbsYOA6s/8F/641v02L21aJuaBa";
+const INVALID_CREDENTIALS_MESSAGE = "Invalid username or password.";
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
-	const errors = validationResult(req);
+	const { identifier, password } = req.body as {
+		identifier: string;
+		password: string;
+	};
 
-	if (!errors.isEmpty()) {
-		return res.status(400).json({
-			errors: errors.array(),
-		});
-	}
-
-	const { identifier, password } = matchedData(req);
 	const existingUser = await User.getUserByIdentifier(identifier);
+
 	if (!existingUser) {
-		return next(new NotFoundError("Invalid username or password"));
+		await bcrypt.compare(password, DUMMY_PASSWORD_HASH);
+		return next(new UnauthorizedError(INVALID_CREDENTIALS_MESSAGE));
 	}
 
 	const isPasswordMatch = await bcrypt.compare(
 		password,
-		existingUser.password_hash
+		existingUser.password_hash,
 	);
 
 	if (!isPasswordMatch) {
-		return next(new ValidationError("Invalid username or password"));
+		return next(new UnauthorizedError(INVALID_CREDENTIALS_MESSAGE));
 	}
 
 	const identity = existingUser.email ?? existingUser.id_number;
@@ -36,22 +41,20 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 			identifier: identity,
 			role: existingUser.role,
 		},
-		res
+		res,
 	);
+
+	const { password_hash: _passwordHash, ...safeUser } = existingUser;
 
 	return res.status(200).json({
 		success: true,
 		message: "User successfully logged in.",
-		data: { user: { ...existingUser, password_hash: null } },
+		data: { user: safeUser },
 	});
 };
 
-const logout = async (req: Request, res: Response, next: NextFunction) => {
-	res.clearCookie("jwt", {
-		secure: process.env.NODE_ENV === "production",
-		httpOnly: true,
-		sameSite: "lax",
-	});
+const logout = async (_req: Request, res: Response, _next: NextFunction) => {
+	res.clearCookie("jwt", getAuthCookieOptions());
 
 	res.status(200).json({
 		success: true,

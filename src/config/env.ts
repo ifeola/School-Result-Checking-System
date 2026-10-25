@@ -182,11 +182,11 @@ export const loadEnv = (overrides: NodeJS.ProcessEnv = {}): AppEnv => {
 		throw new Error("DATABASE_URL is required in production.");
 	}
 
-	if (data.RATE_LIMIT_STORE === "redis") {
-		throw new Error(
-			"RATE_LIMIT_STORE=redis is not implemented yet. " +
-				"Call setRateLimitStoreFactory() with a Redis store before enabling it.",
-		);
+	const configuredCorsOrigins =
+		overrides.CORS_ORIGINS ?? process.env.CORS_ORIGINS;
+
+	if (isProduction && !configuredCorsOrigins?.trim()) {
+		throw new Error("CORS_ORIGINS is required in production.");
 	}
 
 	return {

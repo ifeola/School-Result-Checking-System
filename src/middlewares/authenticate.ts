@@ -1,21 +1,21 @@
 import jwt from "jsonwebtoken";
-import { config } from "dotenv";
 import type { Response, NextFunction } from "express";
+import { loadEnv } from "../config/env.ts";
 import { UnauthorizedError } from "../services/Custom-Errors.ts";
 import type { AuthenticatedRequest } from "../types/type.ts";
 
-config();
+const env = loadEnv();
 
 const authenticate = (
 	req: AuthenticatedRequest,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
-	let token;
+	let token: string | undefined;
 
 	if (
 		req.headers.authorization &&
-		req.headers.authorization.startsWith("Bearer")
+		req.headers.authorization.startsWith("Bearer ")
 	) {
 		token = req.headers.authorization.split(" ")[1];
 	} else if (req.cookies?.jwt) {
@@ -24,19 +24,32 @@ const authenticate = (
 
 	if (!token) {
 		return next(new UnauthorizedError());
-	} 
+	}
 
 	try {
-		const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
-			id: string;
-			identifier: string;
-			role: string;
+		const decoded = jwt.verify(token, env.jwt.secret, {
+			algorithms: ["HS256"],
+			issuer: env.jwt.issuer,
+			audience: env.jwt.audience,
+		}) as {
+			id?: string;
+			identifier?: string;
+			role?: string;
 		};
 
-		req.user = decoded;
-		next();
-	} catch (error) {
-		next(error);
+		if (!decoded?.id || !decoded?.role) {
+			return next(new UnauthorizedError());
+		}
+
+		req.user = {
+			id: decoded.id,
+			identifier: decoded.identifier ?? "",
+			role: decoded.role,
+		};
+
+		return next();
+	} catch {
+		return next(new UnauthorizedError());
 	}
 };
 

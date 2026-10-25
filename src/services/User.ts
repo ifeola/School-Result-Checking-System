@@ -47,10 +47,12 @@ class User {
 			LEFT JOIN students s ON s.user_id = u.id
       LEFT JOIN admins a on a.user_id = u.id
 			LEFT JOIN staff t on t.user_id = u.id
-			WHERE u.email = $1
-   			OR s.admission_number = $1
-				or t.staff_number = $1
+			WHERE (
+				u.email = $1
+				OR s.admission_number = $1
+				OR t.staff_number = $1
 				OR a.admin_number = $1
+			)
 			AND u.deleted_at IS NULL;
 		`;
 		const result = await db.query(queryText, [identifier]);

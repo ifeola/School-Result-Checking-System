@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { login } from "../controllers/auth.controller.ts";
-import validateUserData from "../middlewares/validator.ts";
 import {
 	authLimiter,
 	loginSlowDown,
 } from "../middlewares/rateLimit.ts";
+import { validate } from "../middlewares/validate.ts";
+import { loginSchema } from "../schemas/auth.ts";
 import catchError from "../utils/catchError.ts";
 
 const router: Router = Router();
@@ -13,7 +14,7 @@ router.post(
 	"/",
 	authLimiter,
 	loginSlowDown,
-	validateUserData,
+	validate({ body: loginSchema }),
 	catchError(login),
 );
 
