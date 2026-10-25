@@ -177,6 +177,15 @@ export const loadEnv = (overrides: NodeJS.ProcessEnv = {}): AppEnv => {
 
 	const data = parsed.data;
 	const isProduction = data.NODE_ENV === "production";
+	const cookieSecure = data.COOKIE_SECURE ?? isProduction;
+	const cookieSameSite =
+		data.COOKIE_SAME_SITE ?? (isProduction ? "none" : "lax");
+
+	if (cookieSameSite === "none" && !cookieSecure) {
+		throw new Error(
+			"COOKIE_SAME_SITE=none requires COOKIE_SECURE=true (HTTPS).",
+		);
+	}
 
 	if (isProduction && !data.DATABASE_URL) {
 		throw new Error("DATABASE_URL is required in production.");
@@ -231,8 +240,8 @@ export const loadEnv = (overrides: NodeJS.ProcessEnv = {}): AppEnv => {
 			maxDelayMs: data.LOGIN_SLOWDOWN_MAX_DELAY_MS,
 		},
 		cookie: {
-			secure: data.COOKIE_SECURE ?? isProduction,
-			sameSite: data.COOKIE_SAME_SITE ?? (isProduction ? "none" : "lax"),
+			secure: cookieSecure,
+			sameSite: cookieSameSite,
 			...(data.COOKIE_DOMAIN ? { domain: data.COOKIE_DOMAIN } : {}),
 		},
 		puppeteer: {
