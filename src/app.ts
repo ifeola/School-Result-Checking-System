@@ -24,6 +24,13 @@ export const createApp = (options: CreateAppOptions = {}): Application => {
 	applySecurityHeaders(app, env);
 	app.use("/api/v1", globalLimiter);
 	applyBodyParsers(app, env);
+
+	// Shallow liveness probe for the reverse proxy / platform health check.
+	// It intentionally does not touch the database.
+	app.get("/health", (_req, res) => {
+		res.status(200).json({ status: "ok" });
+	});
+
 	app.use("/api/v1", router);
 
 	app.use(notFound);

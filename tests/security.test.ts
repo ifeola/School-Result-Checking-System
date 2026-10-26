@@ -7,6 +7,7 @@ import { describe, expect, it, vi } from "vitest";
 import db from "../src/database/db.ts";
 import Student from "../src/services/Students.ts";
 import User from "../src/services/User.ts";
+import Admin from "../src/services/Admin.ts";
 import { createTestApp, signToken } from "./helpers.ts";
 
 const VALIDATION_MESSAGE = "Too many requests. Please try again later.";
@@ -92,6 +93,22 @@ describe("input validation and SQL injection", () => {
 		expect(querySpy).not.toHaveBeenCalled();
 	});
 
+	it("routes /students/results to the staff results handler", async () => {
+		const app = createTestApp();
+		const token = signToken("staff_admin");
+
+		vi.spyOn(db, "query").mockResolvedValue({
+			rows: [{ count: "0" }],
+			rowCount: 1,
+		} as never);
+
+		const response = await request(app)
+			.get("/api/v1/students/results")
+			.set("Authorization", `Bearer ${token}`);
+
+		expect(response.status).toBe(200);
+	});
+
 	it("rejects SQL-injection-style update keys before the database", async () => {
 		const app = createTestApp();
 		const token = signToken("staff_admin");
@@ -169,6 +186,24 @@ describe("authentication and authorization", () => {
 			success: false,
 			message: "Authentication failed, please try again.",
 		});
+	});
+
+	it("returns a profile for a super_admin", async () => {
+		const app = createTestApp();
+		const token = signToken("super_admin");
+
+		vi.spyOn(Admin, "getAdminById").mockResolvedValueOnce({
+			id: randomUUID(),
+			user_id: "super-admin-user-id",
+			role: "super_admin",
+		} as never);
+
+		const response = await request(app)
+			.get("/api/v1/auth/me")
+			.set("Authorization", `Bearer ${token}`);
+
+		expect(response.status).toBe(200);
+		expect(response.body.data.user.role).toBe("super_admin");
 	});
 
 	it("returns 403 when a student calls an admin-only route", async () => {
@@ -351,6 +386,16 @@ describe("CORS and request hardening", () => {
 		expect(response.body.message).toBe("Invalid JSON payload.");
 	});
 
+	it("exposes an unauthenticated liveness probe", async () => {
+		const app = createTestApp();
+
+		const response = await request(app).get("/health");
+
+		expect(response.status).toBe(200);
+		expect(response.body).toEqual({ status: "ok" });
+		expect(response.headers["cache-control"]).toBe("no-store");
+	});
+
 	it("removes x-powered-by and sets security headers", async () => {
 		const app = createTestApp();
 
@@ -359,6 +404,7 @@ describe("CORS and request hardening", () => {
 		expect(response.headers["x-powered-by"]).toBeUndefined();
 		expect(response.headers["x-content-type-options"]).toBe("nosniff");
 		expect(response.headers["content-security-policy"]).toBeDefined();
+		expect(response.headers["cache-control"]).toBe("no-store");
 	});
 });
 

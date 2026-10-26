@@ -59,6 +59,13 @@ export const applySecurityHeaders = (app: Application, env: AppEnv) => {
 	};
 
 	app.use(cors(corsOptions));
+
+	// API responses can contain student records, results and tokens. Prevent
+	// browsers and intermediary proxies from storing them.
+	app.use((_req, res, next) => {
+		res.setHeader("Cache-Control", "no-store");
+		next();
+	});
 };
 
 export const applyBodyParsers = (app: Application, env: AppEnv) => {
@@ -70,7 +77,7 @@ export const applyBodyParsers = (app: Application, env: AppEnv) => {
 	);
 	app.use(
 		express.urlencoded({
-			extended: true,
+			extended: false,
 			limit: env.body.urlencodedLimit,
 			parameterLimit: env.body.parameterLimit,
 		}),

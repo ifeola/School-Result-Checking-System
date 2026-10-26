@@ -53,7 +53,7 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
 		await client.query("COMMIT");
 		return res.status(201).json({
 			success: true,
-			message: `Admin successfully added with ${userData.permission_level}`,
+			message: "Admin successfully added.",
 			data: {
 				admin: adminData,
 			},

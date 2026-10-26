@@ -32,7 +32,7 @@ class Department {
         where id = $1
       `;
 		const response = await db.query(queryText, [id]);
-		return response.rows[0].id;
+		return response.rows[0]?.id;
 	}
 }
 
@@ -52,7 +52,7 @@ class Term {
         where id = $1
       `;
 		const response = await db.query(queryText, [id]);
-		return response.rows[0].id;
+		return response.rows[0]?.id;
 	}
 }
 

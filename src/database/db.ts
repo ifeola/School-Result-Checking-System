@@ -6,11 +6,6 @@ config();
 const connectionString = process.env.DATABASE_URL!;
 const useSsl = Boolean(connectionString) && process.env.DB_SSL !== "false";
 const sql = new Pool({
-	// user: process.env.DB_USER,
-	// host: process.env.DB_HOST,
-	// database: process.env.DB_NAME,
-	// password: process.env.DB_PASSWORD,
-	// port: Number(process.env.DB_PORT) as number,
 	connectionString,
 	ssl: useSsl
 		? {
@@ -20,6 +15,11 @@ const sql = new Pool({
 					process.env.DB_SSL_REJECT_UNAUTHORIZED === "true",
 			}
 		: false,
+	max: 20,
+	idleTimeoutMillis: 30_000,
+	connectionTimeoutMillis: 10_000,
+	statement_timeout: 30_000,
+	query_timeout: 30_000,
 });
 
 export default {

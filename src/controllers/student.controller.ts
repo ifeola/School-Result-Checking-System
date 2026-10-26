@@ -55,6 +55,16 @@ const createStudent = async (
     // const sessionRecord = await Session.getSessionById(data.sessionId);
     const currentSession = await AcademicSession.getCurrent();
 
+    if (!classRecord) {
+      return next(new ValidationError("Class not found."));
+    }
+
+    if (!currentSession) {
+      return next(
+        new ValidationError("No current academic session is configured."),
+      );
+    }
+
     if (classRecord.level === "senior" && !data.department_name) {
       return next(
         new ValidationError("Department is required for senior classes"),
@@ -70,6 +80,10 @@ const createStudent = async (
     const departmentRecord = data.department_name
       ? await Department.getDepartmentById(data.department_name)
       : null;
+
+    if (data.department_name && !departmentRecord) {
+      return next(new ValidationError("Department not found."));
+    }
 
     await client.query("BEGIN");
     const userData: user = { role: ROLE, password: hashedPassword };
@@ -163,7 +177,14 @@ const deleteStudent = async (
     return next(new ValidationError("Please provide a valid id"));
   }
   const client = await db.sql.connect();
-  const existingStudent = await Student.getStudentById(studentId);
+  let existingStudent;
+
+  try {
+    existingStudent = await Student.getStudentById(studentId);
+  } catch (error) {
+    client.release();
+    return next(error);
+  }
 
   if (!existingStudent) {
     client.release();
@@ -189,7 +210,7 @@ const deleteStudent = async (
     return res.status(200).json({
       success: true,
       message: "Student successfully deleted.",
-      data: { student: deleteStudent },
+      data: { student: deletedStudent },
     });
   } catch (error) {
     await client.query("ROLLBACK");

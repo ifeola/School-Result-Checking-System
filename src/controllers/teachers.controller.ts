@@ -75,8 +75,7 @@ const createTeacher = async (
     });
   } catch (error) {
     await client.query("ROLLBACK");
-    // throw error;
-    return next(new Error("Something went wrong"));
+    return next(error);
   } finally {
     client.release();
   }
@@ -93,9 +92,17 @@ const deleteTeacher = async (
   }
 
   const client = await db.sql.connect();
-  const existingTeacher = await Teacher.getTeacherById(teacherId);
+  let existingTeacher;
+
+  try {
+    existingTeacher = await Teacher.getTeacherById(teacherId);
+  } catch (error) {
+    client.release();
+    return next(error);
+  }
 
   if (!existingTeacher) {
+    client.release();
     return next(new NotFoundError("Teacher not found."));
   }
 

@@ -1,5 +1,3 @@
-import type { ValidationError as ExpressValidationError } from "express-validator";
-
 class CustomError extends Error {
   public readonly status: number;
   public readonly isOperational: boolean;
@@ -20,15 +18,8 @@ class NotFoundError extends CustomError {
 }
 
 class ValidationError extends CustomError {
-  constructor(
-    message:
-      | ExpressValidationError[]
-      | string = "Validation error, please try again.",
-  ) {
-    const msg = Array.isArray(message)
-      ? message.map((e) => e.msg).join(", ")
-      : message;
-    super(400, msg);
+  constructor(message = "Validation error, please try again.") {
+    super(400, message);
     this.name = "ValidationError";
   }
 }

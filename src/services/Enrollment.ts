@@ -51,7 +51,7 @@ class Enrollment {
 			FROM inserted
 			JOIN classes cl
 					ON inserted.class_id = cl.id
-			JOIN departments de
+			LEFT JOIN departments de
 					ON inserted.department_id = de.id
 			JOIN academic_periods ap
 					ON inserted.academic_period_id = ap.id;

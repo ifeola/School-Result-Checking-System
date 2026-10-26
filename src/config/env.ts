@@ -187,6 +187,10 @@ export const loadEnv = (overrides: NodeJS.ProcessEnv = {}): AppEnv => {
 		);
 	}
 
+	if (isProduction && !cookieSecure) {
+		throw new Error("COOKIE_SECURE must be true in production.");
+	}
+
 	if (isProduction && !data.DATABASE_URL) {
 		throw new Error("DATABASE_URL is required in production.");
 	}

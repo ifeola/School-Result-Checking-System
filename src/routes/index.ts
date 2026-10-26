@@ -28,6 +28,11 @@ router.use("/logout", logoutRouter);
 router.use("/classes", classRouter);
 router.use("/departments", departmentRouter);
 
+// Results routers must be mounted before /students so that paths such as
+// /students/results are not captured by the /students/:id route.
+router.use("/students/results/all", allResultsRouter);
+router.use("/students/results", resultCountsRouter);
+
 // Users routes
 router.use("/admins", adminRouter);
 router.use("/students", studentRouter);
@@ -36,9 +41,6 @@ router.use("/students", assessmentRouter);
 router.use("/students", previousAssessmentRouter);
 router.use("/students", classPositionRouter);
 
-// Results routers
-router.use("/students/results/all", allResultsRouter);
-router.use("/students/results", resultCountsRouter);
 router.use("/result", generateResultRouter);
 
 // Academic Sessions routers
