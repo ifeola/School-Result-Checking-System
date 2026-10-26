@@ -26,12 +26,6 @@ class User {
 		return result.rows[0];
 	}
 
-	static async getAllUsers() {
-		const queryText = `
-			select 
-		`;
-	}
-
 	static async getUserByIdentifier(identifier: string) {
 		const queryText = `
 			SELECT

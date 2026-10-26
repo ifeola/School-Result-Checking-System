@@ -1,11 +1,9 @@
-import type { Response, Request, NextFunction } from "express";
+import type { Response, NextFunction } from "express";
 import type { AuthenticatedRequest } from "../types/type.ts";
 import { NotFoundError, UnauthorizedError } from "../services/Custom-Errors.ts";
 import Student from "../services/Students.ts";
 import Teacher from "../services/Teacher.ts";
 import Admin from "../services/Admin.ts";
-
-const getUsers = (req: Request, res: Response, next: NextFunction) => {};
 
 const getUser = async (
 	req: AuthenticatedRequest,
